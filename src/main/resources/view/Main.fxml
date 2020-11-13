@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar layoutY="-2.0" prefHeight="37.0" prefWidth="1036.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane layoutX="-6.0" layoutY="35.0" prefHeight="534.0" prefWidth="1042.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="FrontOffice">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="505.0" prefWidth="987.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5" layoutX="6.0" orientation="VERTICAL" prefHeight="506.0" prefWidth="1036.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <Text layoutX="28.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Emprunt" wrappingWidth="96.13671875" AnchorPane.bottomAnchor="207.482421875" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="900.86328125" AnchorPane.topAnchor="18.576171875">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Button fx:id="addE" layoutX="133.0" layoutY="111.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="168.0" text="Ajouter Emprunt" />
+                                    <Button fx:id="delE" layoutX="433.0" layoutY="111.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="168.0" text="Annuler Emprunt" />
+                                    <Button layoutX="737.0" layoutY="111.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="168.0" text="Modifier Emprunt (quand le livre est emprunté?" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="257.0" prefWidth="1034.0">
+                                 <children>
+                                    <Text layoutX="41.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réservation" wrappingWidth="96.13671875" AnchorPane.bottomAnchor="207.423828125" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="900.86328125" AnchorPane.topAnchor="18.576171875">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Button fx:id="addRes" layoutX="133.0" layoutY="108.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="168.0" text="Ajouter Réservation" />
+                                    <Button fx:id="delRes" layoutX="433.0" layoutY="108.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="168.0" text="Annuler Réservation" />
+                                    <Button layoutX="732.0" layoutY="108.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="168.0" text="Modifier Réservation (quand l'oeuvre est réservée?" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="BackOffice">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5" layoutX="6.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="508.0" prefWidth="1036.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="267.0" prefWidth="1034.0">
+                                 <children>
+                                    <Text layoutX="37.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usager" wrappingWidth="96.13671875" AnchorPane.bottomAnchor="207.482421875" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="900.86328125" AnchorPane.topAnchor="18.576171875">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Text>
+                                    <Button fx:id="addU" layoutX="107.0" layoutY="113.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" text="Ajouter Usager" />
+                                    <Button fx:id="updU" layoutX="398.0" layoutY="113.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" text="Modifier Usager" />
+                                    <Button fx:id="delU" layoutX="682.0" layoutY="113.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" text="Supprimer Usager" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <TabPane prefHeight="250.0" prefWidth="1036.0" tabClosingPolicy="UNAVAILABLE">
+                                      <tabs>
+                                        <Tab text="Exemplaire">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="390.0">
+                                                   <children>
+                                                      <Button fx:id="addEx" layoutX="112.0" layoutY="72.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" text="Ajouter Exemplaire" />
+                                                      <Button fx:id="updEx" layoutX="401.0" layoutY="72.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" text="Modifier Exemplaire" />
+                                                      <Button fx:id="delEx" layoutX="687.0" layoutY="72.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" text="Supprimer Exemplaire" />
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                        <Tab text="Oeuvre">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="172.0" prefWidth="327.0">
+                                                   <children>
+                                                      <Button fx:id="addO" layoutX="250.0" layoutY="74.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" text="Ajouter Oeuvre" />
+                                                      <Button fx:id="defO" layoutX="562.0" layoutY="74.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="157.0" text="Supprimer Oeuvre" />
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
