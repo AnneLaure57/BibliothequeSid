@@ -49,8 +49,7 @@
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                    <children>
                                                       <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" text="Ajouter Emprunt" />
-                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" text="Modifier Emprunt" />
-                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" text="Annuler Emprunt" />
+                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" text="Rendre Exemplaire" />
                                                       <TextField layoutX="623.0" layoutY="54.0" />
                                                       <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
                                                    </children>
@@ -113,7 +112,7 @@
                                                    <children>
                                                       <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" text="Ajouter Exemplaire" />
                                                       <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" text="Modifier Exemplaire" />
-                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" text="Annuler Exemplaire" />
+                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" text="Supprimer Exemplaire" />
                                                       <TextField layoutX="623.0" layoutY="54.0" />
                                                       <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
                                                    </children>
@@ -138,7 +137,7 @@
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                    <children>
                                                       <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" text="Ajouter Oeuvre" />
-                                                      <Button layoutX="231.0" layoutY="54.0" mnemonicParsing="false" text="Annuler Oeuvre" />
+                                                      <Button layoutX="231.0" layoutY="54.0" mnemonicParsing="false" text="Supprimer Oeuvre" />
                                                       <TextField layoutX="623.0" layoutY="54.0" />
                                                       <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
                                                    </children>
@@ -164,7 +163,7 @@
                                                    <children>
                                                       <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" text="Ajouter Usager" />
                                                       <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" text="Modifier Usager" />
-                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" text="Annuler Usager" />
+                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" text="Supprimer Usager" />
                                                       <TextField layoutX="623.0" layoutY="54.0" />
                                                       <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
                                                    </children>
