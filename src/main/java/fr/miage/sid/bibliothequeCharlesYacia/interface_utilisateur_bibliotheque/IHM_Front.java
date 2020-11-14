@@ -1,6 +1,7 @@
 package fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque;
 
 public class IHM_Front {
+	
 
 	public void emprunter(String nom, String titre) {
 		throw new UnsupportedOperationException();

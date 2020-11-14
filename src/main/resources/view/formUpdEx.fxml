@@ -18,7 +18,7 @@
       <Button layoutX="420.0" layoutY="379.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="87.0" text="Valider" />
       <Button layoutX="535.0" layoutY="379.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="87.0" text="Annuler" />
       <Text fx:id="msg" fill="TRANSPARENT" layoutX="54.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="message" />
-      <Text layoutX="43.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oeuvre">
+      <Text layoutX="43.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oeuvre" AnchorPane.leftAnchor="43.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -30,5 +30,11 @@
             <Font size="14.0" />
          </font>
       </Text>
+      <Text layoutX="38.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" AnchorPane.leftAnchor="43.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <ComboBox layoutX="270.0" layoutY="75.0" prefHeight="25.0" prefWidth="220.0" />
    </children>
 </AnchorPane>

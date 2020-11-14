@@ -1,6 +1,8 @@
 package fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque;
 
-import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.*;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
 
 public class Gestion_Back {
 

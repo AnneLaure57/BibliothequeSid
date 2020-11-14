@@ -11,7 +11,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.ControllerInterface">
    <children>
       <MenuBar layoutY="-2.0" prefHeight="37.0" prefWidth="1036.0">
         <menus>
@@ -48,8 +48,8 @@
                                             <items>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                    <children>
-                                                      <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" text="Ajouter Emprunt" />
-                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" text="Rendre Exemplaire" />
+                                                      <Button fx:id="butAddE" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#empruntExemplaire" text="Ajouter Emprunt" />
+                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#rendreExemplaire" text="Rendre Exemplaire" />
                                                       <TextField layoutX="623.0" layoutY="54.0" />
                                                       <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
                                                    </children>
@@ -73,9 +73,9 @@
                                              <items>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                    <children>
-                                                      <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" text="Ajouter Réservation" />
-                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" text="Modifier Réservation" />
-                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" text="Annuler Réservation" />
+                                                      <Button fx:id="butAddRes" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#reserverOeuvre" text="Ajouter Réservation" />
+                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#modifierReservation" text="Modifier Réservation" />
+                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" onAction="#annulerReservation" text="Annuler Réservation" />
                                                       <TextField layoutX="623.0" layoutY="54.0" />
                                                       <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
                                                    </children>
@@ -110,9 +110,9 @@
                                              <items>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                    <children>
-                                                      <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" text="Ajouter Exemplaire" />
-                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" text="Modifier Exemplaire" />
-                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" text="Supprimer Exemplaire" />
+                                                      <Button fx:id="butAddEx" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterExemplaire" text="Ajouter Exemplaire" />
+                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#modifierExemplaire" text="Modifier Exemplaire" />
+                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerExemplaire" text="Supprimer Exemplaire" />
                                                       <TextField layoutX="623.0" layoutY="54.0" />
                                                       <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
                                                    </children>
@@ -136,8 +136,8 @@
                                              <items>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                    <children>
-                                                      <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" text="Ajouter Oeuvre" />
-                                                      <Button layoutX="231.0" layoutY="54.0" mnemonicParsing="false" text="Supprimer Oeuvre" />
+                                                      <Button fx:id="butAddO" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterOeuvre" text="Ajouter Oeuvre" />
+                                                      <Button layoutX="231.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerOeuvre" text="Supprimer Oeuvre" />
                                                       <TextField layoutX="623.0" layoutY="54.0" />
                                                       <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
                                                    </children>
@@ -161,9 +161,9 @@
                                              <items>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                    <children>
-                                                      <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" text="Ajouter Usager" />
-                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" text="Modifier Usager" />
-                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" text="Supprimer Usager" />
+                                                      <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterUsager" text="Ajouter Usager" />
+                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#modifierUsager" text="Modifier Usager" />
+                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerUsager" text="Supprimer Usager" />
                                                       <TextField layoutX="623.0" layoutY="54.0" />
                                                       <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
                                                    </children>

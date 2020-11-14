@@ -1,58 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="50.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom">
+      <Text layoutX="31.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="47.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom">
+      <Text layoutX="335.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="52.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mail">
+      <Text layoutX="28.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mail">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="51.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Téléphone">
+      <Text layoutX="22.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Téléphone">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="47.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse">
+      <Text layoutX="30.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de Naissance">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="46.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Postal">
+      <Text layoutX="28.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Postal">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="52.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ville">
+      <Text layoutX="28.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ville">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <TextField layoutX="165.0" layoutY="68.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField layoutX="165.0" layoutY="119.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField layoutX="165.0" layoutY="167.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField layoutX="165.0" layoutY="210.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField layoutX="165.0" layoutY="254.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField layoutX="165.0" layoutY="299.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField layoutX="165.0" layoutY="339.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField layoutX="100.0" layoutY="68.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField layoutX="397.0" layoutY="68.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField layoutX="129.0" layoutY="210.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField layoutX="129.0" layoutY="253.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField layoutX="129.0" layoutY="299.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField layoutX="129.0" layoutY="339.0" prefHeight="25.0" prefWidth="220.0" />
       <Button layoutX="420.0" layoutY="379.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="87.0" text="Valider" />
       <Button layoutX="535.0" layoutY="379.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="87.0" text="Annuler" />
       <Text fx:id="msg" fill="TRANSPARENT" layoutX="54.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="message" />
+      <Text layoutX="30.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <TextField layoutX="129.0" layoutY="167.0" prefHeight="25.0" prefWidth="220.0" />
+      <DatePicker layoutX="158.0" layoutY="118.0" prefHeight="25.0" prefWidth="188.0" />
    </children>
 </AnchorPane>
