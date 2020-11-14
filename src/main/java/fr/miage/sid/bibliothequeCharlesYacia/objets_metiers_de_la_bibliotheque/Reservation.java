@@ -4,24 +4,32 @@ import fr.miage.sid.bibliothequeCharlesYacia.utilitaires.*;
 
 public class Reservation {
 
-	private int dateReservation;
-	private int statut;
-	private int dateAnnulation;
+	private Date dateReservation;
+	private String statut;
+	private Date dateAnnulation;
 
-	public void getDateReservation() {
-		throw new UnsupportedOperationException();
+	public Date getDateReservation() {
+		return dateReservation;
 	}
 
-	public void setDateReservation(int dateReservation) {
+	public void setDateReservation(Date dateReservation) {
 		this.dateReservation = dateReservation;
 	}
 
-	public void getStatut() {
-		throw new UnsupportedOperationException();
+	public String getStatut() {
+		return statut;
 	}
 
-	public void setStatut(int statut) {
+	public void setStatut(String statut) {
 		this.statut = statut;
+	}
+
+	public Date getDateAnnulation() {
+		return dateAnnulation;
+	}
+
+	public void setDateAnnulation(Date dateAnnulation) {
+		this.dateAnnulation = dateAnnulation;
 	}
 
 	public Reservation(Usager u, Oeuvre o, Date DateJour) {

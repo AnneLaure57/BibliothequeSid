@@ -2,23 +2,25 @@ package fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque;
 
 public class Exemplaire {
 
-	private int numero;
-	private int etat;
+	private int id;
+	private String etat;
 
-	public void getEtat() {
-		throw new UnsupportedOperationException();
-	}
+	
 
-	public void setEtat(int etat) {
-		this.etat = etat;
-	}
-
-	public void getId() {
-		throw new UnsupportedOperationException();
+	public int getId() {
+		return id;
 	}
 
 	public void setId(int id) {
-		throw new UnsupportedOperationException();
+		this.id = id;
+	}
+
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
 	}
 
 	public Emprunt emprunter(Usager u, Oeuvre o, int DateJour) {

@@ -2,13 +2,15 @@ package fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque;
 
 public class Livre extends Oeuvre {
 
-	private int resume;
+	private String resume;
 
-	public void getResume() {
-		throw new UnsupportedOperationException();
+	public String getResume() {
+		return resume;
 	}
 
-	public void setResume(int resume) {
+	public void setResume(String resume) {
 		this.resume = resume;
 	}
+
+	
 }

@@ -2,22 +2,25 @@ package fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque;
 
 public class Auteur {
 
-	private int nom;
-	private int prenom;
-
-	public void getNom() {
-		throw new UnsupportedOperationException();
+	private String nom;
+	private String prenom;
+	
+	public Auteur(String nom, String prenom) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
 	}
-
-	public void setNom(int nom) {
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
-	public void getPrénom() {
-		throw new UnsupportedOperationException();
+	public String getPrenom() {
+		return prenom;
 	}
-
-	public void setPrénom(int prénom) {
-		throw new UnsupportedOperationException();
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
+	
 }

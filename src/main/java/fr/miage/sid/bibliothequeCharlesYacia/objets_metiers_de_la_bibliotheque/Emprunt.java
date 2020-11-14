@@ -4,42 +4,41 @@ import fr.miage.sid.bibliothequeCharlesYacia.utilitaires.*;
 
 public class Emprunt {
 
-	private int dateEmprunt;
-	private int statut;
-	private int dateRetour;
+	private Date dateEmprunt;
+	private String statut;
+	private Date dateRetour;
 	private int NbEmprunt;
-	private int duree;
 
-	public void getDateEmprunt() {
-		throw new UnsupportedOperationException();
+	public Date getDateEmprunt() {
+		return dateEmprunt;
 	}
 
-	public void setDateEmprunt(int dateEmprunt) {
+	public void setDateEmprunt(Date dateEmprunt) {
 		this.dateEmprunt = dateEmprunt;
 	}
 
-	public void getStatut() {
-		throw new UnsupportedOperationException();
+	public String getStatut() {
+		return statut;
 	}
 
-	public void setStatut(int statut) {
+	public void setStatut(String statut) {
 		this.statut = statut;
 	}
 
-	public void getDateRetour() {
-		throw new UnsupportedOperationException();
+	public Date getDateRetour() {
+		return dateRetour;
 	}
 
-	public void setDateRetour(int dateRetour) {
+	public void setDateRetour(Date dateRetour) {
 		this.dateRetour = dateRetour;
 	}
 
-	public void getNbEmprunt() {
-		throw new UnsupportedOperationException();
+	public int getNbEmprunt() {
+		return NbEmprunt;
 	}
 
-	public void setNbEmprunt(int NbEmprunt) {
-		throw new UnsupportedOperationException();
+	public void setNbEmprunt(int nbEmprunt) {
+		NbEmprunt = nbEmprunt;
 	}
 
 	public Emprunt emprunt(Usager u, Oeuvre o, Exemplaire e, Date dateJour) {
