@@ -34,7 +34,7 @@
       </MenuBar>
       <TabPane layoutX="-6.0" layoutY="35.0" prefHeight="534.0" prefWidth="1042.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="FrontOffice">
+          <Tab text="Gestion Emprunt/Réservations">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="505.0" prefWidth="987.0">
                      <children>
@@ -96,7 +96,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="BackOffice">
+          <Tab text="Gestion Bibliothèque">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
