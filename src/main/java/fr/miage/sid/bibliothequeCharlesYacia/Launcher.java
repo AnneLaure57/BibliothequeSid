@@ -20,8 +20,8 @@ public class Launcher {
 	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
       EntityTransaction entityTransaction = entityManager.getTransaction();
       entityTransaction.begin();
-
-      Usager usager= new Usager("Yacia","Adel", "2Rue ludovic beauchet", 54000, "Nancy", "0768548385", new Date());
+      
+      Usager usager= new Usager("Yacia","Adel", "2Rue ludovic beauchet", 54000, "Nancy", "0768548385", "adel.yacia@gmail.com", new Date());
       entityManager.persist(usager);
 
       entityManager.getTransaction().commit();

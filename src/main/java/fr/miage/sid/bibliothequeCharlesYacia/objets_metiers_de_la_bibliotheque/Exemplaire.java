@@ -28,9 +28,10 @@ public class Exemplaire {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id_exemplaire")
     private Integer id;
 	
-	@Column(nullable=false)	
+	@Column(name = "etat", nullable=false)	
 	private String etat;
 
 	@OneToMany(mappedBy = "exemplaire", cascade = CascadeType.ALL)

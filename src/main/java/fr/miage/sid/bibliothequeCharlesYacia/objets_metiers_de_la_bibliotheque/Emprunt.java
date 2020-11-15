@@ -29,16 +29,21 @@ import lombok.NoArgsConstructor;
 public class Emprunt {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id_emprunt")
     private Integer id;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_emprunt")
+	@Column(name = "date_emprunt",nullable=false)
 	private Date dateEmprunt;
 	
-	@Column(nullable=false)	
+	@Column(name = "statut",nullable=false)	
 	private String statut;
 	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_retour",nullable=false)
 	private Date dateRetour;
+	
+	@Column(name = "nb_emprunt")
 	private int NbEmprunt;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

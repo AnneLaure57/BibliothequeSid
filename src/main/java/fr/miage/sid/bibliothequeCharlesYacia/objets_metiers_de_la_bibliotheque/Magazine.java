@@ -15,12 +15,15 @@ import javax.persistence.TemporalType;
 @DiscriminatorValue("Magazine")
 public class Magazine extends Oeuvre {
 	
-	
+
+	@Column(name = "numero")
 	private int numero;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_parution")
 	private Date dateParution;
+	
+	@Column(name = "periodicite")
 	private int periodicite;
 	
 	public int getNumero() {

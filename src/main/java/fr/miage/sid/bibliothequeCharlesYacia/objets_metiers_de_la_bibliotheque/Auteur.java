@@ -25,12 +25,13 @@ import lombok.NoArgsConstructor;
 public class Auteur {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id_auteur")
     private Integer id;
 	
-	@Column(nullable=false) // NOT NULL
+	@Column(name = "nom", nullable=false) // NOT NULL
 	private String nom;
 	
-	@Column(nullable=false) // NOT NULL
+	@Column(name = "prenom", nullable=false) // NOT NULL
 	private String prenom;
 	
 	public Auteur(String nom, String prenom) {

@@ -28,22 +28,29 @@ import lombok.NoArgsConstructor;
 public class Usager {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id_usager")
     private Integer id;
 	
-	@Column(nullable=false) // NOT NULL
+	@Column(name = "nom", nullable=false) // NOT NULL
 	private String nom;
 	
-	@Column(nullable=false) // NOT NULL
+	@Column(name = "prenom", nullable=false) // NOT NULL
 	private String prenom;
 	
+	@Column(name = "adresse", nullable=false) // NOT NULL
 	private String adresse;
 	
-	@Column(name = "code_postal")
+	@Column(name = "code_postal", nullable=false)
 	private int codepostal;
 	
+	@Column(name = "ville", nullable=false)
 	private String ville;
 	
+	@Column(name = "telephone")
 	private String telephone;
+	
+	@Column(name = "mail")
+	private String mail;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_creation")
@@ -110,6 +117,14 @@ public class Usager {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+	
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 
 	public Date getDateCreation() {
 		return dateCreation;
@@ -143,7 +158,7 @@ public class Usager {
 		throw new UnsupportedOperationException();
 	}
 
-	public Usager(String nom, String prenom, String adresse, int codepostal, String ville, String telephone,
+	public Usager(String nom, String prenom, String adresse, int codepostal, String ville, String telephone, String mail,
 			 Date dateNaissance) {
 		super();
 		this.nom = nom;
@@ -152,6 +167,7 @@ public class Usager {
 		this.codepostal = codepostal;
 		this.ville = ville;
 		this.telephone = telephone;
+		this.mail = mail;
 		this.dateCreation = new Date();
 		this.dateNaissance = dateNaissance;
 		
@@ -164,7 +180,7 @@ public class Usager {
 	@Override
 	public String toString() {
 		return "Usager [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", codepostal="
-				+ codepostal + ", ville=" + ville + ", telephone=" + telephone + ", dateCreation=" + dateCreation
+				+ codepostal + ", ville=" + ville + ", telephone=" + telephone + ", mail=" + mail + ", dateCreation=" + dateCreation
 				+ ", dateNaissance=" + dateNaissance + ", dateSuppression=" + dateSuppression + "]";
 	}
 	

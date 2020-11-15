@@ -30,10 +30,10 @@ public class Reservation {
     private Integer id;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_reservation")
+	@Column(name = "date_reservation", nullable=false)
 	private Date dateReservation;
 	
-	@Column(nullable = false)
+	@Column(name = "statut", nullable = false)
 	private String statut;
 	
 	@Temporal(TemporalType.DATE)
@@ -41,11 +41,11 @@ public class Reservation {
 	private Date dateAnnulation;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usager")
+	@JoinColumn(name = "id_usager", nullable = false)
     private Usager usager = new Usager ();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_oeuvre")
+	@JoinColumn(name = "id_oeuvre", nullable = false)
     private Oeuvre oeuvre = new Oeuvre ();
 	
 	public Date getDateReservation() {

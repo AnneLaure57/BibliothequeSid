@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +18,7 @@ import javax.persistence.ManyToOne;
 @DiscriminatorValue("Livre")
 public class Livre extends Oeuvre {
 	
-	
+	@Column(name = "resume")
 	private String resume;
 
 	public String getResume() {

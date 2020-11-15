@@ -28,20 +28,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-//@Table( name = "OEUVRE" ) // Apparemment ça sert à rien sauf si on veut que la table ait un nom différent de la classe
+@Table( name = "OEUVRE" ) // Apparemment ça sert à rien sauf si on veut que la table ait un nom différent de la classe
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="oeuvre_type", 
-discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name="oeuvre_type", discriminatorType = DiscriminatorType.STRING)
 //@NamedQuery(name="findOeuvreByTitre", query="SELECT o FROM OEUVRE o WHERE o.titre = :titre")
 public class Oeuvre {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id_oeuvre")
     private Integer id;
 	
-	@Column(nullable=false)
+	@Column(name = "titre", nullable=false)
 	private String titre;
 	
+	@Column(name = "description")
 	private String description;
 	
 	@Column(name = "nb_exemp_dispo")
@@ -50,10 +51,13 @@ public class Oeuvre {
 	@Column(name = "nb_exemp_total")
 	private int nbExemplairesTotal;
 	
+	@Column(name = "prix")
 	private int prix;
 	
 	@Column(name = "nb_reservation")
 	private int nbResa;
+	
+	@Column(name = "editeur")
 	private String editeur;
 	
 	@Temporal(TemporalType.DATE)
