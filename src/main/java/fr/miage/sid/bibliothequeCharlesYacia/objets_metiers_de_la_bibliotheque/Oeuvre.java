@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 @Table( name = "OEUVRE" ) // Apparemment ça sert à rien sauf si on veut que la table ait un nom différent de la classe
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="oeuvre_type", discriminatorType = DiscriminatorType.STRING)
-//@NamedQuery(name="findOeuvreByTitre", query="SELECT o FROM OEUVRE o WHERE o.titre = :titre")
+@NamedQuery(name="findOeuvreByTitre", query="SELECT o FROM Oeuvre o WHERE o.titre = :titre")
 public class Oeuvre {
 	
 	@Id

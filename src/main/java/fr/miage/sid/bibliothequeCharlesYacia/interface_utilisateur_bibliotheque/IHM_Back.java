@@ -11,6 +11,7 @@ public class IHM_Back {
 	}
 
 	public void ajouterUsager(String nom) {
+		
 		throw new UnsupportedOperationException();
 	}
 
