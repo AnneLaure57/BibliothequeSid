@@ -20,7 +20,15 @@ public class Livre extends Oeuvre {
 	
 	@Column(name = "resume")
 	private String resume;
-
+	
+	@ManyToMany
+	@JoinTable(
+            name = "LIVREAUTEUR",
+            joinColumns = {@JoinColumn(name = "id_livre", referencedColumnName="id_oeuvre")},
+            inverseJoinColumns = {@JoinColumn(name = "id_auteur", referencedColumnName="id_auteur")}
+    )
+	private List<Auteur> auteurs = new ArrayList<>();
+	
 	public String getResume() {
 		return resume;
 	}

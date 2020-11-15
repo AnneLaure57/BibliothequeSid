@@ -65,6 +65,9 @@ public class Oeuvre {
 	private Date dateEdition;
 
 	@OneToMany(mappedBy = "oeuvre", cascade = CascadeType.ALL)
+    private List<Emprunt> emprunt = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "oeuvre", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "oeuvre", cascade = CascadeType.ALL)

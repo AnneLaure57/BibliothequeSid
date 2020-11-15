@@ -19,16 +19,16 @@ public class Launcher {
 	  
 	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
       EntityTransaction entityTransaction = entityManager.getTransaction();
-      entityTransaction.begin();
+//      entityTransaction.begin();
+//      
+//      Usager usager= new Usager("Yacia","Adel", "2Rue ludovic beauchet", 54000, "Nancy", "0768548385", "adel.yacia@gmail.com", new Date());
+//      entityManager.persist(usager);
+//
+//      entityManager.getTransaction().commit();
+//      entityManager.close();
       
-      Usager usager= new Usager("Yacia","Adel", "2Rue ludovic beauchet", 54000, "Nancy", "0768548385", "adel.yacia@gmail.com", new Date());
-      entityManager.persist(usager);
-
-      entityManager.getTransaction().commit();
-      entityManager.close();
-      
-       entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-       entityTransaction = entityManager.getTransaction();
+//       entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+//       entityTransaction = entityManager.getTransaction();
       entityTransaction.begin();
       @SuppressWarnings("unchecked")
       List<Usager> rows = entityManager.createNativeQuery( "SELECT * FROM USAGER;", Usager.class ).getResultList();

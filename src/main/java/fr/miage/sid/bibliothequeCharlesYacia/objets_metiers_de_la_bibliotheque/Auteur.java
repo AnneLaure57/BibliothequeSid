@@ -28,6 +28,9 @@ public class Auteur {
 	@Column(name = "id_auteur")
     private Integer id;
 	
+	@ManyToMany(mappedBy = "auteurs", cascade = CascadeType.MERGE)
+	private List<Livre> livres = new ArrayList<>();
+	
 	@Column(name = "nom", nullable=false) // NOT NULL
 	private String nom;
 	
