@@ -15,8 +15,7 @@ import javafx.application.Application;
 public class Launcher {
 
   public static void main(String[] args) {
-      Application.launch(App.class, args);
-	  
+     
 	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
       EntityTransaction entityTransaction = entityManager.getTransaction();
 //      entityTransaction.begin();
@@ -34,5 +33,7 @@ public class Launcher {
       List<Usager> rows = entityManager.createNativeQuery( "SELECT * FROM USAGER;", Usager.class ).getResultList();
       rows.forEach(x -> System.out.println(x.toString()));
       entityManager.close();
+      
+      Application.launch(App.class, args);
   }
 }

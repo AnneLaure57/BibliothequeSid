@@ -1,7 +1,10 @@
 package fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.logging.Logger;
 
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Back;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
@@ -10,12 +13,58 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class IHM_Back {
 	
+	/*
+	 *  Attributs
+	 */
+	
+	private static final Logger LOG = Logger.getLogger(Gestion_Back.class.getName());
+	
+	private Gestion_Back gb = new Gestion_Back();
+	
 	@FXML
 	private Parent root;
+	
+	@FXML
+    private Button submit;
+	
+	@FXML
+    private Button cancel;
+	
+	@FXML
+    private Label result;
+	
+	@FXML
+    private TextField lastname;
+	
+	@FXML
+    private TextField firstname;
+	
+	@FXML
+    private DatePicker dateB;
+	
+	@FXML
+    private TextField adress;
+	
+	@FXML
+    private TextField city;
+	
+	@FXML
+    private TextField cp;
+	
+	@FXML
+    private TextField mail;
+	
+	@FXML
+    private TextField tel;
 	
 	@FXML
    	public void initialize() {
@@ -26,6 +75,7 @@ public class IHM_Back {
 	 *  Add Methods
 	 */
 	
+	@FXML
 	public void ajouterUsager(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formAddU.fxml"));
@@ -34,13 +84,37 @@ public class IHM_Back {
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.show();
+                       
         }
+        
         catch (IOException e) {
             e.printStackTrace();
         }
     };
     
-    public void ajouterExemplaire(ActionEvent event) {
+    @FXML
+	private void getInfosU(ActionEvent event) {
+
+    	result.setText("L'usager a été ajouté");
+		result.setTextFill(Color.GREEN);
+		LOG.severe(lastname.getText() + ", " + firstname.getText() + ", " + dateB.getValue() + ", " + adress.getText() + ", " + cp.getText() + ", " + city.getText()
+		+ ", " + mail.getText() + ", " + tel.getText());
+		String LastName = lastname.getText();
+		String FirstName = 	firstname.getText();
+		java.sql.Date dateBirth = java.sql.Date.valueOf(dateB.getValue());
+		String Adress = 	adress.getText();
+		int Cp = 	Integer.parseInt(cp.getText());
+		String City = 	city.getText();
+		String Mail = 	mail.getText();
+		String Tel = 	tel.getText();
+		
+		//save data in Gestion Back
+//      Usager usager= new Usager("Yacia","Adel", "2Rue ludovic beauchet", 54000, "Nancy", "0768548385", "adel.yacia@gmail.com", new Date());
+		gb.ajouterUsager(LastName,FirstName, Adress,Cp, City, Tel, Mail , dateBirth);
+	}
+    
+    @FXML
+	public void ajouterExemplaire(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formAddEx.fxml"));
             Stage stage = new Stage();
@@ -54,6 +128,7 @@ public class IHM_Back {
         }
     };
     
+    @FXML
     public void ajouterOeuvre(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formAddO.fxml"));
@@ -72,6 +147,7 @@ public class IHM_Back {
 	 *  Update Methods
 	 */
     
+    @FXML
     public void modifierExemplaire(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formUpdEx.fxml"));
@@ -86,6 +162,7 @@ public class IHM_Back {
         }
     };
     
+    @FXML
     public void modifierUsager(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formUpdU.fxml"));
@@ -103,6 +180,8 @@ public class IHM_Back {
     /*
 	 *  Delete Methods
 	 */
+    
+    @FXML
     public void supprimerUsager(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formDelU.fxml"));
@@ -117,8 +196,7 @@ public class IHM_Back {
         }
     };
     
-    
-
+    @FXML
     public void supprimerExemplaire(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formDelEx.fxml"));
@@ -133,6 +211,7 @@ public class IHM_Back {
         }
     };
     
+    @FXML
     public void supprimerOeuvre(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formDelO.fxml"));
@@ -146,7 +225,7 @@ public class IHM_Back {
             e.printStackTrace();
         }
     };
-
+    
 	public void ajouterExemplaire(Oeuvre oeuvre, String titre) {
 		throw new UnsupportedOperationException();
 	}
