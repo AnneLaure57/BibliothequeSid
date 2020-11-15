@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table( name = "USAGER" ) // Apparemment ça sert à rien sauf si on veut que la table ait un nom différent de la classe
+@Table( name = "USAGER")
 @NamedQuery(name="findUsagerByNom", query="SELECT u FROM Usager u WHERE u.nom = :nom")
 public class Usager {
 	@Id

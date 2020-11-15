@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table( name = "OEUVRE" ) // Apparemment ça sert à rien sauf si on veut que la table ait un nom différent de la classe
+@Table( name = "OEUVRE" , uniqueConstraints=@UniqueConstraint(columnNames = {"id_oeuvre", "titre", "editeur"})) 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="oeuvre_type", discriminatorType = DiscriminatorType.STRING)
 @NamedQuery(name="findOeuvreByTitre", query="SELECT o FROM Oeuvre o WHERE o.titre = :titre")

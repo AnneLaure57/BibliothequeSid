@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table( name = "AUTEUR" ) // Apparemment ça sert à rien sauf si on veut que la table ait un nom différent de la classe
+@Table( name = "AUTEUR" ) 
 public class Auteur {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

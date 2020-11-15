@@ -15,7 +15,7 @@ import javafx.application.Application;
 public class Launcher {
 
   public static void main(String[] args) {
-  //  Application.launch(App.class, args);
+      Application.launch(App.class, args);
 	  
 	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
       EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -26,9 +26,9 @@ public class Launcher {
 //
 //      entityManager.getTransaction().commit();
 //      entityManager.close();
-      
-//       entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-//       entityTransaction = entityManager.getTransaction();
+//      
+//      entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+//      entityTransaction = entityManager.getTransaction();
       entityTransaction.begin();
       @SuppressWarnings("unchecked")
       List<Usager> rows = entityManager.createNativeQuery( "SELECT * FROM USAGER;", Usager.class ).getResultList();

@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.ControllerInterface">
@@ -34,156 +30,16 @@
       </MenuBar>
       <TabPane layoutX="-6.0" layoutY="35.0" prefHeight="534.0" prefWidth="1042.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Gestion Emprunt/Réservations">
+          <Tab  text="Gestion Emprunt/Réservations">
+			<content>
+			  <fx:include id="tab1" source="FrontView.fxml"/>
+			</content>
+		  </Tab>
+          <Tab id="tab2" text="Gestion Bibliothèque" >
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="505.0" prefWidth="987.0">
-                     <children>
-                        <TabPane layoutX="6.0" prefHeight="506.0" prefWidth="1036.0" tabClosingPolicy="UNAVAILABLE">
-                          <tabs>
-                            <Tab text="Emprunt">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <SplitPane dividerPositions="0.2869198312236287" orientation="VERTICAL" prefHeight="476.0" prefWidth="1036.0">
-                                            <items>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                   <children>
-                                                      <Button fx:id="butAddE" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#empruntExemplaire" text="Ajouter Emprunt" />
-                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#rendreExemplaire" text="Rendre Exemplaire" />
-                                                      <TextField layoutX="623.0" layoutY="54.0" />
-                                                      <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
-                                                   </children>
-                                                </AnchorPane>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                   <children>
-                                                      <ListView prefHeight="335.0" prefWidth="1036.0" />
-                                                   </children>
-                                                </AnchorPane>
-                                            </items>
-                                          </SplitPane>
-                                       </children>
-                                    </AnchorPane>
-                              </content>
-                            </Tab>
-                            <Tab text="Réservation">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <SplitPane dividerPositions="0.2869198312236287" orientation="VERTICAL" prefHeight="476.0" prefWidth="1036.0">
-                                             <items>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                   <children>
-                                                      <Button fx:id="butAddRes" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#reserverOeuvre" text="Ajouter Réservation" />
-                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#modifierReservation" text="Modifier Réservation" />
-                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" onAction="#annulerReservation" text="Annuler Réservation" />
-                                                      <TextField layoutX="623.0" layoutY="54.0" />
-                                                      <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
-                                                   </children>
-                                                </AnchorPane>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                   <children>
-                                                      <ListView prefHeight="335.0" prefWidth="1036.0" />
-                                                   </children>
-                                                </AnchorPane>
-                                             </items>
-                                          </SplitPane>
-                                       </children></AnchorPane>
-                              </content>
-                            </Tab>
-                          </tabs>
-                        </TabPane>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Gestion Bibliothèque">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TabPane prefHeight="506.0" prefWidth="1036.0" tabClosingPolicy="UNAVAILABLE">
-                           <tabs>
-                              <Tab text="Exemplaire">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <SplitPane dividerPositions="0.2869198312236287" orientation="VERTICAL" prefHeight="476.0" prefWidth="1036.0">
-                                             <items>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                   <children>
-                                                      <Button fx:id="butAddEx" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterExemplaire" text="Ajouter Exemplaire" />
-                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#modifierExemplaire" text="Modifier Exemplaire" />
-                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerExemplaire" text="Supprimer Exemplaire" />
-                                                      <TextField layoutX="623.0" layoutY="54.0" />
-                                                      <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
-                                                   </children>
-                                                </AnchorPane>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                   <children>
-                                                      <ListView prefHeight="335.0" prefWidth="1036.0" />
-                                                   </children>
-                                                </AnchorPane>
-                                             </items>
-                                          </SplitPane>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </Tab>
-                              <Tab text="Oeuvre">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <SplitPane dividerPositions="0.2869198312236287" orientation="VERTICAL" prefHeight="476.0" prefWidth="1036.0">
-                                             <items>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                   <children>
-                                                      <Button fx:id="butAddO" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterOeuvre" text="Ajouter Oeuvre" />
-                                                      <Button layoutX="231.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerOeuvre" text="Supprimer Oeuvre" />
-                                                      <TextField layoutX="623.0" layoutY="54.0" />
-                                                      <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
-                                                   </children>
-                                                </AnchorPane>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                   <children>
-                                                      <ListView prefHeight="335.0" prefWidth="1036.0" />
-                                                   </children>
-                                                </AnchorPane>
-                                             </items>
-                                          </SplitPane>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </Tab>
-                              <Tab text="Usager">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <SplitPane dividerPositions="0.2869198312236287" orientation="VERTICAL" prefHeight="476.0" prefWidth="1036.0">
-                                             <items>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                   <children>
-                                                      <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterUsager" text="Ajouter Usager" />
-                                                      <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#modifierUsager" text="Modifier Usager" />
-                                                      <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerUsager" text="Supprimer Usager" />
-                                                      <TextField layoutX="623.0" layoutY="54.0" />
-                                                      <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
-                                                   </children>
-                                                </AnchorPane>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                   <children>
-                                                      <ListView prefHeight="335.0" prefWidth="1036.0" />
-                                                   </children>
-                                                </AnchorPane>
-                                             </items>
-                                          </SplitPane>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </Tab>
-                           </tabs>
-                        </TabPane>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
+			  <fx:include id="tab2" source="BackView.fxml"/>
+			</content>
+		  </Tab>
         </tabs>
       </TabPane>
    </children>
