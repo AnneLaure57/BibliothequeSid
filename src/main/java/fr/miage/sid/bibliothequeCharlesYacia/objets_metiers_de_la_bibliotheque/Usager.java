@@ -29,7 +29,7 @@ public class Usager {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_usager")
-    private Integer id;
+    private int id;
 	
 	@Column(name = "nom", nullable=false) // NOT NULL
 	private String nom;
@@ -70,6 +70,14 @@ public class Usager {
     @OneToMany(mappedBy = "usager", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 	
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int ID) {
+        this.id = ID;
+    }
+    
 	public String getNom() {
 		return nom;
 	}

@@ -8,15 +8,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Front">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Front">
    <children>
-      <TabPane prefHeight="506.0" prefWidth="1036.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="506.0" prefWidth="1042.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Emprunt">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SplitPane dividerPositions="0.2869198312236287" orientation="VERTICAL" prefHeight="476.0" prefWidth="1036.0">
+                        <SplitPane dividerPositions="0.2869198312236287" orientation="VERTICAL" prefHeight="476.0" prefWidth="1042.0">
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
@@ -41,7 +41,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SplitPane dividerPositions="0.2869198312236287" orientation="VERTICAL" prefHeight="476.0" prefWidth="1036.0">
+                        <SplitPane dividerPositions="0.2869198312236287" orientation="VERTICAL" prefHeight="476.0" prefWidth="1042.0">
                            <items>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>

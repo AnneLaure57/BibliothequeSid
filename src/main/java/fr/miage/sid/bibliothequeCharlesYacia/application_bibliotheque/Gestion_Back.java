@@ -1,6 +1,7 @@
 package fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
@@ -10,10 +11,51 @@ import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.E
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
 import fr.miage.sid.bibliothequeCharlesYacia.utilitaires.JPAUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Gestion_Back {
 	
 	private static final Logger LOG = Logger.getLogger(Gestion_Back.class.getName());
+	
+	public static ObservableList<Usager> ListerUsagers() 
+	{
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+		ObservableList<Usager> list = FXCollections.observableArrayList();
+		entityTransaction.begin();
+		
+		@SuppressWarnings("unchecked")
+		List<Usager> usagers = entityManager.createQuery("from Usager").getResultList();
+		for(Usager us : usagers)
+		{
+			list.add(us);
+		}
+		entityManager.close();
+		return list;
+	}
+	
+	public static ObservableList<Usager> trouverUsager(String text) 
+	{
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    ObservableList<Usager> list = FXCollections.observableArrayList();
+	    entityTransaction.begin();
+	    
+	    @SuppressWarnings("unchecked")
+		List<Usager> usagers = entityManager.createQuery("from Usager where nom like '%" + text + "%' or prenom like '%" + text + "%'").getResultList();
+
+	    for(Usager us : usagers)
+		{
+			list.add(us);
+		    LOG.fine(us.toString());
+			
+		}
+	    entityManager.close();
+		return list;
+	}
 
 	public void ajouterUsager(String nom, String prenom, String adresse, int codePostal, String ville, String telephone, String mail, Date dateNaissance) {
 		  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();

@@ -16,8 +16,8 @@ public class Launcher {
 
   public static void main(String[] args) {
      
-	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-      EntityTransaction entityTransaction = entityManager.getTransaction();
+//	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+//      EntityTransaction entityTransaction = entityManager.getTransaction();
 //      entityTransaction.begin();
 //      
 //      Usager usager= new Usager("Yacia","Adel", "2Rue ludovic beauchet", 54000, "Nancy", "0768548385", "adel.yacia@gmail.com", new Date());
@@ -28,11 +28,11 @@ public class Launcher {
 //      
 //      entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 //      entityTransaction = entityManager.getTransaction();
-      entityTransaction.begin();
-      @SuppressWarnings("unchecked")
-      List<Usager> rows = entityManager.createNativeQuery( "SELECT * FROM USAGER;", Usager.class ).getResultList();
-      rows.forEach(x -> System.out.println(x.toString()));
-      entityManager.close();
+//      entityTransaction.begin();
+//      @SuppressWarnings("unchecked")
+//      List<Usager> rows = entityManager.createNativeQuery( "SELECT * FROM USAGER;", Usager.class ).getResultList();
+//      rows.forEach(x -> System.out.println(x.toString()));
+//      entityManager.close();
       
       Application.launch(App.class, args);
   }

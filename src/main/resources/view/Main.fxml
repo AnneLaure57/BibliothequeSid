@@ -7,9 +7,9 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1036.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Front">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Front">
    <children>
-      <MenuBar layoutY="-2.0" prefHeight="37.0" prefWidth="1036.0">
+      <MenuBar layoutY="0" prefHeight="37.0" prefWidth="1042.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -28,7 +28,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane layoutX="-6.0" layoutY="35.0" prefHeight="534.0" prefWidth="1042.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="0" layoutY="35.0" prefHeight="534.0" prefWidth="1042.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab  text="Gestion Emprunt/Réservations">
 			<content>
