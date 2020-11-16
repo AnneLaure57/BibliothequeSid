@@ -89,10 +89,6 @@ public class Exemplaire {
 		this.etat = "actif";
 	}
 
-	public Exemplaire() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public String toString() {
 		return "Exemplaire [id=" + id + ", etat=" + etat + ", emprunts=" + emprunts + ", oeuvre=" + oeuvre + "]";

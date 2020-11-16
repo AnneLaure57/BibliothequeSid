@@ -181,10 +181,6 @@ public class Usager {
 		
 	}
 
-	public Usager() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public String toString() {
 		return "Usager [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", codepostal="

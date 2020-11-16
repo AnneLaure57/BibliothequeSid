@@ -2,6 +2,7 @@ package fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.logging.Logger;
 
@@ -45,8 +46,10 @@ public class IHM_Back {
 	@FXML private Button cancel;
 	@FXML private Button actualize;
 	
-	@FXML
-    private Label result;
+	@FXML private Label result;
+	@FXML private Label resultU;
+	@FXML private Label resultO;
+	@FXML private Label resultEx;
 	
 	@FXML private TextField lastname;
 	@FXML private TextField firstname;
@@ -94,9 +97,15 @@ public class IHM_Back {
 		tabTelU.setCellFactory(TextFieldTableCell.<Usager>forTableColumn());
 		tabMailU.setCellFactory(TextFieldTableCell.<Usager>forTableColumn());
 		
+		resultU.setText("Aucune action effectuée !");
+		
 		getListUsagers();
 		
 	}
+	
+	/*
+	 *  Usager Methods
+	 */
 	
 	public void getListUsagers()
 	{
@@ -104,7 +113,7 @@ public class IHM_Back {
 	}
 	
 	@FXML
-	public void searchUsager () {
+	public void trouverUsager () {
 		ObservableList<Usager> list = gestionBack.trouverUsager(searchUsager.getText());
 		LOG.fine(searchUsager.getText());
 		tabViewU.setItems(list);
@@ -114,10 +123,6 @@ public class IHM_Back {
 	public void actualizeList () {
 		getListUsagers();
 	}
-	
-	/*
-	 *  Add Methods
-	 */
 	
 	@FXML
 	public void ajoutFormU(ActionEvent event) {
@@ -158,6 +163,72 @@ public class IHM_Back {
 		//Pour actualiser la liste
 		getListUsagers();
 	}
+    
+    @FXML
+    public void modFormU(ActionEvent event) {
+        try {
+        	if (tabViewU.getSelectionModel().getSelectedItem() == null) {
+            	resultU.setText("Veuillez selectionner un usager à modifier avant !");
+    			resultU.setTextFill(Color.RED);
+    		} else {
+    			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
+    			int usagerID = usager.getId();
+//    			resultU.setText("L'usager avec l'ID : " + usagerID + " a été modifié !");
+//    			resultU.setTextFill(Color.GREEN);
+    			gestionBack.trouverUsager(usagerID);
+    		}
+        	/*Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formUpdU.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Modifier un usager");
+            Scene scene = new Scene(part);
+            stage.setScene(scene);
+            stage.show();*/
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    };
+    
+    @FXML
+	private void modifierUsager(ActionEvent event) {
+    	
+		/*LOG.fine(lastname.getText() + ", " + firstname.getText() + ", " + dateB.getValue() + ", " + adress.getText() + ", " + cp.getText() + ", " + city.getText()
+		+ ", " + mail.getText() + ", " + tel.getText());
+		String nom = lastname.getText();
+		String prenom = 	firstname.getText();
+		java.sql.Date dateNaissance = java.sql.Date.valueOf(dateB.getValue());
+		String adresse = 	adress.getText();
+		int codePostal = 	Integer.parseInt(cp.getText());
+		String ville = 	city.getText();
+		String email = 	mail.getText();
+		String telephone = 	tel.getText();
+		
+		//save data in Gestion Back
+		gestionBack.ajouterUsager(nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
+		//Pour actualiser la liste
+		getListUsagers();*/
+		
+	}
+    
+    @FXML
+    public void supprimerUsager(ActionEvent event) throws IOException, SQLException {
+        if (tabViewU.getSelectionModel().getSelectedItem() == null) {
+        	resultU.setText("Veuillez selectionner un usager supprimer avant !");
+			resultU.setTextFill(Color.RED);
+		} else {
+			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
+			int usagerID = usager.getId();
+			resultU.setText("L'usager avec l'ID : " + usagerID + " a été supprimé !");
+			resultU.setTextFill(Color.GREEN);
+			gestionBack.supprimerUsager(usagerID);
+			getListUsagers();
+		}
+		
+    };
+    
+    /*
+     * 
+     */
     
     @FXML
 	public void ajouterExemplaire(ActionEvent event) {
@@ -208,39 +279,13 @@ public class IHM_Back {
         }
     };
     
-    @FXML
-    public void modifierUsager(ActionEvent event) {
-        try {
-        	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formUpdU.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Modifier un usager");
-            Scene scene = new Scene(part);
-            stage.setScene(scene);
-            stage.show();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    };
+   
     
     /*
 	 *  Delete Methods
 	 */
     
-    @FXML
-    public void supprimerUsager(ActionEvent event) {
-        try {
-        	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formDelU.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Supprimer un usager");
-            Scene scene = new Scene(part);
-            stage.setScene(scene);
-            stage.show();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    };
+    
     
     @FXML
     public void supprimerExemplaire(ActionEvent event) {
@@ -272,36 +317,36 @@ public class IHM_Back {
         }
     };
     
-	public void ajouterExemplaire(Oeuvre oeuvre, String titre) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void ajouterUsager(String nom) {
-		
-		throw new UnsupportedOperationException();
-	}
-
-	public void ajouterOeuvre(String titre) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void supprimerExemplaire(Oeuvre oeuvre) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void supprimerOeuvre(String titre) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void supprimerUsager(String nom) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void modifierUsager(Usager usager) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void modifierExemplaire(Exemplaire exemplaire) {
-		throw new UnsupportedOperationException();
-	}
+//	public void ajouterExemplaire(Oeuvre oeuvre, String titre) {
+//		throw new UnsupportedOperationException();
+//	}
+//
+//	public void ajouterUsager(String nom) {
+//		
+//		throw new UnsupportedOperationException();
+//	}
+//
+//	public void ajouterOeuvre(String titre) {
+//		throw new UnsupportedOperationException();
+//	}
+//
+//	public void supprimerExemplaire(Oeuvre oeuvre) {
+//		throw new UnsupportedOperationException();
+//	}
+//
+//	public void supprimerOeuvre(String titre) {
+//		throw new UnsupportedOperationException();
+//	}
+//
+//	public void supprimerUsager(String nom) {
+//		throw new UnsupportedOperationException();
+//	}
+//
+//	public void modifierUsager(Usager usager) {
+//		throw new UnsupportedOperationException();
+//	}
+//
+//	public void modifierExemplaire(Exemplaire exemplaire) {
+//		throw new UnsupportedOperationException();
+//	}
 }

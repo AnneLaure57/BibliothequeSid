@@ -162,11 +162,6 @@ public class Oeuvre {
 		this.editeur = editeur;
 		this.dateEdition = dateEdition;
 	}
-	
-	
-	public Oeuvre() {
-		super();
-	}
 
 	@Override
 	public String toString() {

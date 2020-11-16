@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
@@ -67,34 +68,66 @@ public class Gestion_Back {
 	      //Get the infos
 	      LOG.finer(usager.toString());
 	
-	      entityManager.getTransaction().commit();
+	      entityTransaction.commit();
 	      entityManager.close();
+	}
+	
+	public void supprimerUsager(int usagerID) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	      EntityTransaction entityTransaction = entityManager.getTransaction();
+	      entityTransaction.begin();
 	      
-	      entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	      entityTransaction = entityManager.getTransaction();
+	      try {
+	    	//Get the infos
+	    	  //S1
+//	    	  Query query = entityManager.createQuery("delete from Usager where id = '" + usagerID + "'");
+//			  query.executeUpdate();
+	    	  
+	    	  //S2
+	    	  Usager usager = entityManager.find(Usager.class,usagerID);
+	    	  entityManager.remove(usager);
+		
+		      entityTransaction.commit();
+		      entityManager.close();
+	    	  
+	      } catch(Exception e)
+			{
+				e.printStackTrace();
+				entityTransaction.rollback(); 
+			}
 	}
 
-	public void ajouterOeuvre(String titre) {
-		throw new UnsupportedOperationException();
+	public void modifierUsager(int usagerID) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public void supprimerExemplaire(Oeuvre oeuvre) {
-		throw new UnsupportedOperationException();
+	public void trouverUsager(int usagerID) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    entityTransaction.begin();
+	    
+		try {
+		  //S2
+		  // Query query = entityManager.createQuery("from Usager where id = '" + usagerID + "'");
+		  Usager usager = entityManager.find(Usager.class,usagerID);
+		  System.out.println(usager.toString());
+		  LOG.fine(usager.toString());
+		  //TODO
+		  //Move functions in the other controller : formUpdU with ControllerInterface
+		  // créer méthode getDate( Usager usager)
+		  // Name.setText = usager.getNom()
+		  // meyhods to move openformU, getData, modifierUsager
+		  //TODO faire modifierUsager dans GestionBack
+			
+		  entityManager.close();
+		    	  
+		 } catch(Exception e) {
+				e.printStackTrace();
+				entityTransaction.rollback(); 
+		 }
+		
 	}
 
-	public void supprimerOeuvre(String titre) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void supprimerUsager(String nom) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void modifierUsager(Usager usager) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void modifierExemplaire(Exemplaire exemplaire) {
-		throw new UnsupportedOperationException();
-	}
 }
