@@ -15,12 +15,12 @@ public class Gestion_Back {
 	
 	private static final Logger LOG = Logger.getLogger(Gestion_Back.class.getName());
 
-	public void ajouterUsager(String LastName, String firstName, String adress, int cp, String city, String tel, String mail, Date dateBirth) {
+	public void ajouterUsager(String nom, String prenom, String adresse, int codePostal, String ville, String telephone, String mail, Date dateNaissance) {
 		  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	      EntityTransaction entityTransaction = entityManager.getTransaction();
 	      entityTransaction.begin();
 	      
-	      Usager usager= new Usager(LastName,firstName, adress, cp, city, tel, mail, dateBirth);
+	      Usager usager= new Usager(nom,prenom, adresse, codePostal, ville, telephone, mail, dateNaissance);
 	      entityManager.persist(usager);
 	      //Get the infos
 	      LOG.finer(usager.toString());

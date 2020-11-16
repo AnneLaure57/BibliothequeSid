@@ -76,7 +76,7 @@ public class IHM_Back {
 	 */
 	
 	@FXML
-	public void ajouterUsager(ActionEvent event) {
+	public void ajoutFormU(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formAddU.fxml"));
             Stage stage = new Stage();
@@ -93,24 +93,24 @@ public class IHM_Back {
     };
     
     @FXML
-	private void getInfosU(ActionEvent event) {
+	private void ajouterUsager(ActionEvent event) {
 
     	result.setText("L'usager a été ajouté");
 		result.setTextFill(Color.GREEN);
 		LOG.severe(lastname.getText() + ", " + firstname.getText() + ", " + dateB.getValue() + ", " + adress.getText() + ", " + cp.getText() + ", " + city.getText()
 		+ ", " + mail.getText() + ", " + tel.getText());
-		String LastName = lastname.getText();
-		String FirstName = 	firstname.getText();
-		java.sql.Date dateBirth = java.sql.Date.valueOf(dateB.getValue());
-		String Adress = 	adress.getText();
-		int Cp = 	Integer.parseInt(cp.getText());
-		String City = 	city.getText();
-		String Mail = 	mail.getText();
-		String Tel = 	tel.getText();
+		String nom = lastname.getText();
+		String prenom = 	firstname.getText();
+		java.sql.Date dateNaissance = java.sql.Date.valueOf(dateB.getValue());
+		String adresse = 	adress.getText();
+		int codePostal = 	Integer.parseInt(cp.getText());
+		String ville = 	city.getText();
+		String email = 	mail.getText();
+		String telephone = 	tel.getText();
 		
 		//save data in Gestion Back
 //      Usager usager= new Usager("Yacia","Adel", "2Rue ludovic beauchet", 54000, "Nancy", "0768548385", "adel.yacia@gmail.com", new Date());
-		gb.ajouterUsager(LastName,FirstName, Adress,Cp, City, Tel, Mail , dateBirth);
+		gb.ajouterUsager(nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
 	}
     
     @FXML

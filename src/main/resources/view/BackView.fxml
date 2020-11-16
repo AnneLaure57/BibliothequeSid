@@ -71,7 +71,7 @@
                            <items>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterUsager" text="Ajouter Usager" />
+                                    <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormU" text="Ajouter Usager" />
                                     <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#modifierUsager" text="Modifier Usager" />
                                     <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerUsager" text="Supprimer Usager" />
                                     <TextField layoutX="623.0" layoutY="54.0" />
