@@ -24,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.DateStringConverter;
@@ -75,7 +76,7 @@ public class IHM_Back {
 	@FXML TableColumn<Usager, Date> tabDateDU;
 	
 	@FXML
-   	public void initialize() {
+   	public void initialize() throws IOException {
 	
 		tabIdU.setCellValueFactory(new PropertyValueFactory<Usager, Number>("id"));
 		tabNameU.setCellValueFactory(new PropertyValueFactory<Usager, String>("nom"));
@@ -103,12 +104,21 @@ public class IHM_Back {
 		
 	}
 	
+	@FXML
+    private void closeView(){
+        // get a handle to the stage
+        Stage stage = (Stage) cancel.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }    
+	
 	/*
 	 *  Usager Methods
 	 */
 	
 	public void getListUsagers()
 	{
+		System.out.println("je suis ici");
 		tabViewU.setItems(gestionBack.ListerUsagers());
 	}
 	
@@ -145,8 +155,6 @@ public class IHM_Back {
     
     @FXML
 	private void ajouterUsager(ActionEvent event) {
-    	result.setText("L'usager a été ajouté");
-		result.setTextFill(Color.GREEN);
 		LOG.fine(lastname.getText() + ", " + firstname.getText() + ", " + dateB.getValue() + ", " + adress.getText() + ", " + cp.getText() + ", " + city.getText()
 		+ ", " + mail.getText() + ", " + tel.getText());
 		String nom = lastname.getText();
@@ -160,7 +168,9 @@ public class IHM_Back {
 		
 		//save data in Gestion Back
 		gestionBack.ajouterUsager(nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
-		//Pour actualiser la liste
+		result.setText("L'usager a été ajouté");
+		result.setTextFill(Color.GREEN);
+		//Pour actualiser la liste TODO : resolve, the list is not actualize
 		getListUsagers();
 	}
     

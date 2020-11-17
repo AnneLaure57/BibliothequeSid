@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Front">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar layoutY="0" prefHeight="37.0" prefWidth="1042.0">
         <menus>
@@ -30,14 +30,14 @@
       </MenuBar>
       <TabPane layoutX="0" layoutY="35.0" prefHeight="534.0" prefWidth="1042.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab  text="Gestion Emprunt/Réservations">
+          <Tab text="Gestion Emprunt/Réservations">
 			<content>
-			  <fx:include id="tab1" source="FrontView.fxml"/>
+			  <fx:include id="tab1" source="FrontView.fxml" />
 			</content>
 		  </Tab>
-          <Tab id="tab2" text="Gestion Bibliothèque" >
+          <Tab id="tab2" text="Gestion Bibliothèque">
             <content>
-			  <fx:include id="tab2" source="BackView.fxml"/>
+			  <fx:include id="tab2" source="BackView.fxml" />
 			</content>
 		  </Tab>
         </tabs>

@@ -70,7 +70,6 @@ public class ControllerInterface {
 	@FXML
    	public void initialize() {
 		
-		//result.setText("Aucune recherche effectuée !");
 	}
 	
 	
@@ -108,11 +107,54 @@ public class ControllerInterface {
 		String telephone = 	tel.getText();
 		
 		//save data in Gestion Back
-//      Usager usager= new Usager("Yacia","Adel", "2Rue ludovic beauchet", 54000, "Nancy", "0768548385", "adel.yacia@gmail.com", new Date());
 		gestionBack.ajouterUsager(nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
 		//Pour actualiser mais cause une erreur TODO
-		//ihmBack.getListUsagers();
+	    //ihmBack.getListUsagers();
 	}
+    
+    @FXML
+    public void modFormU(ActionEvent event) {
+        try {
+        	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/formUpdU.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Modifier un usager");
+            Scene scene = new Scene(part);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    };
+    
+    @FXML
+	private void modifierUsager(ActionEvent event) {
+    	
+		/*LOG.fine(lastname.getText() + ", " + firstname.getText() + ", " + dateB.getValue() + ", " + adress.getText() + ", " + cp.getText() + ", " + city.getText()
+		+ ", " + mail.getText() + ", " + tel.getText());
+		String nom = lastname.getText();
+		String prenom = 	firstname.getText();
+		java.sql.Date dateNaissance = java.sql.Date.valueOf(dateB.getValue());
+		String adresse = 	adress.getText();
+		int codePostal = 	Integer.parseInt(cp.getText());
+		String ville = 	city.getText();
+		String email = 	mail.getText();
+		String telephone = 	tel.getText();
+		
+		//save data in Gestion Back
+		gestionBack.ajouterUsager(nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
+		//Pour actualiser la liste
+		getListUsagers();*/
+		
+	}
+    
+    @FXML
+    private void closeView(){
+        // get a handle to the stage
+        Stage stage = (Stage) cancel.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }
 	
 //	@FXML
 //	private void getInfosU(ActionEvent event) {
