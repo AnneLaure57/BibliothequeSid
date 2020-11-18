@@ -3,7 +3,7 @@ package fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Back;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Usager;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,10 +24,10 @@ public class ControllerInterface {
 	 *  Attributs
 	 */
 	
-	private static final Logger LOG = Logger.getLogger(Gestion_Back.class.getName());
+	private static final Logger LOG = Logger.getLogger(Gestion_Usager.class.getName());
 	
-	private Gestion_Back gestionBack = new Gestion_Back();
-	private IHM_Back ihmBack = new IHM_Back();
+	private Gestion_Usager gestionBack = new Gestion_Usager();
+	private IHM_Usager ihmBack = new IHM_Usager();
 	
 	@FXML
 	private Parent root;
