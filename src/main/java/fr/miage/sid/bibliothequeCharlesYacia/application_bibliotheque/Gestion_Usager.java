@@ -73,6 +73,27 @@ public class Gestion_Usager {
 	      entityManager.close();
 	}
 	
+	public void modifierUsager(int id, String nom, String prenom, String adresse, int codePostal, String ville, String telephone, String email, Date dateNaissance) {
+		
+	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+      EntityTransaction entityTransaction = entityManager.getTransaction();
+      entityTransaction.begin();
+		
+		try {
+			
+    	  Query query = entityManager.createQuery("Update Usager "+ "set nom='" + nom + "', prenom= '" + prenom +"', adresse='" + adresse +"', code_postal='" + codePostal + 
+    			  "', ville='" + ville +"', telephone='"+ telephone +"', mail='" + email + "', date_naissance='" + dateNaissance +"'  where id='" + id + "'");
+		  query.executeUpdate();
+			
+		  entityTransaction.commit();
+	      entityManager.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void supprimerUsager(int usagerID) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	      EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -98,29 +119,17 @@ public class Gestion_Usager {
 			}
 	}
 
-	public void modifierUsager(int usagerID) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void trouverUsager(int usagerID) {
+	public Usager trouverUsager(int usagerID) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
 	    entityTransaction.begin();
-	    
+	    Usager usager = null;
 		try {
 		  //S2
 		  // Query query = entityManager.createQuery("from Usager where id = '" + usagerID + "'");
-		  Usager usager = entityManager.find(Usager.class,usagerID);
-		  System.out.println(usager.toString());
+		  usager = entityManager.find(Usager.class,usagerID);
 		  LOG.fine(usager.toString());
-		  //TODO
-		  //Move functions in the other controller : formUpdU with ControllerInterface
-		  // créer méthode getDate( Usager usager)
-		  // Name.setText = usager.getNom()
-		  // meyhods to move openformU, getData, modifierUsager
-		  //TODO faire modifierUsager dans GestionBack
 			
 		  entityManager.close();
 		    	  
@@ -128,6 +137,7 @@ public class Gestion_Usager {
 				e.printStackTrace();
 				entityTransaction.rollback(); 
 		 }
+		return usager;
 		
 	}
 
