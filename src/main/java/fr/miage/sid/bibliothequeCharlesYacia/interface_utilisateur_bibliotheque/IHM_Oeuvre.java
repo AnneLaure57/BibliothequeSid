@@ -226,7 +226,7 @@ public class IHM_Oeuvre implements Initializable{
 		String type = "Magazine";
 		
 		//save data in Gestion Oeuvre
-		gestionOeuvre.ajouterOeuvre(type,titre, description,nombreTotal, nombreTotal,prix, editeur,dateEdition);
+		//gestionOeuvre.ajouterOeuvre(type,titre, description,nombreTotal, nombreTotal,prix, editeur,dateEdition);
 		//TODO correct FXML Exception (maybe add tab in table view)
 		gestionOeuvre.ajouterMagazine(type,titre,description,nombreTotal, nombreTotal,prix, editeur,dateEdition, numero, periodicite);
 		result.setText("Le magazine a été ajouté !");
@@ -272,7 +272,7 @@ public class IHM_Oeuvre implements Initializable{
 		String type = "Livre";
 		
 		//save data in Gestion Oeuvre
-		gestionOeuvre.ajouterOeuvre(type,titre, description,nombreTotal, nombreTotal,prix, editeur,dateEdition);
+		//gestionOeuvre.ajouterOeuvre(type,titre, description,nombreTotal, nombreTotal,prix, editeur,dateEdition);
 		//TODO correct FXML Exception (maybe add tab in table view)
 		gestionOeuvre.ajouterLivre(type,titre,description,nombreTotal, nombreTotal,prix, editeur,dateEdition, resume);
 		result.setText("Le livre a été ajouté !");

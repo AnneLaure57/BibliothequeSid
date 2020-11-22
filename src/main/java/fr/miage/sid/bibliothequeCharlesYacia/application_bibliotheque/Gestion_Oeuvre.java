@@ -124,6 +124,7 @@ public class Gestion_Oeuvre {
         entityManager.persist(oeuvre);
         //Get the infos
         LOG.finer(oeuvre.toString());
+        System.out.println(oeuvre.toString());
 
         entityTransaction.commit();
         entityManager.close();

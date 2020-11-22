@@ -13,11 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @DiscriminatorValue("Livre")
 public class Livre extends Oeuvre {
 	
@@ -41,11 +44,12 @@ public class Livre extends Oeuvre {
 	}
 
 	public Livre(String type, String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix, String editeur, Date dateEdition) {
+		//super(titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
 		super(titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
 	}
 
 	public Livre(String type, String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix, String editeur, Date dateEdition, String resume) {
-		super(titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
+		super(type,titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
 		this.resume = resume;
 	}
 

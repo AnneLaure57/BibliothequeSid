@@ -200,14 +200,12 @@ public class Oeuvre {
 		this.dateEdition = dateEdition;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Oeuvre [id=" + id + ", titre=" + titre + ", description=" + description + ", nbExemplairesDispo="
-				+ nbExemplairesDispo + ", nbExemplairesTotal=" + nbExemplairesTotal + ", prix=" + prix + ", nbResa="
-				+ nbResa + ", editeur=" + editeur + ", dateEdition=" + dateEdition + ", dateSuppression="
-				+ dateSuppression + ", emprunt=" + emprunt + ", reservations=" + reservations + ", exemplaires="
-				+ exemplaires + "]";
+		return "Oeuvre [id=" + id + ", type=" + type + ", titre=" + titre + ", description=" + description
+				+ ", nbExemplairesDispo=" + nbExemplairesDispo + ", nbExemplairesTotal=" + nbExemplairesTotal
+				+ ", prix=" + prix + ", nbResa=" + nbResa + ", editeur=" + editeur + ", dateEdition=" + dateEdition
+				+ ", dateSuppression=" + dateSuppression + ", emprunt=" + emprunt + ", reservations=" + reservations
+				+ ", exemplaires=" + exemplaires + "]";
 	}
-
 }
