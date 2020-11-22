@@ -100,6 +100,7 @@ public class IHM_Usager implements Initializable{
 			tabMailU.setCellFactory(TextFieldTableCell.<Usager>forTableColumn());
 			
 			resultU.setText("Aucune action effectuée !");
+			resultU.setTextFill(Color.BLUE);
 			
 			getListUsagers();
 		}
@@ -123,7 +124,7 @@ public class IHM_Usager implements Initializable{
     }    
 	
 	/*
-	 *  Usager Methods
+	 * List all usagers in tableView
 	 */
 	
 	public void getListUsagers()
@@ -132,12 +133,17 @@ public class IHM_Usager implements Initializable{
 	}
 	
 	/*
-	 * Get the list of Usagers inside select
+	 * Get the list of Usagers inside select for modForm
 	 */
+	
 	public void getListUsagersSelect()
 	{
 		select.setItems(gestionBack.ListerUsagersUnDeleted());
 	}
+	
+	/*
+	 * Find a usager by lastname/firstname research
+	 */
 	
 	@FXML
 	public void trouverUsager () {
@@ -213,7 +219,7 @@ public class IHM_Usager implements Initializable{
 		
 		//save data in Gestion Back
 		gestionBack.ajouterUsager(nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
-		result.setText("L'usager a été ajouté");
+		result.setText("L'usager a été ajouté !");
 		result.setTextFill(Color.GREEN);
 	}
 
@@ -282,6 +288,8 @@ public class IHM_Usager implements Initializable{
 		
 		//save data in Gestion Back
 		gestionBack.modifierUsager(id,nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
+		result.setText("L'usager a été modifié !");
+		result.setTextFill(Color.GREEN);
 	}
     
     @FXML

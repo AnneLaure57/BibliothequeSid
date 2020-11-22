@@ -2,8 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -13,17 +14,33 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button fx:id="butAddO" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterOeuvre" text="Ajouter Oeuvre" />
-                  <Button layoutX="231.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerOeuvre" text="Supprimer Oeuvre" />
-                  <TextField layoutX="623.0" layoutY="54.0" />
-                  <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
+                  <Button fx:id="butAddO" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormO" text="Ajouter Oeuvre" />
+                  <Button layoutX="231.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverOeuvre" text="Archiver Oeuvre" />
+                  <TextField fx:id="searchOeuvre" layoutX="623.0" layoutY="54.0" />
+                  <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverOeuvre" text="Rechercher" />
                   <Label layoutX="28.0" layoutY="102.0" text="Résultat : " />
-                  <Label fx:id="resultO" layoutX="28.0" layoutY="102.0" prefHeight="17.0" prefWidth="199.0" />
+                  <Label fx:id="resultO" layoutX="80.0" layoutY="102.0" prefHeight="17.0" prefWidth="405.0" />
+                  <Button layoutX="371.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerOeuvre" text="Supprimer Oeuvre" />
+                  <Button layoutX="888.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <ListView prefHeight="335.0" prefWidth="1036.0" />
+                  <TableView fx:id="tabViewO" prefHeight="335.0" prefWidth="1042.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0">
+                    <columns>
+                      <TableColumn fx:id="tabId" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="tabType" prefWidth="75.0" text="Type" />
+                      <TableColumn fx:id="tabTitle" prefWidth="75.0" text="Titre" />
+                        <TableColumn fx:id="tabDesc" prefWidth="75.0" text="Description" />
+                        <TableColumn fx:id="tabPrix" prefWidth="75.0" text="Prix" />
+                        <TableColumn fx:id="tabAv" prefWidth="75.0" text="Disponiles" />
+                        <TableColumn fx:id="tabTotal" prefWidth="75.0" text="Total" />
+                        <TableColumn fx:id="tabNbResa" prefWidth="100.0" text="Nombres Résa" />
+                        <TableColumn fx:id="tabEditor" prefWidth="79.0" text="Editeur" />
+                        <TableColumn fx:id="tabDateE" prefWidth="113.0" text="Date édition" />
+                        <TableColumn fx:id="tabDateS" prefWidth="130.0" text="Date suppression" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
          </items>

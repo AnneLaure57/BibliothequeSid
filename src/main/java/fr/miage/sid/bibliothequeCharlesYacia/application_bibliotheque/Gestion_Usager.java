@@ -1,7 +1,6 @@
 package fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,9 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.ControllerInterface;
-import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
-import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
 import fr.miage.sid.bibliothequeCharlesYacia.utilitaires.JPAUtil;
 import javafx.collections.FXCollections;
@@ -116,27 +112,26 @@ public class Gestion_Usager {
 	
 	public void supprimerUsager(int usagerID) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	      EntityTransaction entityTransaction = entityManager.getTransaction();
-	      entityTransaction.begin();
-	      
-	      try {
-	    	//Get the infos
-	    	  //S1
-//	    	  Query query = entityManager.createQuery("delete from Usager where id = '" + usagerID + "'");
-//			  query.executeUpdate();
-	    	  
-	    	  //S2
-	    	  Usager usager = entityManager.find(Usager.class,usagerID);
-	    	  entityManager.remove(usager);
-		
-		      entityTransaction.commit();
-		      entityManager.close();
-	    	  
-	      } catch(Exception e)
-			{
-				e.printStackTrace();
-				entityTransaction.rollback(); 
-			}
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		  
+		  try {
+			//Get the infos
+		    //S1
+			//	    	  Query query = entityManager.createQuery("delete from Usager where id = '" + usagerID + "'");
+		    //			  query.executeUpdate();
+		  
+		    //S2
+		    Usager usager = entityManager.find(Usager.class,usagerID);
+		    entityManager.remove(usager);
+	
+	        entityTransaction.commit();
+	        entityManager.close();
+			  
+		  } catch(Exception e) {
+			  e.printStackTrace();
+			  entityTransaction.rollback(); 
+		  }
 	}
 	
 	public void archiverUsager(int id) {
@@ -148,7 +143,7 @@ public class Gestion_Usager {
 	    entityTransaction.begin();
 		try {
 			
-		  Query query = entityManager.createQuery("Update Usager "+ "set date_suppression='" + dateD + "'  where id='" + id + "'");
+		  Query query = entityManager.createQuery("Update Usager set date_suppression='" + dateD + "'  where id='" + id + "'");
 		  query.executeUpdate();
 			
 		  entityTransaction.commit();

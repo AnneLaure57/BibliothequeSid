@@ -36,8 +36,6 @@ public class Livre extends Oeuvre {
 	public void setResume(String resume) {
 		this.resume = resume;
 	}
-	
-	
 
 	public Livre(String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix,
 			String editeur, Date dateEdition) {
