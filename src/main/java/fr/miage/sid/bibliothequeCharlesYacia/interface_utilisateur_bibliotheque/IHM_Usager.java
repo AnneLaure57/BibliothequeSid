@@ -4,16 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Usager;
-import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
-import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,10 +26,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.converter.DateStringConverter;
 import javafx.util.converter.NumberStringConverter;
 
 public class IHM_Usager implements Initializable{
@@ -138,9 +131,12 @@ public class IHM_Usager implements Initializable{
 		tabViewU.setItems(gestionBack.ListerUsagers());
 	}
 	
+	/*
+	 * Get the list of Usagers inside select
+	 */
 	public void getListUsagersSelect()
 	{
-		select.setItems(gestionBack.ListerUsagers());
+		select.setItems(gestionBack.ListerUsagersUnDeleted());
 	}
 	
 	@FXML
@@ -158,6 +154,7 @@ public class IHM_Usager implements Initializable{
 		} else {
 			Usager usager = (Usager) select.getSelectionModel().getSelectedItem();
 			int usagerID = usager.getId();
+			//auto complement fields
 			Usager modusager = gestionBack.trouverUsager(usagerID);
 			lastname.setText(modusager.getNom());
 			firstname.setText(modusager.getPrenom());
@@ -197,6 +194,12 @@ public class IHM_Usager implements Initializable{
     
     @FXML
 	private void ajouterUsager(ActionEvent event) {
+    	if (! textFieldsValid()) {
+            // one or more of the text fields are empty
+    		result.setText("Veuillez remplir les champs manquants !");
+    		result.setTextFill(Color.RED);
+            return;
+        }
 		LOG.fine(lastname.getText() + ", " + firstname.getText() + ", " + dateB.getValue() + ", " + adress.getText() + ", " + cp.getText() + ", " + city.getText()
 		+ ", " + mail.getText() + ", " + tel.getText());
 		String nom = lastname.getText();
@@ -256,20 +259,14 @@ public class IHM_Usager implements Initializable{
             e.printStackTrace();
         }
     };
-    
-    
-    public void getData(Usager modusager) {
-    	System.out.println("je suis ici " +modusager.toString() + " nom : "+ modusager.getNom());
-    	//lastname.setText(modusager.getNom());
-    	//lastname = new TextField();
-    	//lastname.setText(modusager.getNom());
-		
-	}
 
 	@FXML
 	private void modifierUsager(ActionEvent event) {
-    	
-		
+		if (! textFieldsValid()) {
+            // one or more of the text fields are empty
+    		result.setText("Veuillez remplir les champs manquants !");
+    		result.setTextFill(Color.RED);
+        }
 		System.out.println(lastname.getText() + ", " + firstname.getText() + ", " + dateB.getValue() + ", " + adress.getText() + ", " + cp.getText() + ", " + city.getText()
 		+ ", " + mail.getText() + ", " + tel.getText());
 		Usager us = (Usager) select.getSelectionModel().getSelectedItem();
@@ -290,12 +287,12 @@ public class IHM_Usager implements Initializable{
     @FXML
     public void supprimerUsager(ActionEvent event) throws IOException, SQLException {
         if (tabViewU.getSelectionModel().getSelectedItem() == null) {
-        	resultU.setText("Veuillez selectionner un usager supprimer avant !");
+        	resultU.setText("Veuillez sélectionner un usager à supprimer avant !");
 			resultU.setTextFill(Color.RED);
 		} else {
 			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
 			int usagerID = usager.getId();
-			resultU.setText("L'usager avec l'ID : " + usagerID + " a été supprimé !");
+			resultU.setText("L'usager avec l'ID " + usagerID + " a été supprimé !");
 			resultU.setTextFill(Color.GREEN);
 			gestionBack.supprimerUsager(usagerID);
 			getListUsagers();
@@ -303,36 +300,57 @@ public class IHM_Usager implements Initializable{
 		
     };
     
-//	public void ajouterExemplaire(Oeuvre oeuvre, String titre) {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public void ajouterUsager(String nom) {
-//		
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public void ajouterOeuvre(String titre) {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public void supprimerExemplaire(Oeuvre oeuvre) {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public void supprimerOeuvre(String titre) {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public void supprimerUsager(String nom) {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public void modifierUsager(Usager usager) {
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public void modifierExemplaire(Exemplaire exemplaire) {
-//		throw new UnsupportedOperationException();
-//	}
+    @FXML
+    public void archiverUsager(ActionEvent event) throws IOException, SQLException {
+        if (tabViewU.getSelectionModel().getSelectedItem() == null) {
+        	resultU.setText("Veuillez sélectionner un usager à archiver avant !");
+			resultU.setTextFill(Color.RED);
+		} else {
+			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
+			int usagerID = usager.getId();
+			resultU.setText("L'usager avec l'ID " + usagerID + " a été supprimé !");
+			resultU.setTextFill(Color.GREEN);
+			gestionBack.archiverUsager(usagerID);
+			getListUsagers();
+		}
+		
+    };
+    
+    private boolean textFieldsValid() {
+
+        boolean validTextFields = true;
+
+        if (lastname.getText().isEmpty()) {
+            validTextFields = false;
+            lastname.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+        }
+
+        if (firstname.getText().isEmpty()) {
+            validTextFields = false;
+            firstname.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+        }
+        
+        if (adress.getText().isEmpty()) {
+            validTextFields = false;
+            adress.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+        }
+        
+        if (city.getText().isEmpty()) {
+            validTextFields = false;
+            city.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+        }
+        
+        if (cp.getText().isEmpty()) {
+            validTextFields = false;
+            cp.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+        }
+        
+        if (dateB.getValue() == null) {
+            validTextFields = false;
+            dateB.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+        }
+
+        return validTextFields;
+    }
+    
 }

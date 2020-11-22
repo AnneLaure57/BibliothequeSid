@@ -40,13 +40,13 @@ public class Usager {
 	@Column(name = "adresse", nullable=false) // NOT NULL
 	private String adresse;
 	
-	@Column(name = "code_postal", nullable=false)
+	@Column(name = "code_postal", nullable=false, length=5)
 	private int codepostal;
 	
 	@Column(name = "ville", nullable=false)
 	private String ville;
 	
-	@Column(name = "telephone")
+	@Column(name = "telephone", length=10)
 	private String telephone;
 	
 	@Column(name = "mail")
@@ -183,10 +183,7 @@ public class Usager {
 
 	@Override
 	public String toString() {
-		return "Usager [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", codepostal="
-				+ codepostal + ", ville=" + ville + ", telephone=" + telephone + ", mail=" + mail + ", dateCreation=" + dateCreation
-				+ ", dateNaissance=" + dateNaissance + ", dateSuppression=" + dateSuppression + "]";
+		return "id :" + id + ", " + nom + " - " + prenom;
 	}
-	
-	
+
 }

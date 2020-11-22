@@ -1,6 +1,8 @@
 package fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -30,6 +32,24 @@ public class Gestion_Usager {
 		
 		@SuppressWarnings("unchecked")
 		List<Usager> usagers = entityManager.createQuery("from Usager").getResultList();
+		for(Usager us : usagers)
+		{
+			list.add(us);
+		}
+		entityManager.close();
+		return list;
+	}
+	
+	public static ObservableList<Usager> ListerUsagersUnDeleted() 
+	{
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+		ObservableList<Usager> list = FXCollections.observableArrayList();
+		entityTransaction.begin();
+		
+		@SuppressWarnings("unchecked")
+		List<Usager> usagers = entityManager.createQuery("from Usager where date_suppression is null ").getResultList();
 		for(Usager us : usagers)
 		{
 			list.add(us);
@@ -118,6 +138,27 @@ public class Gestion_Usager {
 				entityTransaction.rollback(); 
 			}
 	}
+	
+	public void archiverUsager(int id) {
+		 Calendar calendar = Calendar.getInstance();
+		 java.sql.Date dateD = new java.sql.Date(calendar.getTime().getTime());
+		    
+	    EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+	    entityTransaction.begin();
+		try {
+			
+		  Query query = entityManager.createQuery("Update Usager "+ "set date_suppression='" + dateD + "'  where id='" + id + "'");
+		  query.executeUpdate();
+			
+		  entityTransaction.commit();
+	      entityManager.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	public Usager trouverUsager(int usagerID) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
@@ -127,7 +168,9 @@ public class Gestion_Usager {
 	    Usager usager = null;
 		try {
 		  //S2
-		  // Query query = entityManager.createQuery("from Usager where id = '" + usagerID + "'");
+		  //Query query = entityManager.createQuery("from Usager where id = '" + usagerID + "' and date_supression=''");
+		  //LOG.fine(query.toString());
+	      //query.executeUpdate();
 		  usager = entityManager.find(Usager.class,usagerID);
 		  LOG.fine(usager.toString());
 			
@@ -140,5 +183,5 @@ public class Gestion_Usager {
 		return usager;
 		
 	}
-
+	
 }
