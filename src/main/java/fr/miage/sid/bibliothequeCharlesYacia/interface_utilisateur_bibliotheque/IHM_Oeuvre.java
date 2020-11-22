@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Oeuvre;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -100,6 +100,14 @@ public class IHM_Oeuvre implements Initializable{
 			getListOeuvres();
 		}
 		
+		if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/listMags.fxml"))) {
+			getListMags();
+		}
+		
+		if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/listBooks.fxml"))) {
+			getListLivres();
+		}
+			
 	}
 	
 	/*
@@ -108,6 +116,19 @@ public class IHM_Oeuvre implements Initializable{
 	
 	private void getListOeuvres() {
 		tabViewO.setItems(gestionOeuvre.ListerOeuvres());
+		//tabViewO.setItems(gestionOeuvre.ListerMagazines());
+		
+	}
+	
+	private void getListMags() {
+		//tabViewO.setItems(gestionOeuvre.ListerOeuvres());
+		tabViewO.setItems(gestionOeuvre.ListerMagazines());
+		
+	}
+	
+	private void getListLivres() {
+		tabViewO.setItems(gestionOeuvre.ListerLivres());
+		//tabViewO.setItems(gestionOeuvre.ListerMagazines());
 		
 	}
 	

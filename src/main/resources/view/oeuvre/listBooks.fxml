@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Oeuvre">
+   <children>
+      <TableView fx:id="tabViewO" prefHeight="307.0" prefWidth="1036.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0">
+        <columns>
+          <TableColumn fx:id="tabId" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="tabTitle" prefWidth="75.0" text="Titre" />
+            <TableColumn fx:id="tabDesc" prefWidth="75.0" text="Description" />
+            <TableColumn fx:id="tabPrix" prefWidth="75.0" text="Prix" />
+            <TableColumn fx:id="tabAv" prefWidth="75.0" text="Disponiles" />
+            <TableColumn fx:id="tabTotal" prefWidth="75.0" text="Total" />
+            <TableColumn fx:id="tabNbResa" prefWidth="98.0" text="Nombre Réservations" />
+            <TableColumn fx:id="tabEditor" prefWidth="76.0" text="Editeur" />
+            <TableColumn fx:id="tabDateE" prefWidth="114.0" text="Date Parution" />
+            <TableColumn fx:id="tabDateS" prefWidth="117.0" text="Date suppression" />
+            <TableColumn fx:id="TabResum" prefWidth="180.0" text="Résumé" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

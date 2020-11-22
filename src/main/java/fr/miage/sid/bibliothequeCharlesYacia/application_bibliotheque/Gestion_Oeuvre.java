@@ -37,6 +37,40 @@ public class Gestion_Oeuvre {
 		return list;
 	}
 	
+	public ObservableList<Oeuvre> ListerMagazines() {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+		ObservableList<Oeuvre> list = FXCollections.observableArrayList();
+		entityTransaction.begin();
+		
+		@SuppressWarnings("unchecked")
+		List<Oeuvre> oeuvres = entityManager.createQuery("from Magazine").getResultList();
+		for(Oeuvre o : oeuvres)
+		{
+			list.add(o);
+		}
+		entityManager.close();
+		return list;
+	}
+	
+	public ObservableList<Oeuvre> ListerLivres() {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+		ObservableList<Oeuvre> list = FXCollections.observableArrayList();
+		entityTransaction.begin();
+		
+		@SuppressWarnings("unchecked")
+		List<Oeuvre> oeuvres = entityManager.createQuery("from Livre").getResultList();
+		for(Oeuvre o : oeuvres)
+		{
+			list.add(o);
+		}
+		entityManager.close();
+		return list;
+	}
+	
 	public ObservableList<Oeuvre> trouverOeuvre(String text) 
 	{
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
@@ -97,39 +131,7 @@ public class Gestion_Oeuvre {
 		}
 		//TODO archive Exemplaires
 	}
-
-	/*public void ajouterOeuvre(String titre, String description,int nombreDispo, int nombreTotal, int prix, String editeur,Date dateEdition) {
-	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-      EntityTransaction entityTransaction = entityManager.getTransaction();
-      entityTransaction.begin();
-      
-      Oeuvre oeuvre= new Oeuvre(titre,description,nombreDispo, nombreTotal, prix, editeur, dateEdition);
-      entityManager.persist(oeuvre);
-      //Get the infos
-      LOG.finer(oeuvre.toString());
-
-      entityTransaction.commit();
-      entityManager.close();
-		
-	}*/
-
-    public void ajouterOeuvre(String type,String titre, String description, int nombreDispo, int nombreTotal, int prix,String editeur, Date dateEdition) {
-		// TODO Auto-generated method stub
-	    //add oeuvre for Mag or Book
-    	EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
-        //add Oeuvre
-        Oeuvre oeuvre= new Oeuvre(type, titre,description,nombreDispo, nombreTotal, prix, editeur, dateEdition);
-        entityManager.persist(oeuvre);
-        //Get the infos
-        LOG.finer(oeuvre.toString());
-        System.out.println(oeuvre.toString());
-
-        entityTransaction.commit();
-        entityManager.close();
-	}
-
+	
 	public void ajouterMagazine(String type,String titre, String description, int nombreDispo, int nombreTotal, int prix,String editeur, Date dateEdition, String numero, int periodicite) {
 		// TODO Auto-generated method stub
 	     //add magazine
@@ -161,5 +163,37 @@ public class Gestion_Oeuvre {
 	     entityTransaction.commit();
 	     entityManager.close();
 	}
+
+	/*public void ajouterOeuvre(String titre, String description,int nombreDispo, int nombreTotal, int prix, String editeur,Date dateEdition) {
+	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+      EntityTransaction entityTransaction = entityManager.getTransaction();
+      entityTransaction.begin();
+      
+      Oeuvre oeuvre= new Oeuvre(titre,description,nombreDispo, nombreTotal, prix, editeur, dateEdition);
+      entityManager.persist(oeuvre);
+      //Get the infos
+      LOG.finer(oeuvre.toString());
+
+      entityTransaction.commit();
+      entityManager.close();
+		
+	}
+
+    public void ajouterOeuvre(String type,String titre, String description, int nombreDispo, int nombreTotal, int prix,String editeur, Date dateEdition) {
+		// TODO Auto-generated method stub
+	    //add oeuvre for Mag or Book
+    	EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        //add Oeuvre
+        Oeuvre oeuvre= new Oeuvre(type, titre,description,nombreDispo, nombreTotal, prix, editeur, dateEdition);
+        entityManager.persist(oeuvre);
+        //Get the infos
+        LOG.finer(oeuvre.toString());
+        System.out.println(oeuvre.toString());
+
+        entityTransaction.commit();
+        entityManager.close();
+	}*/
 
 }
