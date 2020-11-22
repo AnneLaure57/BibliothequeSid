@@ -1,40 +1,48 @@
 package fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 @Entity
+@NoArgsConstructor
 @DiscriminatorValue("Magazine")
 public class Magazine extends Oeuvre {
-	
 
+	//TODO : find why num is consider as id, even if we add another id with @
 	@Column(name = "numero")
-	private int numero;
+	private String numero;
 	
-	@Temporal(TemporalType.DATE)
+	/*@Temporal(TemporalType.DATE)
 	@Column(name = "date_parution")
-	private Date dateParution;
+	private Date dateParution;*/
 	
 	@Column(name = "periodicite")
 	private int periodicite;
 	
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	public Date getDateParution() {
+	/*public Date getDateParution() {
 		return dateParution;
 	}
 	public void setDateParution(Date dateParution) {
 		this.dateParution = dateParution;
-	}
+	}*/
 	public int getPeriodicite() {
 		return periodicite;
 	}
@@ -42,22 +50,27 @@ public class Magazine extends Oeuvre {
 		this.periodicite = periodicite;
 	}
 	
-	
-	public Magazine(String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix,
-			String editeur, Date dateEdition) {
+	public Magazine(String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix, String editeur, Date dateEdition) {
 		super(titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
 	}
 	
-	public Magazine(String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix,
-			String editeur, Date dateEdition, int numero, Date dateParution, int periodicite) {
+	/*public Magazine(String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix,String editeur, Date dateEdition, String numero, int periodicite) {
 		super(titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
 		this.numero = numero;
-		this.dateParution = dateParution;
+		//this.dateParution = dateParution;
+		this.periodicite = periodicite;
+	}*/
+	
+	public Magazine(String type, String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix,String editeur, Date dateEdition, String numero, int periodicite) {
+		super(titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
+		this.numero = numero;
+		//this.dateParution = dateParution;
 		this.periodicite = periodicite;
 	}
+	
 	@Override
 	public String toString() {
-		return "Magazine [numero=" + numero + ", dateParution=" + dateParution + ", periodicite=" + periodicite + "]";
+		return "Magazine [numero=" + numero + ", periodicite=" + periodicite + "]";
 	}
 
 	

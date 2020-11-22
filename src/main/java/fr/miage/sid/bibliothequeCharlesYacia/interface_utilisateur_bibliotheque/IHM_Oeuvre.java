@@ -42,13 +42,19 @@ public class IHM_Oeuvre implements Initializable{
 	@FXML private Label resultO;
 	
 	@FXML private TextField title;
-	@FXML private ComboBox type;
 	@FXML private TextField desc;
 	@FXML private DatePicker dateE;
 	@FXML private TextField price;
 	@FXML private TextField editor;
 	@FXML private TextField nbTotal;
 	@FXML private TextField searchOeuvre;
+	
+	//Magazine
+	@FXML private TextField num;
+	@FXML private TextField period;
+	
+	//Book
+	@FXML private TextField resum;
 	
 	@FXML TableView<Oeuvre> tabViewO;
 	@FXML TableColumn<Oeuvre, Number> tabId;
@@ -67,7 +73,7 @@ public class IHM_Oeuvre implements Initializable{
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/OeuvreView.fxml"))) {
 			tabId.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("id"));
-			//tabType.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("type"));
+			tabType.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("type"));
 			tabTitle.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("titre"));
 			tabDesc.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("description"));
 			tabPrix.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("prix"));
@@ -78,7 +84,7 @@ public class IHM_Oeuvre implements Initializable{
 			tabDateE.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateEdition"));
 			tabDateS.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateSuppression"));
 		
-			//tabType.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
+			tabType.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
 			tabTitle.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
 			tabDesc.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
 			tabPrix.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
@@ -138,6 +144,10 @@ public class IHM_Oeuvre implements Initializable{
 		tabViewO.setItems(list);
 	}
 	
+	/*
+     * Add oeuvre V1
+     */
+	
 	@FXML
     public void ajoutFormO(ActionEvent event) {
         try {
@@ -152,10 +162,6 @@ public class IHM_Oeuvre implements Initializable{
             e.printStackTrace();
         }
     };
-    
-    /*
-     * Add oeuvre
-     */
     
     @FXML
 	private void ajouterOeuvre(ActionEvent event) {
@@ -175,8 +181,101 @@ public class IHM_Oeuvre implements Initializable{
 		
 		//save data in Gestion Oeuvre
 		//(String titre, String description, int nbExemplairesTotal, int prix, String editeur, Date dateEdition)
-		gestionOeuvre.ajouterOeuvre(titre, description,nombreTotal, nombreTotal,prix, editeur,dateEdition);
+		//gestionOeuvre.ajouterOeuvre(titre, description,nombreTotal, nombreTotal,prix, editeur,dateEdition);
 		result.setText("L'oeuvre a été ajouté !");
+		result.setTextFill(Color.GREEN);
+	}
+    
+    /*
+     * Add magazine
+     */
+	
+	@FXML
+    public void ajoutFormOM(ActionEvent event) {
+        try {
+        	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/oeuvre/formAddOM.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Ajouter un nouveau magazine");
+            Scene scene = new Scene(part);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    };
+    
+    @FXML
+	private void ajouterOeuvreMagazine(ActionEvent event) {
+    	if (! textFieldsValid()) {
+            // one or more of the text fields are empty
+    		result.setText("Veuillez remplir les champs manquants !");
+    		result.setTextFill(Color.RED);
+            return;
+        }
+		LOG.fine(title.getText() + ", " + desc.getText() + ", " + dateE.getValue() + ", " + price.getText() + ", " + editor.getText() + ", " + nbTotal.getText()
+		+ ", " + num.getText() +period.getText());
+		String titre = title.getText();
+		String description = 	desc.getText();
+		java.sql.Date dateEdition = java.sql.Date.valueOf(dateE.getValue());
+		int prix = 	Integer.parseInt(price.getText());
+		int nombreTotal = 	Integer.parseInt(nbTotal.getText());
+		String editeur = editor.getText();
+		String numero = num.getText();
+		int periodicite = Integer.parseInt(period.getText());
+		String type = "Magazine";
+		
+		//save data in Gestion Oeuvre
+		gestionOeuvre.ajouterOeuvre(type,titre, description,nombreTotal, nombreTotal,prix, editeur,dateEdition);
+		//TODO correct FXML Exception (maybe add tab in table view)
+		gestionOeuvre.ajouterMagazine(type,titre,description,nombreTotal, nombreTotal,prix, editeur,dateEdition, numero, periodicite);
+		result.setText("Le magazine a été ajouté !");
+		result.setTextFill(Color.GREEN);
+	}
+    
+    /*
+     * Add books
+     */
+    
+    @FXML
+    public void ajoutFormOB(ActionEvent event) {
+        try {
+        	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/oeuvre/formAddOB.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Ajouter un nouveau livre");
+            Scene scene = new Scene(part);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    };
+    
+    @FXML
+	private void ajouterOeuvreLivre(ActionEvent event) {
+    	if (! textFieldsValid()) {
+            // one or more of the text fields are empty
+    		result.setText("Veuillez remplir les champs manquants !");
+    		result.setTextFill(Color.RED);
+            return;
+        }
+		LOG.fine(title.getText() + ", " + desc.getText() + ", " + dateE.getValue() + ", " + price.getText() + ", " + editor.getText() + ", " + nbTotal.getText()
+		+ ", " + resum.getText());
+		String titre = title.getText();
+		String description = 	desc.getText();
+		java.sql.Date dateEdition = java.sql.Date.valueOf(dateE.getValue());
+		int prix = 	Integer.parseInt(price.getText());
+		int nombreTotal = 	Integer.parseInt(nbTotal.getText());
+		String editeur = editor.getText();
+		String resume = resum.getText();
+		String type = "Livre";
+		
+		//save data in Gestion Oeuvre
+		gestionOeuvre.ajouterOeuvre(type,titre, description,nombreTotal, nombreTotal,prix, editeur,dateEdition);
+		//TODO correct FXML Exception (maybe add tab in table view)
+		gestionOeuvre.ajouterLivre(type,titre,description,nombreTotal, nombreTotal,prix, editeur,dateEdition, resume);
+		result.setText("Le livre a été ajouté !");
 		result.setTextFill(Color.GREEN);
 	}
     
@@ -211,7 +310,7 @@ public class IHM_Oeuvre implements Initializable{
 		} else {
 			Oeuvre oeuvre = tabViewO.getSelectionModel().getSelectedItem();
 			int oeuvreID = oeuvre.getId();
-			resultO.setText("L'oeuvre avec l'ID " + oeuvreID + " a été supprimé !");
+			resultO.setText("L'oeuvre avec l'ID " + oeuvreID + " a été archivé !");
 			resultO.setTextFill(Color.GREEN);
 			gestionOeuvre.archiverOeuvre(oeuvreID);
 			getListOeuvres();

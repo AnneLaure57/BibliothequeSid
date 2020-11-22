@@ -38,7 +38,10 @@ public class Oeuvre {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_oeuvre")
-    private Integer id;
+    private int id;
+	
+	@Column(name = "type")
+	private String type;
 	
 	@Column(name = "titre", nullable=false)
 	private String titre;
@@ -85,7 +88,15 @@ public class Oeuvre {
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
+	
+	public String getType() {
+		return type;
+	}
 
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -175,6 +186,20 @@ public class Oeuvre {
 		this.editeur = editeur;
 		this.dateEdition = dateEdition;
 	}
+	
+	public Oeuvre(String type, String titre, String description, int nbExemplairesDispo,int nbExemplairesTotal, int prix, String editeur, Date dateEdition) {
+		super();
+		this.type = type;
+		this.titre = titre;
+		this.description = description;
+		this.nbExemplairesDispo = nbExemplairesTotal;
+		this.nbExemplairesTotal = nbExemplairesTotal;
+		this.prix = prix;
+		this.nbResa = 0;
+		this.editeur = editeur;
+		this.dateEdition = dateEdition;
+	}
+
 
 	@Override
 	public String toString() {
@@ -185,7 +210,4 @@ public class Oeuvre {
 				+ exemplaires + "]";
 	}
 
-	
-	
-	
 }

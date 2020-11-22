@@ -1168,3 +1168,31 @@ Column "DATE_SUPRESSION" not found; SQL statement:
 	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:174)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+2020-11-22 11:51:57 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Erreur lors de la conversion de données "'dfgdfg12' (OEUVRE: NUMERO INTEGER)"
+Data conversion error converting "'dfgdfg12' (OEUVRE: NUMERO INTEGER)"; SQL statement:
+/* insert fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine */ insert into OEUVRE (id_oeuvre, date_edition, date_suppression, description, editeur, nb_exemp_dispo, nb_exemp_total, nb_reservation, prix, titre, type, numero, periodicite, oeuvre_type) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Magazine') -- (NULL, ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, 'Magazine') [22018-197]
+2020-11-22 11:55:41 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Erreur lors de la conversion de données "'rrter4' (OEUVRE: NUMERO INTEGER)"
+Data conversion error converting "'rrter4' (OEUVRE: NUMERO INTEGER)"; SQL statement:
+/* insert fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine */ insert into OEUVRE (id_oeuvre, date_edition, date_suppression, description, editeur, nb_exemp_dispo, nb_exemp_total, nb_reservation, prix, titre, type, numero, periodicite, oeuvre_type) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Magazine') -- (NULL, ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, 'Magazine') [22018-197]
+2020-11-22 11:56:00 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Erreur lors de la conversion de données "'rrter' (OEUVRE: NUMERO INTEGER)"
+Data conversion error converting "'rrter' (OEUVRE: NUMERO INTEGER)"; SQL statement:
+/* insert fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine */ insert into OEUVRE (id_oeuvre, date_edition, date_suppression, description, editeur, nb_exemp_dispo, nb_exemp_total, nb_reservation, prix, titre, type, numero, periodicite, oeuvre_type) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Magazine') -- (NULL, ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, 'Magazine') [22018-197]
+2020-11-22 11:56:42 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLException: Erreur lors de la conversion de données "'ERT' (OEUVRE: NUMERO INTEGER)"
+Data conversion error converting "'ERT' (OEUVRE: NUMERO INTEGER)"; SQL statement:
+/* insert fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine */ insert into OEUVRE (id_oeuvre, date_edition, date_suppression, description, editeur, nb_exemp_dispo, nb_exemp_total, nb_reservation, prix, titre, type, numero, periodicite, oeuvre_type) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Magazine') -- (NULL, ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, 'Magazine') [22018-197]
+2020-11-22 11:59:33 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Erreur lors de la conversion de données "'erf' (OEUVRE: NUMERO INTEGER)"
+Data conversion error converting "'erf' (OEUVRE: NUMERO INTEGER)"; SQL statement:
+/* insert fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine */ insert into OEUVRE (id_oeuvre, date_edition, date_suppression, description, editeur, nb_exemp_dispo, nb_exemp_total, nb_reservation, prix, titre, type, numero, periodicite, oeuvre_type) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Magazine') -- (NULL, ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, 'Magazine') [22018-197]
+2020-11-22 12:01:09 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Erreur lors de la conversion de données "'sdf' (OEUVRE: NUMERO INTEGER)"
+Data conversion error converting "'sdf' (OEUVRE: NUMERO INTEGER)"; SQL statement:
+/* insert fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine */ insert into OEUVRE (id_oeuvre, date_edition, date_suppression, description, editeur, nb_exemp_dispo, nb_exemp_total, nb_reservation, prix, titre, type, numero, periodicite, oeuvre_type) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Magazine') -- (NULL, ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, 'Magazine') [22018-197]
+2020-11-22 12:04:49 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Erreur lors de la conversion de données "'erf' (OEUVRE: NUMERO INTEGER)"
+Data conversion error converting "'erf' (OEUVRE: NUMERO INTEGER)"; SQL statement:
+/* insert fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine */ insert into OEUVRE (id_oeuvre, date_edition, date_suppression, description, editeur, nb_exemp_dispo, nb_exemp_total, nb_reservation, prix, titre, type, numero, periodicite, oeuvre_type) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Magazine') -- (NULL, ?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, 'Magazine') [22018-197]

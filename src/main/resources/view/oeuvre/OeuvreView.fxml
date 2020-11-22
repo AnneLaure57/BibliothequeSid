@@ -14,14 +14,16 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button fx:id="butAddO" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormO" text="Ajouter Oeuvre" />
-                  <Button layoutX="231.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverOeuvre" text="Archiver Oeuvre" />
+                  <Button fx:id="butAddO" layoutX="136.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormOB" text="Ajouter Livre" />
+                  <Button layoutX="347.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverOeuvre" text="Archiver Oeuvre" />
                   <TextField fx:id="searchOeuvre" layoutX="623.0" layoutY="54.0" />
                   <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverOeuvre" text="Rechercher" />
                   <Label layoutX="28.0" layoutY="102.0" text="Résultat : " />
                   <Label fx:id="resultO" layoutX="80.0" layoutY="102.0" prefHeight="17.0" prefWidth="405.0" />
-                  <Button layoutX="371.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerOeuvre" text="Supprimer Oeuvre" />
+                  <Button layoutX="455.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerOeuvre" text="Supprimer Oeuvre" />
                   <Button layoutX="888.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
+                  <Button fx:id="butAddO1" layoutX="228.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormOM" text="Ajouter Magazine" />
+                  <!--<Button fx:id="butAddO2" layoutX="32.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormO" text="Ajouter Oeuvre" />-->
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.utilitaires.JPAUtil;
 import javafx.collections.FXCollections;
@@ -72,7 +74,7 @@ public class Gestion_Oeuvre {
 			  e.printStackTrace();
 			  entityTransaction.rollback(); 
 		  }
-		
+		//TODO remove Exemplaires
 	}
 
 	public void archiverOeuvre(int oeuvreID) {
@@ -93,10 +95,10 @@ public class Gestion_Oeuvre {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		//TODO archive Exemplaires
 	}
 
-	public void ajouterOeuvre(String titre, String description,int nombreDispo, int nombreTotal, int prix, String editeur,Date dateEdition) {
+	/*public void ajouterOeuvre(String titre, String description,int nombreDispo, int nombreTotal, int prix, String editeur,Date dateEdition) {
 	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
       EntityTransaction entityTransaction = entityManager.getTransaction();
       entityTransaction.begin();
@@ -109,6 +111,54 @@ public class Gestion_Oeuvre {
       entityTransaction.commit();
       entityManager.close();
 		
+	}*/
+
+    public void ajouterOeuvre(String type,String titre, String description, int nombreDispo, int nombreTotal, int prix,String editeur, Date dateEdition) {
+		// TODO Auto-generated method stub
+	    //add oeuvre for Mag or Book
+    	EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        //add Oeuvre
+        Oeuvre oeuvre= new Oeuvre(type, titre,description,nombreDispo, nombreTotal, prix, editeur, dateEdition);
+        entityManager.persist(oeuvre);
+        //Get the infos
+        LOG.finer(oeuvre.toString());
+
+        entityTransaction.commit();
+        entityManager.close();
+	}
+
+	public void ajouterMagazine(String type,String titre, String description, int nombreDispo, int nombreTotal, int prix,String editeur, Date dateEdition, String numero, int periodicite) {
+		// TODO Auto-generated method stub
+	     //add magazine
+	     EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	     EntityTransaction entityTransaction = entityManager.getTransaction();
+	     entityTransaction.begin();
+	      
+	     Magazine mag= new Magazine(type, titre, description,nombreDispo, nombreTotal, prix, editeur, dateEdition, numero, periodicite);
+	     entityManager.persist(mag);
+	     //Get the infos
+	     LOG.finer(mag.toString());
+
+	     entityTransaction.commit();
+	     entityManager.close();
+	}
+	
+	public void ajouterLivre(String type,String titre, String description, int nombreDispo, int nombreTotal, int prix,String editeur, Date dateEdition, String resume) {
+		// TODO Auto-generated method stub
+	     //add magazine
+	     EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	     EntityTransaction entityTransaction = entityManager.getTransaction();
+	     entityTransaction.begin();
+	      
+	     Livre livre= new Livre(type, titre, description,nombreDispo, nombreTotal, prix, editeur, dateEdition, resume);
+	     entityManager.persist(livre);
+	     //Get the infos
+	     LOG.finer(livre.toString());
+
+	     entityTransaction.commit();
+	     entityManager.close();
 	}
 
 }
