@@ -4,9 +4,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Oeuvre">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Oeuvre">
    <children>
-      <TableView fx:id="tabViewO" prefHeight="307.0" prefWidth="1035.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0">
+      <TableView fx:id="tabViewO" prefHeight="307.0" prefWidth="1042.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0">
         <columns>
           <TableColumn fx:id="tabId" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="tabTitle" prefWidth="75.0" text="Titre" />
@@ -19,7 +19,7 @@
             <TableColumn fx:id="tabDateE" prefWidth="114.0" text="Date Parution" />
             <TableColumn fx:id="tabDateS" prefWidth="117.0" text="Date suppression" />
             <TableColumn fx:id="tabRef" text="Réf" />
-            <TableColumn fx:id="tabPer" prefWidth="106.0" text="Période" />
+            <TableColumn fx:id="tabPer" prefWidth="180.0" text="Période" />
         </columns>
       </TableView>
    </children>
