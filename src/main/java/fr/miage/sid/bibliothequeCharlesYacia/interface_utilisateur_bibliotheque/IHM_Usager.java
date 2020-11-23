@@ -272,6 +272,7 @@ public class IHM_Usager implements Initializable{
             // one or more of the text fields are empty
     		result.setText("Veuillez remplir les champs manquants !");
     		result.setTextFill(Color.RED);
+    		return;
         }
 		System.out.println(lastname.getText() + ", " + firstname.getText() + ", " + dateB.getValue() + ", " + adress.getText() + ", " + cp.getText() + ", " + city.getText()
 		+ ", " + mail.getText() + ", " + tel.getText());

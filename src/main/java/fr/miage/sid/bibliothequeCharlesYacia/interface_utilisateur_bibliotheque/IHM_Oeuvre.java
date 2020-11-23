@@ -69,6 +69,35 @@ public class IHM_Oeuvre implements Initializable{
 	@FXML TableColumn<Oeuvre, Date> tabDateE;
 	@FXML TableColumn<Oeuvre, Date> tabDateS;
 	
+	@FXML TableView<Oeuvre> tabViewOB;
+	@FXML TableColumn<Oeuvre, Number> tabIdB;
+	@FXML TableColumn<Oeuvre, String> tabTypeB;
+	@FXML TableColumn<Oeuvre, String> tabTitleB;
+	@FXML TableColumn<Oeuvre, String> tabDescB;
+	@FXML TableColumn<Oeuvre, Number> tabAvB;
+	@FXML TableColumn<Oeuvre, Number> tabTotalB;
+	@FXML TableColumn<Oeuvre, Number> tabPrixB;
+	@FXML TableColumn<Oeuvre, Number> tabNbResaB;
+	@FXML TableColumn<Oeuvre, String> tabEditorB;
+	@FXML TableColumn<Oeuvre, Date> tabDateEB;
+	@FXML TableColumn<Oeuvre, Date> tabDateSB;
+	@FXML TableColumn<Livre, String> tabResum;
+	
+	@FXML TableView<Oeuvre> tabViewOM;
+	@FXML TableColumn<Oeuvre, Number> tabIdM;
+	@FXML TableColumn<Oeuvre, String> tabTypeM;
+	@FXML TableColumn<Oeuvre, String> tabTitleM;
+	@FXML TableColumn<Oeuvre, String> tabDescM;
+	@FXML TableColumn<Oeuvre, Number> tabAvM;
+	@FXML TableColumn<Oeuvre, Number> tabTotalM;
+	@FXML TableColumn<Oeuvre, Number> tabPrixM;
+	@FXML TableColumn<Oeuvre, Number> tabNbResaM;
+	@FXML TableColumn<Oeuvre, String> tabEditorM;
+	@FXML TableColumn<Oeuvre, Date> tabDateEM;
+	@FXML TableColumn<Oeuvre, Date> tabDateSM;
+	@FXML TableColumn<Livre, Number> tabRef;
+	@FXML TableColumn<Livre, Number> tabPer;
+	
 	public void initialize(URL location, ResourceBundle resources){
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/OeuvreView.fxml"))) {
@@ -101,10 +130,54 @@ public class IHM_Oeuvre implements Initializable{
 		}
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/listMags.fxml"))) {
+			
+			tabIdM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("id"));
+			tabTitleM.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("titre"));
+			tabDescM.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("description"));
+			tabPrixM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("prix"));
+			tabAvM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbExemplairesDispo"));
+			tabTotalM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbExemplairesTotal"));
+			tabNbResaM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbResa"));
+			tabEditorM.setCellValueFactory(new PropertyValueFactory<Oeuvre,String>("editeur"));
+			tabDateEM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateEdition"));
+			tabDateSM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateSuppression"));
+		
+			tabTitleM.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
+			tabDescM.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
+			tabPrixM.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
+			tabAvM.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
+			tabTotalM.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
+			tabAvM.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
+			tabNbResaM.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
+			tabEditorM.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
+			
 			getListMags();
 		}
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/listBooks.fxml"))) {
+			
+			//TODO find how display O + L
+			
+			tabIdB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("id"));
+			tabTitleB.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("titre"));
+			tabDescB.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("description"));
+			tabPrixB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("prix"));
+			tabAvB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbExemplairesDispo"));
+			tabTotalB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbExemplairesTotal"));
+			tabNbResaB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbResa"));
+			tabEditorB.setCellValueFactory(new PropertyValueFactory<Oeuvre,String>("editeur"));
+			tabDateEB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateEdition"));
+			tabDateSB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateSuppression"));
+		
+			tabTitleB.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
+			tabDescB.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
+			tabPrixB.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
+			tabAvB.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
+			tabTotalB.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
+			tabAvB.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
+			tabNbResaB.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
+			tabEditorB.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
+			
 			getListLivres();
 		}
 			
@@ -121,14 +194,12 @@ public class IHM_Oeuvre implements Initializable{
 	}
 	
 	private void getListMags() {
-		//tabViewO.setItems(gestionOeuvre.ListerOeuvres());
-		tabViewO.setItems(gestionOeuvre.ListerMagazines());
+		tabViewOM.setItems(gestionOeuvre.ListerMagazines());
 		
 	}
 	
 	private void getListLivres() {
-		tabViewO.setItems(gestionOeuvre.ListerLivres());
-		//tabViewO.setItems(gestionOeuvre.ListerMagazines());
+		tabViewOB.setItems(gestionOeuvre.ListerLivres());
 		
 	}
 	

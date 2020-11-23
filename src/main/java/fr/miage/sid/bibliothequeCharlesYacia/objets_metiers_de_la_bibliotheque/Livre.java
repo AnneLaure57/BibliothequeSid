@@ -24,6 +24,9 @@ import lombok.NoArgsConstructor;
 @DiscriminatorValue("Livre")
 public class Livre extends Oeuvre {
 	
+	//TODO revoir héritage
+	//TODO voir relation avec oeuvre
+	
 	@Column(name = "resume")
 	private String resume;
 	

@@ -54,7 +54,8 @@
                       <Tab text="Livres">
                            <content>
                               <fx:include source="listBooks.fxml" />
-                           </content></Tab>
+                           </content>
+                      </Tab>
                       <Tab text="Magazines">
                            <content>
                               <fx:include source="listMags.fxml" />
