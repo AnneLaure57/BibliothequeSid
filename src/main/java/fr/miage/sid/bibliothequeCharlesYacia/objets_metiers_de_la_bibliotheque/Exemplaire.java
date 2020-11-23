@@ -34,6 +34,12 @@ public class Exemplaire {
 	@Column(name = "etat", nullable=false)	
 	private String etat;
 
+	@Column(name = "statut", nullable=false)	
+	private String statut;
+	
+	@Column(name = "titre", nullable=false)	
+	private String titre;
+	
 	@OneToMany(mappedBy = "exemplaire", cascade = CascadeType.ALL)
     private List<Emprunt> emprunts = new ArrayList<>();
 	
@@ -55,6 +61,15 @@ public class Exemplaire {
 
 	public void setEtat(String etat) {
 		this.etat = etat;
+	}
+	
+	
+	public String getStatut() {
+		return statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
 	}
 
 	public Emprunt emprunter(Usager u, Oeuvre o, int DateJour) {
@@ -83,10 +98,12 @@ public class Exemplaire {
 	
 	
 
-	public Exemplaire(Oeuvre oeuvre) {
+	public Exemplaire(Oeuvre oeuvre, String etat) {
 		super();
 		this.oeuvre = oeuvre;
-		this.etat = "actif";
+		this.etat = etat;
+		this.statut = "Disponible";
+		this.titre = oeuvre.getTitre();
 	}
 
 	@Override
