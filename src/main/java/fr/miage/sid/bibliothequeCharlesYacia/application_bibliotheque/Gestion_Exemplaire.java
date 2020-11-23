@@ -133,4 +133,26 @@ public class Gestion_Exemplaire {
 	      entityManager.close();
 	}
 
+	public void supprimerExemplaire(int exemplaireID) {
+		// TODO Auto-generated method stub
+		
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		  
+		  try {
+			
+		    Exemplaire exemplaire = entityManager.find(Exemplaire.class,exemplaireID);
+		    entityManager.remove(exemplaire);
+	
+	        entityTransaction.commit();
+	        entityManager.close();
+			  
+		  } catch(Exception e) {
+			  e.printStackTrace();
+			  entityTransaction.rollback(); 
+		  }
+		
+	}
+
 }

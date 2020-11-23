@@ -3,6 +3,7 @@ package fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -182,8 +183,6 @@ public class IHM_Exemplaire implements Initializable{
 	@FXML
 	private void modifierExemplaire(ActionEvent event) {
     	
-
-		
 		Exemplaire exemplaire = (Exemplaire) select.getSelectionModel().getSelectedItem();
 		String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
 		
@@ -209,7 +208,21 @@ public class IHM_Exemplaire implements Initializable{
             e.printStackTrace();
         }
     }
-    
+	
+	@FXML 
+	public void supprimerExemplaire(ActionEvent event) throws IOException, SQLException {
+	 if (tabViewEx.getSelectionModel().getSelectedItem() == null) {
+     	resultEx.setText("Veuillez sélectionner un exemplaire à supprimer avant !");
+			resultEx.setTextFill(Color.RED);
+		} else {
+			Exemplaire exemplaire = tabViewEx.getSelectionModel().getSelectedItem();
+			int exemplaireID = exemplaire.getId();
+			gestionExemplaire.supprimerExemplaire(exemplaireID);
+			resultEx.setText("L'exemplaire avec l'ID " + exemplaireID + " a été supprimé !");
+			resultEx.setTextFill(Color.GREEN);
+			getListExemplaires();
+		}
+	}
 	/**
 	 * 
 	 */
