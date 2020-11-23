@@ -78,7 +78,7 @@ public class Oeuvre {
 	@OneToMany(mappedBy = "oeuvre", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "oeuvre", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "oeuvre", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Exemplaire> exemplaires = new ArrayList<>();
 	
 	public String getTitre() {

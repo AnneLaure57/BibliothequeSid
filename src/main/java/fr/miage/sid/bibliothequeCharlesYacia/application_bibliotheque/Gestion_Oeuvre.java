@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.utilitaires.JPAUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -71,7 +72,7 @@ public class Gestion_Oeuvre {
 		return list;
 	}
 	
-	public ObservableList<Oeuvre> trouverOeuvre(String text) 
+	public ObservableList<Oeuvre> trouverOeuvre(String recherche) 
 	{
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -80,8 +81,8 @@ public class Gestion_Oeuvre {
 	    entityTransaction.begin();
 	    
 	    @SuppressWarnings("unchecked")
-		List<Oeuvre> oeuvres = entityManager.createQuery("from Oeuvre where titre like '%" + text + "%'").getResultList();
-
+		List<Oeuvre> oeuvres = entityManager.createQuery("from Oeuvre where lower(titre) like '%" + recherche + "%' ").getResultList();
+	    // or auteur like '%" + recherche + "%'"
 	    for(Oeuvre o : oeuvres)
 		{
 			list.add(o);
@@ -99,7 +100,12 @@ public class Gestion_Oeuvre {
 		  
 		  try {
 		    Oeuvre oeuvre = entityManager.find(Oeuvre.class,oeuvreID);
+		    oeuvre.getExemplaires().clear();
 		    entityManager.remove(oeuvre);
+			//Remove Oeuvres + Exemplaires
+			//Query query = entityManager.createQuery("Delete Oeuvre o, Exemplaire e from e inner join o where e.id_oeuvre = o.id and o.id='" + oeuvreID + "'");
+			//Query query = entityManager.createQuery("Delete Exemplaire e, Oeuvre o where e.id_oeuvre = o.id and o.id='" + oeuvreID + "'");
+			//query.executeUpdate();
 	
 	        entityTransaction.commit();
 	        entityManager.close();
@@ -108,7 +114,6 @@ public class Gestion_Oeuvre {
 			  e.printStackTrace();
 			  entityTransaction.rollback(); 
 		  }
-		//TODO remove Exemplaires
 	}
 
 	public void archiverOeuvre(int oeuvreID) {

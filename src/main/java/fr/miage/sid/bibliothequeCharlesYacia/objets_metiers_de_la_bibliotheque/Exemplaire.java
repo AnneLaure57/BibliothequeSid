@@ -71,7 +71,7 @@ public class Exemplaire {
 	public void setStatut(String statut) {
 		this.statut = statut;
 	}
-
+	
 	public Emprunt emprunter(Usager u, Oeuvre o, int DateJour) {
 		throw new UnsupportedOperationException();
 	}
