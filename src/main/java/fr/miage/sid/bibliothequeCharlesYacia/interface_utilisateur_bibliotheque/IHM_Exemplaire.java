@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -41,12 +42,15 @@ public class IHM_Exemplaire implements Initializable{
 	
 	@FXML private ComboBox selectOeuvres;
 	@FXML private ComboBox selectEtats;
+	@FXML private ComboBox select;
 	
 	@FXML private Button submit;
 	@FXML private Button cancel;
 	
+	@FXML private TextField titre;
 	
 	@FXML private Label result;
+	@FXML private Label resultEx;
 	
 	@FXML TableView<Exemplaire> tabViewEx;
 	@FXML TableColumn<Exemplaire, Number> tabIdEx;
@@ -74,14 +78,26 @@ public class IHM_Exemplaire implements Initializable{
 			
             result.setText("Aucune modification enregistrée !");
             result.setTextFill(Color.BLUE);
-            System.out.println("Je reconnais la fenetre");
             getListEtatSelect();
-            System.out.println("Je reconnais la fenetre");
             getListOeuvreSelect();
+            	
+		}
+		
+		if (location.equals(getClass().getClassLoader().getResource("view/exemplaire/formUpdEx.fxml"))) {
+			
+            result.setText("Aucune modification enregistrée !");
+            result.setTextFill(Color.BLUE);
+            getListExemplairesSelect();
+            getListEtatSelect();
             	
 		}
 	}
 	
+	private void getListExemplairesSelect() {
+		// TODO Auto-generated method stub
+		select.setItems(gestionExemplaire.ListerExemplaire());
+	}
+
 	@FXML
 	public void actualizeList () {
 		getListExemplaires();
@@ -102,6 +118,7 @@ public class IHM_Exemplaire implements Initializable{
 			    "Abimé"
 			);
 	}
+	
 
 	@FXML
     private void closeView(){
@@ -117,7 +134,7 @@ public class IHM_Exemplaire implements Initializable{
 	}
 
 	@FXML
-	public void ajouterExemplaire(ActionEvent event) {
+	public void formAddExemplaire(ActionEvent event) {
 		
 		System.out.println("Je rentre dans ajout");
         try {
@@ -135,7 +152,7 @@ public class IHM_Exemplaire implements Initializable{
     }
     
     @FXML
-	private void ajouterEx(ActionEvent event) {
+	private void ajouterExemplaire(ActionEvent event) {
     	
 		String etat = (String) selectEtats.getSelectionModel().getSelectedItem();
 		
@@ -148,7 +165,7 @@ public class IHM_Exemplaire implements Initializable{
 	}
 	
 	@FXML
-    public void modifierExemplaire(ActionEvent event) {
+    public void formUpExemplaire(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/exemplaire/formUpdEx.fxml"));
             Stage stage = new Stage();
@@ -163,7 +180,23 @@ public class IHM_Exemplaire implements Initializable{
     }
 	
 	@FXML
-    public void supprimerExemplaire(ActionEvent event) {
+	private void modifierExemplaire(ActionEvent event) {
+    	
+
+		
+		Exemplaire exemplaire = (Exemplaire) select.getSelectionModel().getSelectedItem();
+		String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
+		
+		//save data in Gestion Back
+		gestionExemplaire.modiferExemplaire(exemplaire, etat);
+
+		result.setText("L'usager a été modifié !");
+		result.setTextFill(Color.GREEN);
+
+	}
+	
+	@FXML
+    public void formDltExemplaire(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/exemplaire/formDelEx.fxml"));
             Stage stage = new Stage();
@@ -177,10 +210,32 @@ public class IHM_Exemplaire implements Initializable{
         }
     }
     
+	/**
+	 * 
+	 */
+	@FXML
+	public void  selectExemplaire() {
+		
+			if (select.getSelectionModel().getSelectedItem() == null) {
+	        	result.setText("Veuillez selectionner un exemplaire à modifier avant !");
+				result.setTextFill(Color.RED);
+			} else {
+				Exemplaire exemplaire = (Exemplaire) select.getSelectionModel().getSelectedItem();
+				int exemplaireID = exemplaire.getId();
+				//auto complement fields
+				Exemplaire modExemplaire = gestionExemplaire.trouverExemplaire(exemplaireID);
+				
+				titre.setText(modExemplaire.getTitre());
+				selectEtats.getSelectionModel().select(modExemplaire.getEtat());
+			}
+		}
+    
+	
     @FXML
 	public void selectOeuvre() {
 			
     }
+   
     
     @FXML
 	public void selectEtat() {

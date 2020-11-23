@@ -14,7 +14,7 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Button fx:id="submit" layoutX="419.0" layoutY="292.0" mnemonicParsing="false" onAction="#ajouterEx" prefHeight="42.0" prefWidth="87.0" text="Valider" />
+      <Button fx:id="submit" layoutX="419.0" layoutY="292.0" mnemonicParsing="false" onAction="#ajouterExemplaire" prefHeight="42.0" prefWidth="87.0" text="Valider" />
       <Button fx:id="cancel" layoutX="538.0" layoutY="292.0" mnemonicParsing="false" onAction="#closeView" prefHeight="42.0" prefWidth="87.0" text="Annuler" />
       <Text fx:id="msg" fill="TRANSPARENT" layoutX="54.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="message" />
       <Text layoutX="43.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oeuvre">

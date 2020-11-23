@@ -108,7 +108,7 @@ public class Exemplaire {
 
 	@Override
 	public String toString() {
-		return "Exemplaire [id=" + id + ", etat=" + etat + ", emprunts=" + emprunts + ", oeuvre=" + oeuvre + "]";
+		return "Exemplaire [id=" + id + ", etat=" + etat + ", emprunts=" + emprunts + ", titre=" + titre + "]";
 	}
 	
 	

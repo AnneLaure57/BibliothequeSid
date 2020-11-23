@@ -9,7 +9,7 @@ import javax.persistence.EntityTransaction;
 
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
-
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
 import fr.miage.sid.bibliothequeCharlesYacia.utilitaires.JPAUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -83,6 +83,54 @@ public class Gestion_Exemplaire {
 	    entityManager.close();
 	    
 		return oeuvre;
+	}
+
+	public Exemplaire trouverExemplaire(int exemplaireID) {
+		// TODO Auto-generated method stub
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    entityTransaction.begin();
+	    Exemplaire exemplaire = null;
+		try {
+		  
+		  exemplaire = entityManager.find(Exemplaire.class,exemplaireID);
+		  LOG.fine(exemplaire.toString());
+			
+		  entityManager.close();
+		    	  
+		 } catch(Exception e) {
+				e.printStackTrace();
+				entityTransaction.rollback(); 
+		 }
+		return exemplaire;
+	}
+
+	public void modiferExemplaire(Exemplaire exemp, String etat) {
+		// TODO Auto-generated method stub
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    entityTransaction.begin();
+	    try {
+		    Exemplaire exemplaire = entityManager.find(Exemplaire.class, exemp.getId());
+		    
+		    if(exemplaire != null) {
+		    	exemplaire.setEtat(etat);
+		    }
+
+		  //Get the infos
+		      LOG.finer(exemplaire.toString());
+		
+		      entityTransaction.commit();
+	      
+	    }
+	    catch (RuntimeException e) {
+	        entityManager.getTransaction().rollback();
+	        throw e;
+	    }
+	    
+	      entityManager.close();
 	}
 
 }

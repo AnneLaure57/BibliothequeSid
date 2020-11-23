@@ -2,39 +2,35 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="391.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Exemplaire">
    <children>
       <Text layoutX="45.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="État">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <TextField layoutX="270.0" layoutY="198.0" prefHeight="25.0" prefWidth="220.0" />
-      <Button layoutX="420.0" layoutY="379.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="87.0" text="Valider" />
-      <Button layoutX="535.0" layoutY="379.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="87.0" text="Annuler" />
+      <TextField fx:id="titre" editable="false" layoutX="270.0" layoutY="129.0" prefHeight="25.0" prefWidth="220.0" />
+      <Button fx:id="submit" layoutX="419.0" layoutY="311.0" mnemonicParsing="false" onAction="#modifierExemplaire" prefHeight="42.0" prefWidth="87.0" text="Valider" />
+      <Button fx:id="cancel" layoutX="530.0" layoutY="311.0" mnemonicParsing="false" onAction="#closeView" prefHeight="42.0" prefWidth="87.0" text="Annuler" />
       <Text fx:id="msg" fill="TRANSPARENT" layoutX="54.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="message" />
       <Text layoutX="43.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oeuvre" AnchorPane.leftAnchor="43.0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <ComboBox layoutX="270.0" layoutY="130.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField layoutX="270.0" layoutY="253.0" prefHeight="25.0" prefWidth="220.0" />
-      <Text layoutX="42.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'exemplaires total">
+      <ComboBox fx:id="selectEtats" layoutX="270.0" layoutY="197.0" prefHeight="25.0" prefWidth="220.0" />
+      <Text layoutX="38.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sélectionner un exemplaire" AnchorPane.leftAnchor="43.0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="38.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" AnchorPane.leftAnchor="43.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
-      <ComboBox layoutX="270.0" layoutY="75.0" prefHeight="25.0" prefWidth="220.0" />
+      <ComboBox fx:id="select" layoutX="270.0" layoutY="75.0" onAction="#selectExemplaire" prefHeight="25.0" prefWidth="220.0" />
+      <Label fx:id="result" layoutX="50.0" layoutY="40.0" prefHeight="17.0" prefWidth="278.0" />
    </children>
 </AnchorPane>

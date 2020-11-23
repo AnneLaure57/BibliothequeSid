@@ -14,9 +14,9 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button fx:id="butAddEx" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajouterExemplaire" text="Ajouter Exemplaire" />
-                  <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#modifierExemplaire" text="Modifier Exemplaire" />
-                  <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerExemplaire" text="Supprimer Exemplaire" />
+                  <Button fx:id="butAddEx" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#formAddExemplaire" text="Ajouter Exemplaire" />
+                  <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#formUpExemplaire" text="Modifier Exemplaire" />
+                  <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" onAction="#formDltExemplaire" text="Supprimer Exemplaire" />
                   <TextField layoutX="623.0" layoutY="54.0" />
                   <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
                   <Button layoutX="902.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
