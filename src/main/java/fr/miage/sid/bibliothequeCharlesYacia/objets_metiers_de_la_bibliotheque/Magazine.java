@@ -67,11 +67,12 @@ public class Magazine extends Oeuvre {
 		//this.dateParution = dateParution;
 		this.periodicite = periodicite;
 	}
-	
 	@Override
 	public String toString() {
-		return "Magazine [numero=" + numero + ", periodicite=" + periodicite + "]";
+		return "Magazine [ id=" + id + ", type=" + type
+				+ ", titre=" + titre + ", description=" + description + ", nbExemplairesDispo=" + nbExemplairesDispo
+				+ ", nbExemplairesTotal=" + nbExemplairesTotal + ", prix=" + prix + ", nbResa=" + nbResa + ", editeur="
+				+ editeur + ", dateEdition=" + dateEdition + ", dateSuppression=" + dateSuppression + "numero=" + numero + ", periodicite=" + periodicite + "]";
 	}
-
 	
 }

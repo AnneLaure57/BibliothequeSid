@@ -105,6 +105,27 @@ public class Gestion_Exemplaire {
 		 }
 		return exemplaire;
 	}
+	
+	public ObservableList<Exemplaire> trouverOeuvre(String recherche) 
+	{
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    ObservableList<Exemplaire> list = FXCollections.observableArrayList();
+	    entityTransaction.begin();
+	    
+	    @SuppressWarnings("unchecked")
+		List<Exemplaire> exemplaires = entityManager.createQuery("from Exemplaire where lower(titre) like '%" + recherche + "%' ").getResultList();
+	    // or auteur like '%" + recherche + "%'"
+	    for(Exemplaire e : exemplaires)
+		{
+			list.add(e);
+		    LOG.fine(e.toString());
+			
+		}
+	    entityManager.close();
+		return list;
+	}
 
 	public void modiferExemplaire(Exemplaire exemp, String etat) {
 		// TODO Auto-generated method stub

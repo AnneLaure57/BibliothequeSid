@@ -3,8 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -30,38 +28,21 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TabPane prefHeight="337.0" prefWidth="1040.0" tabClosingPolicy="UNAVAILABLE">
-                    <tabs>
-                      <Tab text="Oeuvres">
-                           <content>
-                              <TableView fx:id="tabViewO" prefHeight="337.0" prefWidth="1042.0">
-                                <columns>
-                                  <TableColumn fx:id="tabId" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="tabType" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="tabTitle" prefWidth="75.0" text="Titre" />
-                                    <TableColumn fx:id="tabDesc" prefWidth="75.0" text="Description" />
-                                    <TableColumn fx:id="tabPrix" prefWidth="75.0" text="Prix" />
-                                    <TableColumn fx:id="tabAv" prefWidth="75.0" text="Disponiles" />
-                                    <TableColumn fx:id="tabTotal" prefWidth="75.0" text="Total" />
-                                    <TableColumn fx:id="tabNbResa" prefWidth="100.0" text="Nombre Résev" />
-                                    <TableColumn fx:id="tabEditor" prefWidth="140.0" text="Editeur" />
-                                    <TableColumn fx:id="tabDateE" prefWidth="115.0" text="Date édition" />
-                                    <TableColumn fx:id="tabDateS" prefWidth="153.0" text="Date suppression" />
-                                </columns>
-                              </TableView>
-                           </content>
-                        </Tab>
-                      <Tab text="Livres">
-                           <content>
-                              <fx:include source="listBooks.fxml" />
-                           </content>
-                      </Tab>
-                      <Tab text="Magazines">
-                           <content>
-                              <fx:include source="listMags.fxml" />
-                           </content></Tab>
-                    </tabs>
-                  </TabPane>
+                  <TableView fx:id="tabViewO" prefHeight="337.0" prefWidth="1042.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0">
+                    <columns>
+                      <TableColumn fx:id="tabId" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="tabType" prefWidth="75.0" text="Type" />
+                      <TableColumn fx:id="tabTitle" prefWidth="75.0" text="Titre" />
+                        <TableColumn fx:id="tabDesc" prefWidth="75.0" text="Description" />
+                        <TableColumn fx:id="tabPrix" prefWidth="75.0" text="Prix" />
+                        <TableColumn fx:id="tabAv" prefWidth="75.0" text="Disponiles" />
+                        <TableColumn fx:id="tabTotal" prefWidth="75.0" text="Total" />
+                        <TableColumn fx:id="tabNbResa" prefWidth="100.0" text="Nombre Résev" />
+                        <TableColumn fx:id="tabEditor" prefWidth="140.0" text="Editeur" />
+                        <TableColumn fx:id="tabDateE" prefWidth="115.0" text="Date édition" />
+                        <TableColumn fx:id="tabDateS" prefWidth="153.0" text="Date suppression" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
          </items>

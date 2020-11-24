@@ -13,6 +13,7 @@ import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Us
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +50,7 @@ public class IHM_Exemplaire implements Initializable{
 	@FXML private Button cancel;
 	
 	@FXML private TextField titre;
+	@FXML private TextField searchExemplaire;
 	
 	@FXML private Label result;
 	@FXML private Label resultEx;
@@ -105,19 +107,27 @@ public class IHM_Exemplaire implements Initializable{
 	}
 	
 	private void getListOeuvreSelect() {
-		// TODO Auto-generated method stub
-		System.out.println("Get liste Oeuvre");
 		selectOeuvres.setItems(gestionExemplaire.ListerOeuvre());
 	}
 
 	private void getListEtatSelect() {
-		// TODO Auto-generated method stub
-		System.out.println("Get list oeuvre");
 		selectEtats.getItems().addAll(
 			    "Neuf",
 			    "Bon",
 			    "Abimé"
 			);
+	}
+	
+	/*
+	 * Search by title
+	 * 
+	 */
+	
+	@FXML
+	public void trouverExemplaire () {
+		ObservableList<Exemplaire> list = gestionExemplaire.trouverOeuvre(searchExemplaire.getText());
+		LOG.fine(searchExemplaire.getText());
+		tabViewEx.setItems(list);
 	}
 	
 
@@ -136,8 +146,6 @@ public class IHM_Exemplaire implements Initializable{
 
 	@FXML
 	public void formAddExemplaire(ActionEvent event) {
-		
-		System.out.println("Je rentre dans ajout");
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/exemplaire/formAddEx.fxml"));
             Stage stage = new Stage();

@@ -58,8 +58,13 @@ public class Livre extends Oeuvre {
 
 	@Override
 	public String toString() {
-		return "Livre [resume=" + resume + "]";
+		return "Livre [ auteurs=" + auteurs + ", id=" + id + ", type=" + type + ", titre=" + titre
+				+ ", description=" + description + ", nbExemplairesDispo=" + nbExemplairesDispo
+				+ ", nbExemplairesTotal=" + nbExemplairesTotal + ", prix=" + prix + ", nbResa=" + nbResa + ", editeur="
+				+ editeur + ", dateEdition=" + dateEdition + ", dateSuppression=" + dateSuppression + "resume=" + resume + "]";
 	}
+	
+	
 
 	
 }

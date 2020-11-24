@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -69,7 +70,7 @@ public class IHM_Oeuvre implements Initializable{
 	@FXML TableColumn<Oeuvre, Date> tabDateE;
 	@FXML TableColumn<Oeuvre, Date> tabDateS;
 	
-	@FXML TableView<Oeuvre> tabViewOB;
+	/*@FXML TableView<Oeuvre> tabViewOB;
 	@FXML TableColumn<Oeuvre, Number> tabIdB;
 	@FXML TableColumn<Oeuvre, String> tabTypeB;
 	@FXML TableColumn<Oeuvre, String> tabTitleB;
@@ -95,8 +96,8 @@ public class IHM_Oeuvre implements Initializable{
 	@FXML TableColumn<Oeuvre, String> tabEditorM;
 	@FXML TableColumn<Oeuvre, Date> tabDateEM;
 	@FXML TableColumn<Oeuvre, Date> tabDateSM;
-	@FXML TableColumn<Livre, Number> tabRef;
-	@FXML TableColumn<Livre, Number> tabPer;
+	@FXML TableColumn<Magazine, Number> tabRef;
+	@FXML TableColumn<Magazine, Number> tabPer;*/
 	
 	public void initialize(URL location, ResourceBundle resources){
 		
@@ -129,7 +130,7 @@ public class IHM_Oeuvre implements Initializable{
 			getListOeuvres();
 		}
 		
-		if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/listMags.fxml"))) {
+		/*if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/listMags.fxml"))) {
 			
 			tabIdM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("id"));
 			tabTitleM.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("titre"));
@@ -179,7 +180,7 @@ public class IHM_Oeuvre implements Initializable{
 			tabEditorB.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
 			
 			getListLivres();
-		}
+		}*/
 			
 	}
 	
@@ -193,7 +194,7 @@ public class IHM_Oeuvre implements Initializable{
 		
 	}
 	
-	private void getListMags() {
+	/*private void getListMags() {
 		tabViewOM.setItems(gestionOeuvre.ListerMagazines());
 		
 	}
@@ -201,7 +202,7 @@ public class IHM_Oeuvre implements Initializable{
 	private void getListLivres() {
 		tabViewOB.setItems(gestionOeuvre.ListerLivres());
 		
-	}
+	}*/
 	
 	/*
 	 * Close forms like Add

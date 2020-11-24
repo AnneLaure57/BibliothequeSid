@@ -38,48 +38,48 @@ public class Oeuvre {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_oeuvre")
-    private int id;
+    protected int id;
 	
 	@Column(name = "type")
-	private String type;
+	protected String type;
 	
 	@Column(name = "titre", nullable=false)
-	private String titre;
+	protected String titre;
 	
 	@Column(name = "description")
-	private String description;
+	protected String description;
 	
 	@Column(name = "nb_exemp_dispo")
-	private int nbExemplairesDispo;
+	protected int nbExemplairesDispo;
 	
 	@Column(name = "nb_exemp_total")
-	private int nbExemplairesTotal;
+	protected int nbExemplairesTotal;
 	
 	@Column(name = "prix")
-	private int prix;
+	protected int prix;
 	
 	@Column(name = "nb_reservation")
-	private int nbResa;
+	protected int nbResa;
 	
 	@Column(name = "editeur")
-	private String editeur;
+	protected String editeur;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_edition")
-	private Date dateEdition;
+	protected Date dateEdition;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_suppression")
-	private Date dateSuppression;
+	protected Date dateSuppression;
 
 	@OneToMany(mappedBy = "oeuvre", cascade = CascadeType.ALL)
-    private List<Emprunt> emprunt = new ArrayList<>();
+	protected List<Emprunt> emprunt = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "oeuvre", cascade = CascadeType.ALL)
-    private List<Reservation> reservations = new ArrayList<>();
+	protected List<Reservation> reservations = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "oeuvre", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Exemplaire> exemplaires = new ArrayList<>();
+	protected List<Exemplaire> exemplaires = new ArrayList<>();
 	
 	public String getTitre() {
 		return titre;

@@ -17,8 +17,8 @@
                   <Button fx:id="butAddEx" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#formAddExemplaire" text="Ajouter Exemplaire" />
                   <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#formUpExemplaire" text="Modifier Exemplaire" />
                   <Button layoutX="423.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerExemplaire" text="Supprimer Exemplaire" />
-                  <TextField layoutX="623.0" layoutY="54.0" />
-                  <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
+                  <TextField fx:id="searchExemplaire" layoutX="623.0" layoutY="54.0" />
+                  <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverExemplaire" text="Rechercher" />
                   <Button layoutX="902.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
                   <Label layoutX="38.0" layoutY="102.0" text="Résultat : " />
                   <Label fx:id="resultEx" layoutX="90.0" layoutY="102.0" prefHeight="17.0" prefWidth="648.0" />
@@ -26,12 +26,12 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tabViewEx" prefHeight="335.0" prefWidth="786.0">
+                  <TableView fx:id="tabViewEx" prefHeight="335.0" prefWidth="1040.0">
                     <columns>
                       <TableColumn fx:id="tabIdEx" prefWidth="98.0" text="ID" />
-                      <TableColumn fx:id="tabTitreEx" prefWidth="513.0" text="Titre" />
-                        <TableColumn fx:id="tabEtatEx" minWidth="0.0" prefWidth="86.0" text="Etat" />
-                        <TableColumn fx:id="tabStatutEx" prefWidth="88.0" text="Statut" />
+                      <TableColumn fx:id="tabTitreEx" prefWidth="383.0" text="Titre" />
+                        <TableColumn fx:id="tabEtatEx" minWidth="0.0" prefWidth="275.0" text="Etat" />
+                        <TableColumn fx:id="tabStatutEx" prefWidth="283.0" text="Statut" />
                     </columns>
                   </TableView>
                </children>

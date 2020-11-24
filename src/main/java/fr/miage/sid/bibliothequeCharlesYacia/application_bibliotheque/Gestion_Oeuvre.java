@@ -50,6 +50,8 @@ public class Gestion_Oeuvre {
 		for(Oeuvre o : oeuvres)
 		{
 			list.add(o);
+			((Magazine) o).toString();
+			System.out.println(((Magazine) o).toString());
 		}
 		entityManager.close();
 		return list;
@@ -81,7 +83,7 @@ public class Gestion_Oeuvre {
 	    entityTransaction.begin();
 	    
 	    @SuppressWarnings("unchecked")
-		List<Oeuvre> oeuvres = entityManager.createQuery("from Oeuvre where lower(titre) like '%" + recherche + "%' ").getResultList();
+		List<Oeuvre> oeuvres = entityManager.createQuery("from Oeuvre where lower(titre) like '%" + recherche + "%' or lower(type) like '%" + recherche + "%'").getResultList();
 	    // or auteur like '%" + recherche + "%'"
 	    for(Oeuvre o : oeuvres)
 		{
