@@ -15,7 +15,20 @@
             </Tab>
             <Tab text="Oeuvre">
                <content>
-                  <fx:include source="oeuvre/OeuvreView.fxml" />
+                  <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Livres/Magazines">
+                           <content>
+                              <fx:include source="oeuvre/OeuvreView.fxml" />
+                           </content>
+                      </Tab>
+                      <Tab text="Auteurs">
+                           <content>
+                              <fx:include source="auteur/AuteurView.fxml" />
+                           </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
                </content>
             </Tab>
             <Tab text="Usager">
