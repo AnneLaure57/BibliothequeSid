@@ -45,7 +45,7 @@ public class Gestion_Usager {
 		entityTransaction.begin();
 		
 		@SuppressWarnings("unchecked")
-		List<Usager> usagers = entityManager.createQuery("from Usager where date_suppression is null ").getResultList();
+		List<Usager> usagers = entityManager.createQuery("from Usager where date_archivage is null ").getResultList();
 		for(Usager us : usagers)
 		{
 			list.add(us);

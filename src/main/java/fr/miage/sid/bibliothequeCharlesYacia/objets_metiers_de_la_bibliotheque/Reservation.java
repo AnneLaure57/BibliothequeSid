@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,11 +23,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table( name = "RESERVATION" ) // Apparemment ça sert à rien sauf si on veut que la table ait un nom différent de la classe
+@Table( name = "RESERVATION" , uniqueConstraints=@UniqueConstraint(columnNames = {"date_reservation", "titre", "nomPrenom"})) 
 public class Reservation {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id_reservation")
     private Integer id;
 	
 	@Temporal(TemporalType.DATE)
@@ -35,6 +37,12 @@ public class Reservation {
 	
 	@Column(name = "statut", nullable = false)
 	private String statut;
+	
+	@Column(name = "titre", nullable=false)	
+	private String titre;
+	
+	@Column(name = "nomPrenom", nullable=false)	
+	private String nomPrenom;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_annulation")
@@ -47,6 +55,10 @@ public class Reservation {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_oeuvre", nullable = false)
     private Oeuvre oeuvre = new Oeuvre ();
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_archivage")
+	private Date dateArchivage;
 	
 	public Date getDateReservation() {
 		return dateReservation;
@@ -71,33 +83,23 @@ public class Reservation {
 	public void setDateAnnulation(Date dateAnnulation) {
 		this.dateAnnulation = dateAnnulation;
 	}
-
-	public Reservation(Usager u, Oeuvre o, Date DateJour) {
-		throw new UnsupportedOperationException();
+	
+	public Date getDateArchivage() {
+		return dateArchivage;
 	}
 
-	public Reservation e_identification(Usager usager, Oeuvre oeuvre) {
-		throw new UnsupportedOperationException();
+	public void setDateArchivage(Date dateArchivage) {
+		this.dateArchivage = dateArchivage;
 	}
 
-	public void annulerReservation(Reservation reservation, Date dateJ) {
-		throw new UnsupportedOperationException();
-	}
-
-	public Reservation e_identification(Usager usager) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void supprimerReservation(Reservation reservation) {
-		throw new UnsupportedOperationException();
-	}
-
-	public Reservation(Usager usager, Oeuvre oeuvre) {
+	public Reservation(Usager usager, Oeuvre oeuvre, Date dateReservation) {
 		super();
-		this.dateReservation = new Date();
-		this.statut = "Actif";
+		this.dateReservation = dateReservation;
+		this.statut = "Réservée";
 		this.usager = usager;
 		this.oeuvre = oeuvre;
+		this.titre = oeuvre.getTitre();
+		this.nomPrenom = usager.getNom() + " " + usager.getPrenom();
 	}
 
 	@Override
@@ -105,6 +107,5 @@ public class Reservation {
 		return "Reservation [id=" + id + ", dateReservation=" + dateReservation + ", statut=" + statut
 				+ ", dateAnnulation=" + dateAnnulation + "]";
 	}
-	
 	
 }

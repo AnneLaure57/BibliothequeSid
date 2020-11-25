@@ -223,6 +223,10 @@ public class IHM_Auteur implements Initializable{
 		result.setText("L'auteur a été modifié !");
 		result.setTextFill(Color.GREEN);
 	}
+	
+	/*
+	 *  delete Usager
+	 */
     
     @FXML
     public void supprimerAuteur(ActionEvent event) throws IOException, SQLException {
@@ -239,6 +243,11 @@ public class IHM_Auteur implements Initializable{
 		}
 		
     };
+    
+    /*
+     * 
+     *  Archivage
+     */
     
     @FXML
     public void archiverAuteur(ActionEvent event) throws IOException, SQLException {

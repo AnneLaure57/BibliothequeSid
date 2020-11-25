@@ -112,7 +112,7 @@ public class IHM_Oeuvre implements Initializable{
 			tabNbResa.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbResa"));
 			tabEditor.setCellValueFactory(new PropertyValueFactory<Oeuvre,String>("editeur"));
 			tabDateE.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateEdition"));
-			tabDateS.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateSuppression"));
+			tabDateS.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateArchivage"));
 		
 			tabType.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
 			tabTitle.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
@@ -392,7 +392,7 @@ public class IHM_Oeuvre implements Initializable{
     };
     
     /*
-     * Set dateSuppression from Oeuvre
+     * Set dateArchivage from Oeuvre
      */
     
     @FXML

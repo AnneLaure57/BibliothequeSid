@@ -61,8 +61,8 @@ public class Usager {
 	private Date dateNaissance;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_suppression")
-	private Date dateSuppression;
+	@Column(name = "date_archivage")
+	private Date dateArchivage;
 
 	@OneToMany(mappedBy = "usager", cascade = CascadeType.ALL)
     private List<Emprunt> emprunts = new ArrayList<>();
@@ -150,12 +150,12 @@ public class Usager {
 		this.dateNaissance = dateNaissance;
 	}
 
-	public Date getDateSuppression() {
-		return dateSuppression;
+	public Date getDateArchivage() {
+		return dateArchivage;
 	}
 
-	public void setDateSuppression(Date dateSuppression) {
-		this.dateSuppression = dateSuppression;
+	public void setDateArchivage(Date dateSuppression) {
+		this.dateArchivage = dateSuppression;
 	}
 
 	public Usager e_identification(String nom) {

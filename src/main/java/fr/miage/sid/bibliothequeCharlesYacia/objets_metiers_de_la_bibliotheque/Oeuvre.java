@@ -69,8 +69,8 @@ public class Oeuvre {
 	protected Date dateEdition;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_suppression")
-	protected Date dateSuppression;
+	@Column(name = "date_archivage")
+	protected Date dateArchivage;
 
 	@OneToMany(mappedBy = "oeuvre", cascade = CascadeType.ALL)
 	protected List<Emprunt> emprunt = new ArrayList<>();
@@ -153,12 +153,12 @@ public class Oeuvre {
 		this.dateEdition = dateEdition;
 	}
 	
-	public Date getDateSuppression() {
-		return dateSuppression;
+	public Date getDateArchivage() {
+		return dateArchivage;
 	}
 	
-	public void setDateSuppression(Date dateSuppression) {
-		this.dateSuppression = dateSuppression;
+	public void setDateArchivage(Date dateSuppression) {
+		this.dateArchivage = dateSuppression;
 	}
 
 	public void findOeuvre() {
@@ -202,10 +202,13 @@ public class Oeuvre {
 
 	@Override
 	public String toString() {
+		return "id=" + id + "titre=" + titre ;
+	}
+	/*public String toString() {
 		return "Oeuvre [id=" + id + ", type=" + type + ", titre=" + titre + ", description=" + description
 				+ ", nbExemplairesDispo=" + nbExemplairesDispo + ", nbExemplairesTotal=" + nbExemplairesTotal
 				+ ", prix=" + prix + ", nbResa=" + nbResa + ", editeur=" + editeur + ", dateEdition=" + dateEdition
-				+ ", dateSuppression=" + dateSuppression + ", emprunt=" + emprunt + ", reservations=" + reservations
+				+ ", dateSuppression=" + dateArchivage + ", emprunt=" + emprunt + ", reservations=" + reservations
 				+ ", exemplaires=" + exemplaires + "]";
-	}
+	}*/
 }

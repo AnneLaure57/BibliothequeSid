@@ -72,10 +72,9 @@ public class Gestion_Exemplaire {
 	}
 
 	public Oeuvre getOeuvreByName(Object titre) {
-		// TODO Auto-generated method stub
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	      EntityTransaction entityTransaction = entityManager.getTransaction();
-	      entityTransaction.begin();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+	    entityTransaction.begin();
 	      
 		Oeuvre oeuvre = (Oeuvre) entityManager.createNativeQuery( "SELECT * FROM Oeuvre WHERE titre ='"+ titre.toString() +"';", Oeuvre.class ).getSingleResult();
 		

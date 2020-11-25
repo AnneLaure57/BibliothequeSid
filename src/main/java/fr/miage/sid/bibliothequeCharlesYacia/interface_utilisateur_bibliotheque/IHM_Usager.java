@@ -89,7 +89,7 @@ public class IHM_Usager implements Initializable{
 			tabMailU.setCellValueFactory(new PropertyValueFactory<Usager, String>("mail"));
 			tabDateBU.setCellValueFactory(new PropertyValueFactory<Usager, Date>("dateNaissance"));
 			tabDateCU.setCellValueFactory(new PropertyValueFactory<Usager, Date>("dateCreation"));
-			tabDateDU.setCellValueFactory(new PropertyValueFactory<Usager, Date>("dateSuppression"));
+			tabDateDU.setCellValueFactory(new PropertyValueFactory<Usager, Date>("dateArchivage"));
 		
 			tabNameU.setCellFactory(TextFieldTableCell.<Usager>forTableColumn());
 			tabFNameU.setCellFactory(TextFieldTableCell.<Usager>forTableColumn());

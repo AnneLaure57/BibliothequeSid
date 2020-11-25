@@ -127,7 +127,7 @@ public class Gestion_Oeuvre {
 	    entityTransaction.begin();
 		try {
 			
-		  Query query = entityManager.createQuery("Update Oeuvre set date_suppression='" + dateD + "'  where id='" + oeuvreID  + "'");
+		  Query query = entityManager.createQuery("Update Oeuvre set date_archivage='" + dateD + "'  where id='" + oeuvreID  + "'");
 		  query.executeUpdate();
 			
 		  entityTransaction.commit();
