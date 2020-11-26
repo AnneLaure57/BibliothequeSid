@@ -143,7 +143,7 @@ public class Gestion_Usager {
 	    entityTransaction.begin();
 		try {
 			
-		  Query query = entityManager.createQuery("Update Usager set date_suppression='" + dateD + "'  where id='" + id + "'");
+		  Query query = entityManager.createQuery("Update Usager set date_archivage='" + dateD + "'  where id='" + id + "'");
 		  query.executeUpdate();
 			
 		  entityTransaction.commit();

@@ -29,19 +29,29 @@ public class Emprunt {
 	@Column(name = "id_emprunt")
     private Integer id;
 	
+	@Column(name = "statut",nullable=false)	
+	private String statut;
+	
+	@Column(name = "nomPrenom", nullable=false)	
+	private String nomPrenom;
+	
+	@Column(name = "titre", nullable=false)	
+	private String titre;
+	
+	@Column(name = "numero", nullable=false)	
+	private int numero;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_emprunt",nullable=false)
 	private Date dateEmprunt;
-	
-	@Column(name = "statut",nullable=false)	
-	private String statut;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_retour",nullable=false)
 	private Date dateRetour;
 	
-	@Column(name = "nb_emprunt")
-	private int NbEmprunt;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_archivage")
+	protected Date dateArchivage;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usager")
@@ -78,47 +88,34 @@ public class Emprunt {
 	public void setDateRetour(Date dateRetour) {
 		this.dateRetour = dateRetour;
 	}
-
-	public int getNbEmprunt() {
-		return NbEmprunt;
-	}
-
-	public void setNbEmprunt(int nbEmprunt) {
-		NbEmprunt = nbEmprunt;
-	}
-
-	public Emprunt emprunt(Usager u, Oeuvre o, Exemplaire e, Date dateJour) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void rendreExemplaire(Usager usager, Oeuvre oeuvre, Exemplaire exemplaire, Date dateJ) {
-		throw new UnsupportedOperationException();
-	}
-
-	public Emprunt e_identification(Usager usager) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void supprimerEmprunt(Emprunt emprunt) {
-		throw new UnsupportedOperationException();
-	}
 	
-	
+	public Date getDateArchivage() {
+		return dateArchivage;
+	}
 
-	public Emprunt(Usager usager, Oeuvre oeuvre, Exemplaire exemplaire) {
+	public void setDateArchivage(Date dateArchivage) {
+		this.dateArchivage = dateArchivage;
+	}
+
+	public Emprunt(Usager usager, Oeuvre oeuvre, Exemplaire exemplaire, Date dateEmprunt, Date dateRetour) {
 		super();
 		this.usager = usager;
 		this.oeuvre = oeuvre;
 		this.exemplaire = exemplaire;
-		this.dateEmprunt = new Date();
-		this.statut = "en_cours";
+		this.dateEmprunt = dateEmprunt;
+		this.dateRetour = dateRetour;
+		this.statut = "En cours";
+		this.titre = oeuvre.getTitre();
+		this.nomPrenom = usager.getNom() + " " + usager.getPrenom();
+		this.numero = exemplaire.getId();
 		
 	}
 
 	@Override
 	public String toString() {
-		return "Emprunt [id=" + id + ", dateEmprunt=" + dateEmprunt + ", statut=" + statut + ", dateRetour="
-				+ dateRetour + ", NbEmprunt=" + NbEmprunt + "]";
+		return "Emprunt [id=" + id + ", statut=" + statut + ", nomPrenom=" + nomPrenom
+				+ ", titre=" + titre + ", numero=" + numero + ", dateEmprunt=" + dateEmprunt + ", dateRetour="
+				+ dateRetour + "]";
 	}
 	
 }

@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Exemplaire;
-import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Usager;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
@@ -23,7 +22,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,7 +29,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.converter.NumberStringConverter;
 
 public class IHM_Exemplaire implements Initializable{
 	
@@ -60,6 +57,7 @@ public class IHM_Exemplaire implements Initializable{
 	@FXML TableColumn<Exemplaire, String> tabTitreEx;
 	@FXML TableColumn<Exemplaire, String> tabEtatEx;
 	@FXML TableColumn<Exemplaire, String> tabStatutEx;
+	@FXML TableColumn<Exemplaire, Date> tabDateAr;
 	
 	public void initialize(URL location, ResourceBundle resources){
 		
@@ -68,6 +66,7 @@ public class IHM_Exemplaire implements Initializable{
 			tabTitreEx.setCellValueFactory(new PropertyValueFactory<Exemplaire, String>("titre"));
 			tabEtatEx.setCellValueFactory(new PropertyValueFactory<Exemplaire, String>("etat"));
 			tabStatutEx.setCellValueFactory(new PropertyValueFactory<Exemplaire, String>("statut"));
+			tabDateAr.setCellValueFactory(new PropertyValueFactory<Exemplaire, Date>("dateArchivage"));
 			
 		
 			tabTitreEx.setCellFactory(TextFieldTableCell.<Exemplaire>forTableColumn());
@@ -220,8 +219,8 @@ public class IHM_Exemplaire implements Initializable{
 	@FXML 
 	public void supprimerExemplaire(ActionEvent event) throws IOException, SQLException {
 	 if (tabViewEx.getSelectionModel().getSelectedItem() == null) {
-     	resultEx.setText("Veuillez sélectionner un exemplaire à supprimer avant !");
-			resultEx.setTextFill(Color.RED);
+     	resultEx.setText("Veuillez sélectionner un exemplaire à supprimer !");
+		resultEx.setTextFill(Color.RED);
 		} else {
 			Exemplaire exemplaire = tabViewEx.getSelectionModel().getSelectedItem();
 			int exemplaireID = exemplaire.getId();
@@ -231,6 +230,23 @@ public class IHM_Exemplaire implements Initializable{
 			getListExemplaires();
 		}
 	}
+	
+	@FXML
+    public void archiverExemplaire(ActionEvent event) throws IOException, SQLException {
+        if (tabViewEx.getSelectionModel().getSelectedItem() == null) {
+        	resultEx.setText("Veuillez sélectionner un exemplaire à archiver !");
+        	resultEx.setTextFill(Color.RED);
+		} else {
+			Exemplaire exemplaire = tabViewEx.getSelectionModel().getSelectedItem();
+			int exemplaireID = exemplaire.getId();
+			resultEx.setText("L'exemplaire avec l'ID " + exemplaireID + " a été archivé !");
+			resultEx.setTextFill(Color.GREEN);
+			gestionExemplaire.archiverExemplaire(exemplaireID);
+			getListExemplaires();
+		}
+		
+    };
+	
 	/**
 	 * 
 	 */

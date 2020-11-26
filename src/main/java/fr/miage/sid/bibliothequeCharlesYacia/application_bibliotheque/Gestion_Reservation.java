@@ -141,6 +141,7 @@ public class Gestion_Reservation {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			entityTransaction.rollback(); 
 		}
 		
 	}
@@ -162,21 +163,9 @@ public class Gestion_Reservation {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			entityTransaction.rollback(); 
 		}
 		
-	}
-
-	public Oeuvre getOeuvreByName(Object titre) {
-		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	    EntityTransaction entityTransaction = entityManager.getTransaction();
-	    entityTransaction.begin();
-	      
-		Oeuvre oeuvre = (Oeuvre) entityManager.createNativeQuery( "SELECT * FROM Oeuvre WHERE titre ='"+ titre.toString() +"';", Oeuvre.class ).getSingleResult();
-		
-		entityTransaction.commit();
-	    entityManager.close();
-	    
-		return oeuvre;
 	}
 
 }

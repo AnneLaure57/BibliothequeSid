@@ -1,29 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Emprunt">
    <children>
       <SplitPane dividerPositions="0.2869198312236287" orientation="VERTICAL" prefHeight="476.0" prefWidth="1042.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button fx:id="butAddE" layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#empruntExemplaire" text="Ajouter Emprunt" />
-                  <Button layoutX="246.0" layoutY="54.0" mnemonicParsing="false" onAction="#rendreExemplaire" text="Rendre Exemplaire" />
-                  <TextField layoutX="623.0" layoutY="54.0" />
-                  <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" text="Rechercher" />
+                  <Button layoutX="37.0" layoutY="54.0" mnemonicParsing="false" onAction="#formAddEm" text="Emprunter Exemplaire" />
+                  <Button layoutX="328.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverEmprunt" text="Archiver Emprunt" />
+                  <Button layoutX="190.0" layoutY="54.0" mnemonicParsing="false" onAction="#rendreExemplaire" text="Rendre Exemplaire" />
+                  <TextField fx:id="searchEmprunt" layoutX="623.0" layoutY="54.0" />
+                  <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverEmprunt" text="Rechercher" />
+                  <Button layoutX="893.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
+                  <Button layoutX="470.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerEmprunt" text="Supprimer Emprunt" />
+                  <Label fx:id="resultEm" layoutX="76.0" layoutY="95.0" prefHeight="17.0" prefWidth="400.0" />
+                  <Text layoutX="26.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Résultat :" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <ListView prefHeight="335.0" prefWidth="1036.0" />
+                  <TableView fx:id="tabViewEm" prefHeight="335.0" prefWidth="1042.0">
+                    <columns>
+                      <TableColumn fx:id="tabIdEm" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="tabUsager" prefWidth="159.0" text="Usager" />
+                      <TableColumn fx:id="tabTitleO" prefWidth="143.0" text="Titre de l'oeuvre" />
+                        <TableColumn fx:id="tabIdEx" prefWidth="143.0" text="ID Exemplaire" />
+                        <TableColumn fx:id="tabStatut" prefWidth="129.0" text="Statut" />
+                        <TableColumn fx:id="tabDateEm" prefWidth="176.0" text="Date Emprunt" />
+                        <TableColumn fx:id="tabDateRe" prefWidth="220.0" text="Date Retour" />
+                        <TableColumn fx:id="tabDateAr" prefWidth="139.0" text="Date Archivage" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
-        </items>
+         </items>
       </SplitPane>
    </children>
 </AnchorPane>

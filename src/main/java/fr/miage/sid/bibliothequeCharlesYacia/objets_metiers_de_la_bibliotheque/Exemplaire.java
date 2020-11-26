@@ -1,6 +1,7 @@
 package fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,6 +42,10 @@ public class Exemplaire {
 	
 	@Column(name = "titre", nullable=false)	
 	private String titre;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_archivage")
+	protected Date dateArchivage;
 	
 	@OneToMany(mappedBy = "exemplaire", cascade = CascadeType.ALL)
     private List<Emprunt> emprunts = new ArrayList<>();
@@ -72,20 +79,12 @@ public class Exemplaire {
 		this.statut = statut;
 	}
 	
-	public Emprunt emprunter(Usager u, Oeuvre o, int DateJour) {
-		throw new UnsupportedOperationException();
+	public Date getDateArchivage() {
+		return dateArchivage;
 	}
 
-	public Exemplaire e_identification(Oeuvre o) {
-		throw new UnsupportedOperationException();
-	}
-
-	public Exemplaire e_identification(int numero) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void ajouterExemplaire(String titre) {
-		throw new UnsupportedOperationException();
+	public void setDateArchivage(Date dateArchivage) {
+		this.dateArchivage = dateArchivage;
 	}
 
 	public Exemplaire Exemplaire(Oeuvre oeuvre, String etat) {
@@ -95,7 +94,6 @@ public class Exemplaire {
 	public void supprimerExemplaire(Exemplaire exemplaire) {
 		throw new UnsupportedOperationException();
 	}
-	
 	
 
 	public Exemplaire(Oeuvre oeuvre, String etat) {
@@ -108,7 +106,8 @@ public class Exemplaire {
 
 	@Override
 	public String toString() {
-		return "Exemplaire [id=" + id + ", etat=" + etat + ", emprunts=" + emprunts + ", titre=" + titre + "]";
+		//return "Exemplaire [id=" + id + ", etat=" + etat + ", emprunts=" + emprunts + ", titre=" + titre + "]";
+		return id + ", " + titre;
 	}
 	
 	

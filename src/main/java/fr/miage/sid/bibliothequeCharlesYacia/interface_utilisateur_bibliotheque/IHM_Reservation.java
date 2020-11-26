@@ -34,7 +34,7 @@ import javafx.util.converter.NumberStringConverter;
 
 public class IHM_Reservation implements Initializable{
 	
-private static final Logger LOG = Logger.getLogger(Gestion_Reservation.class.getName());
+    private static final Logger LOG = Logger.getLogger(Gestion_Reservation.class.getName());
 	
 	private Gestion_Reservation gestionReservation = new Gestion_Reservation();
 	
@@ -184,8 +184,6 @@ private static final Logger LOG = Logger.getLogger(Gestion_Reservation.class.get
    			Oeuvre oeuvre = (Oeuvre) selectO.getSelectionModel().getSelectedItem();
    	    	
    	    	Usager usager = (Usager) selectU.getSelectionModel().getSelectedItem();
-
-   			//TODO check if already oeuvre + usager +  date
    			
    			java.sql.Date dateReservation = java.sql.Date.valueOf(dateRes.getValue());
    	   		
@@ -245,7 +243,7 @@ private static final Logger LOG = Logger.getLogger(Gestion_Reservation.class.get
 		} else {
 			Reservation reservation = tabViewRes.getSelectionModel().getSelectedItem();
 			int reservationID = reservation.getId();
-			resultRes.setText("La réservation avec l'ID " + reservationID + " a été supprimé !");
+			resultRes.setText("La réservation avec l'ID " + reservationID + " a été archivé !");
 			resultRes.setTextFill(Color.GREEN);
 			gestionReservation.archiverReservation(reservationID);
 			getListReservations();
