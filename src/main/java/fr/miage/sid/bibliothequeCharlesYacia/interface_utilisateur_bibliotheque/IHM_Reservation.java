@@ -194,7 +194,7 @@ public class IHM_Reservation implements Initializable{
 		}
 		catch(Exception e)
 		{
-			result.setText(" La reservation entrée existe déja dans la BDD !");
+			result.setText(" La réservation entrée existe déja dans la BDD !");
 			result.setTextFill(Color.GREEN);
 		}
    	}

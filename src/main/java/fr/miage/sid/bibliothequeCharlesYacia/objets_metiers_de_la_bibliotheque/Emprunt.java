@@ -13,16 +13,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity // Pour associer la classe à une table dans la base
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table( name = "EMPRUNT" ) // Apparemment ça sert à rien sauf si on veut que la table ait un nom différent de la classe
+@Table( name = "EMPRUNT" , uniqueConstraints=@UniqueConstraint(columnNames = {"date_emprunt", "titre", "nomPrenom"}) )
 public class Emprunt {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

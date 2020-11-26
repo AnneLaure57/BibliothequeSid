@@ -184,7 +184,7 @@ public class IHM_Emprunt implements Initializable{
 		}
 		catch(Exception e)
 		{
-			result.setText(" La emprunt entré existe déja dans la BDD !");
+			result.setText(" L'emprunt entré existe déja dans la BDD !");
 			result.setTextFill(Color.GREEN);
 		}
     };
