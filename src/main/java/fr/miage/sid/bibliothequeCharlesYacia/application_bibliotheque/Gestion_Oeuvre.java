@@ -156,7 +156,6 @@ public class Gestion_Oeuvre {
 	}
 	
 	public void ajouterLivre(String type,String titre, String description, Double prix,String editeur, Date dateEdition, String resume) {
-		// TODO Auto-generated method stub
 	     //add magazine
 	     EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	     EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -170,37 +169,189 @@ public class Gestion_Oeuvre {
 	     entityTransaction.commit();
 	     entityManager.close();
 	}
+	
+	public void setNbTotalDisponibles(Oeuvre oeuvre) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    entityTransaction.begin();
+	    try {
+	    	Oeuvre o = entityManager.find(Oeuvre.class, oeuvre.getId());
+		    
+		    if(o != null) {
+		    	o.setNbExemplairesDispo(o.getNbExemplairesDispo()+1);
+		    	o.setNbExemplairesTotal(o.getNbExemplairesTotal()+1);
+		    }
 
-	/*public void ajouterOeuvre(String titre, String description,int nombreDispo, int nombreTotal, int prix, String editeur,Date dateEdition) {
-	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-      EntityTransaction entityTransaction = entityManager.getTransaction();
-      entityTransaction.begin();
-      
-      Oeuvre oeuvre= new Oeuvre(titre,description,nombreDispo, nombreTotal, prix, editeur, dateEdition);
-      entityManager.persist(oeuvre);
-      //Get the infos
-      LOG.finer(oeuvre.toString());
-
-      entityTransaction.commit();
-      entityManager.close();
+		    //Get the infos
+		    LOG.finer(o.toString());
+		    entityTransaction.commit();
+	      
+	    }
+	    catch (RuntimeException e) {
+	        entityManager.getTransaction().rollback();
+	        throw e;
+	    }
+	    
+	      entityManager.close();
 		
 	}
 
-    public void ajouterOeuvre(String type,String titre, String description, int nombreDispo, int nombreTotal, int prix,String editeur, Date dateEdition) {
-		// TODO Auto-generated method stub
-	    //add oeuvre for Mag or Book
-    	EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
-        //add Oeuvre
-        Oeuvre oeuvre= new Oeuvre(type, titre,description,nombreDispo, nombreTotal, prix, editeur, dateEdition);
-        entityManager.persist(oeuvre);
-        //Get the infos
-        LOG.finer(oeuvre.toString());
-        System.out.println(oeuvre.toString());
+	public void setNbTotalDispoDel(Oeuvre oeuvre) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    entityTransaction.begin();
+	    try {
+	    	Oeuvre o = entityManager.find(Oeuvre.class, oeuvre.getId());
+		    
+		    if(o != null) {
+		    	o.setNbExemplairesDispo(o.getNbExemplairesDispo()-1);
+		    	o.setNbExemplairesTotal(o.getNbExemplairesTotal()-1);
+		    }
 
-        entityTransaction.commit();
-        entityManager.close();
-	}*/
+		    //Get the infos
+		    LOG.finer(o.toString());
+		    entityTransaction.commit();
+	      
+	    }
+	    catch (RuntimeException e) {
+	        entityManager.getTransaction().rollback();
+	        throw e;
+	    }
+	    
+	      entityManager.close();
+		
+	}
+	
+	public void setNbTotalDel(Oeuvre oeuvre) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    entityTransaction.begin();
+	    try {
+	    	Oeuvre o = entityManager.find(Oeuvre.class, oeuvre.getId());
+		    
+		    if(o != null) {
+		    	o.setNbExemplairesTotal(o.getNbExemplairesTotal()-1);
+		    }
+
+		    //Get the infos
+		    LOG.finer(o.toString());
+		    entityTransaction.commit();
+	      
+	    }
+	    catch (RuntimeException e) {
+	        entityManager.getTransaction().rollback();
+	        throw e;
+	    }
+	    
+	      entityManager.close();
+		
+	}
+	
+	public void setNbDisponibles(Oeuvre oeuvre) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    entityTransaction.begin();
+	    try {
+	    	Oeuvre o = entityManager.find(Oeuvre.class, oeuvre.getId());
+		    
+		    if(o != null) {
+		    	o.setNbExemplairesDispo(o.getNbExemplairesDispo()+1);
+		    }
+
+		    //Get the infos
+		    LOG.finer(o.toString());
+		    entityTransaction.commit();
+	      
+	    }
+	    catch (RuntimeException e) {
+	        entityManager.getTransaction().rollback();
+	        throw e;
+	    }
+	    
+	      entityManager.close();
+		
+	}
+
+	public void setNbIndisponibles(Oeuvre oeuvre) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    entityTransaction.begin();
+	    try {
+	    	Oeuvre o = entityManager.find(Oeuvre.class, oeuvre.getId());
+		    
+		    if(o != null) {
+		    	o.setNbExemplairesDispo(o.getNbExemplairesDispo()-1);
+		    }
+
+		    //Get the infos
+		    LOG.finer(o.toString());
+		    entityTransaction.commit();
+	      
+	    }
+	    catch (RuntimeException e) {
+	        entityManager.getTransaction().rollback();
+	        throw e;
+	    }
+	    
+	      entityManager.close();
+		
+	}
+	
+	public void setNbResaAdd(Oeuvre oeuvre) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    entityTransaction.begin();
+	    try {
+	    	Oeuvre o = entityManager.find(Oeuvre.class, oeuvre.getId());
+		    
+		    if(o != null) {
+		    	o.setNbResa(o.getNbResa()+1);
+		    }
+
+		    //Get the infos
+		    LOG.finer(o.toString());
+		    entityTransaction.commit();
+	      
+	    }
+	    catch (RuntimeException e) {
+	        entityManager.getTransaction().rollback();
+	        throw e;
+	    }
+	    
+	      entityManager.close();
+		
+	}
+	
+	public void setNbResaRem(Oeuvre oeuvre) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    entityTransaction.begin();
+	    try {
+	    	Oeuvre o = entityManager.find(Oeuvre.class, oeuvre.getId());
+		    
+		    if(o != null) {
+		    	o.setNbResa(o.getNbResa()-1);
+		    }
+
+		    //Get the infos
+		    LOG.finer(o.toString());
+		    entityTransaction.commit();
+	      
+	    }
+	    catch (RuntimeException e) {
+	        entityManager.getTransaction().rollback();
+	        throw e;
+	    }
+	    
+	      entityManager.close();
+		
+	}
 
 }

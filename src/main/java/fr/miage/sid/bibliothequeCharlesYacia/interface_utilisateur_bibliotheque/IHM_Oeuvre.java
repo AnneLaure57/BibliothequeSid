@@ -31,7 +31,7 @@ import javafx.util.converter.NumberStringConverter;
 public class IHM_Oeuvre implements Initializable{
 	
     private static final Logger LOG = Logger.getLogger(Gestion_Oeuvre.class.getName());
-    Gestion_Oeuvre gestionOeuvre = new Gestion_Oeuvre();
+    private Gestion_Oeuvre gestionOeuvre = new Gestion_Oeuvre();
     
     @FXML private Button submit;
 	@FXML private Button cancel;
@@ -230,7 +230,7 @@ public class IHM_Oeuvre implements Initializable{
 				result.setTextFill(Color.RED);
 	        }
     	} catch(Exception e) {
-			result.setText(" Impossible d'ajouter le magazine ! ");
+			result.setText(" Impossible d'ajouter le livre ! ");
 			result.setTextFill(Color.RED);
 		}
 	}

@@ -2156,3 +2156,7 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:D:/Java/bibl
 	at org.h2.mvstore.FileStore.open(FileStore.java:173)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:350)
 	... 69 more
+2020-11-27 22:52:48 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Valeur trop longue pour la colonne "TELEPHONE VARCHAR(10)": "'06699731530' (11)"
+Value too long for column "TELEPHONE VARCHAR(10)": "'06699731530' (11)"; SQL statement:
+/* insert fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager */ insert into USAGER (id_usager, adresse, code_postal, date_archivage, date_creation, date_naissance, mail, nom, prenom, telephone, ville) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-197]

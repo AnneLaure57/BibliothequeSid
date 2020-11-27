@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Reservation;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Auteur;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
@@ -27,16 +28,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.converter.NumberStringConverter;
 
 public class IHM_Reservation implements Initializable{
 	
     private static final Logger LOG = Logger.getLogger(Gestion_Reservation.class.getName());
 	
 	private Gestion_Reservation gestionReservation = new Gestion_Reservation();
+	
+	private Gestion_Oeuvre gestionOeuvre = new Gestion_Oeuvre();
 	
 	@FXML
 	private Parent root;
@@ -173,28 +174,26 @@ public class IHM_Reservation implements Initializable{
     
     @FXML
    	private void reserverOeuvre(ActionEvent event) {
-    	if (! textFieldsValid()) {
-            // one or more of the text fields are empty
-    		result.setText("Veuillez remplir les champs manquants !");
-    		result.setTextFill(Color.RED);
-    		return;
-    	}
-   		try
-		{
-   			Oeuvre oeuvre = (Oeuvre) selectO.getSelectionModel().getSelectedItem();
-   	    	
-   	    	Usager usager = (Usager) selectU.getSelectionModel().getSelectedItem();
-   			
-   			java.sql.Date dateReservation = java.sql.Date.valueOf(dateRes.getValue());
-   	   		
-   	   		//save data in Gestion Back
-   	   		gestionReservation.ajouterReservation(oeuvre,usager,dateReservation);
-   	   		result.setText("La réservation a été ajouté !");
-   	   		result.setTextFill(Color.GREEN);
-		}
-		catch(Exception e)
-		{
-			result.setText(" La réservation entrée existe déja dans la BDD !");
+   		try {
+			if (textFieldsValid()) {
+				//get values from form
+				Oeuvre oeuvre = (Oeuvre) selectO.getSelectionModel().getSelectedItem();
+	   	    	
+	   	    	Usager usager = (Usager) selectU.getSelectionModel().getSelectedItem();
+	   			
+	   			java.sql.Date dateReservation = java.sql.Date.valueOf(dateRes.getValue());
+	   	   		
+	   	   		//save data in Gestion Back
+	   	   		gestionReservation.ajouterReservation(oeuvre,usager,dateReservation);
+	   	   		gestionOeuvre.setNbResaAdd(oeuvre);
+	   	   		result.setText("La réservation a été ajouté !");
+	   	   		result.setTextFill(Color.GREEN);
+	        } else {
+	        	result.setText("  Veuillez remplir tout les champs !");
+				result.setTextFill(Color.RED);
+	        }
+    	} catch(Exception e) {
+    		result.setText(" La réservation entrée existe déja dans la BDD !");
 			result.setTextFill(Color.GREEN);
 		}
    	}
@@ -204,7 +203,6 @@ public class IHM_Reservation implements Initializable{
 	 */
 
     public void annulerReservation(ActionEvent event) {
-    	
     	 if (tabViewRes.getSelectionModel().getSelectedItem() == null) {
          	resultRes.setText("Veuillez sélectionner une réservation à annuler !");
          	resultRes.setTextFill(Color.RED);
@@ -214,6 +212,9 @@ public class IHM_Reservation implements Initializable{
  			resultRes.setText("La réservation avec l'ID " + reservationID + " a été supprimé !");
  			resultRes.setTextFill(Color.GREEN);
  			gestionReservation.annulerReservation(reservationID);
+ 			if (reservation.getDateArchivage() == null) {
+				gestionOeuvre.setNbResaRem(reservation.getOeuvre());
+			}
  			getListReservations();
  		}
         
@@ -229,6 +230,9 @@ public class IHM_Reservation implements Initializable{
 			int reservationID = reservation.getId();
 			resultRes.setText("La réservation avec l'ID " + reservationID + " a été supprimé !");
 			resultRes.setTextFill(Color.GREEN);
+			if (reservation.getDateArchivage() == null && reservation.getDateAnnulation() == null) {
+				gestionOeuvre.setNbResaRem(reservation.getOeuvre());
+			}
 			gestionReservation.supprimerReservation(reservationID);
 			getListReservations();
 		}
@@ -246,6 +250,10 @@ public class IHM_Reservation implements Initializable{
 			resultRes.setText("La réservation avec l'ID " + reservationID + " a été archivé !");
 			resultRes.setTextFill(Color.GREEN);
 			gestionReservation.archiverReservation(reservationID);
+			gestionReservation.annulerReservation(reservationID);
+			if (reservation.getDateAnnulation() == null) {
+				gestionOeuvre.setNbResaRem(reservation.getOeuvre());
+			}
 			getListReservations();
 		}
 		

@@ -18,7 +18,7 @@ public class Gestion_Exemplaire {
 
 	private static final Logger LOG = Logger.getLogger(Gestion_Exemplaire.class.getName());
 	
-	public ObservableList<Exemplaire> ListerExemplaire() {
+	public ObservableList<Exemplaire> ListerExemplaires() {
 		// TODO Auto-generated method stub
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -35,8 +35,29 @@ public class Gestion_Exemplaire {
 		entityManager.close();
 		return list;
 	}
+	
+	public ObservableList<Exemplaire> ListerExemplairesUnDeleted() {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    ObservableList<Exemplaire> list = FXCollections.observableArrayList();
+	    entityTransaction.begin();
+	    
+	    @SuppressWarnings("unchecked")
+		List<Exemplaire> exemplaires = entityManager.createQuery("from Exemplaire where date_archivage is null and statut='Disponible'").getResultList();
 
-	public ObservableList<String> ListerOeuvre() {
+	    for(Exemplaire ex : exemplaires)
+		{
+			list.add(ex);
+		    LOG.fine(ex.toString());
+			
+		}
+	    entityManager.close();
+		return list;
+	}
+
+
+	public ObservableList<String> ListerOeuvres() {
 		// TODO Auto-generated method stub
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -138,10 +159,9 @@ public class Gestion_Exemplaire {
 		    	exemplaire.setEtat(etat);
 		    }
 
-		  //Get the infos
-		      LOG.finer(exemplaire.toString());
-		
-		      entityTransaction.commit();
+		    //Get the infos
+		    LOG.finer(exemplaire.toString());
+		    entityTransaction.commit();
 	      
 	    }
 	    catch (RuntimeException e) {
@@ -169,7 +189,6 @@ public class Gestion_Exemplaire {
 			  e.printStackTrace();
 			  entityTransaction.rollback(); 
 		  }
-		
 	}
 
 	public void archiverExemplaire(int exemplaireID) {
@@ -181,7 +200,7 @@ public class Gestion_Exemplaire {
 	    entityTransaction.begin();
 		try {
 			
-		  Query query = entityManager.createQuery("Update Exemplaire set date_archivage='" + dateD + "'  where id='" + exemplaireID + "'");
+		  Query query = entityManager.createQuery("Update Exemplaire set date_archivage='" + dateD + "', statut='Indisponible'  where id='" + exemplaireID + "'");
 		  query.executeUpdate();
 			
 		  entityTransaction.commit();
@@ -190,7 +209,6 @@ public class Gestion_Exemplaire {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 }

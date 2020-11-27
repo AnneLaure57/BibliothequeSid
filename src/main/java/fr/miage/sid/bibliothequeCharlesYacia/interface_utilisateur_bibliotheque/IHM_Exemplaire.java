@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Exemplaire;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
@@ -38,6 +39,8 @@ public class IHM_Exemplaire implements Initializable{
 	private Gestion_Exemplaire gestionExemplaire = new Gestion_Exemplaire();
 	
 	private Gestion_Emprunt gestionEmprunt = new Gestion_Emprunt();
+	
+	private Gestion_Oeuvre gestionOeuvre = new Gestion_Oeuvre();
 	
 	@FXML
 	private Parent root;
@@ -83,7 +86,7 @@ public class IHM_Exemplaire implements Initializable{
 			
             result.setText("Aucune modification enregistrée !");
             result.setTextFill(Color.BLUE);
-            getListEtatSelect();
+            getListEtat();
             getListOeuvreSelect();
             	
 		}
@@ -92,14 +95,14 @@ public class IHM_Exemplaire implements Initializable{
 			
             result.setText("Aucune modification enregistrée !");
             result.setTextFill(Color.BLUE);
-            getListExemplairesSelect();
+            getListExemplairesUnDeleted();
             getListEtatSelect();
             	
 		}
 	}
 	
 	private void getListExemplairesSelect() {
-		select.setItems(gestionExemplaire.ListerExemplaire());
+		select.setItems(gestionExemplaire.ListerExemplaires());
 	}
 
 	@FXML
@@ -108,11 +111,19 @@ public class IHM_Exemplaire implements Initializable{
 	}
 	
 	private void getListOeuvreSelect() {
-		selectOeuvres.setItems(gestionExemplaire.ListerOeuvre());
+		selectOeuvres.setItems(gestionExemplaire.ListerOeuvres());
 	}
 
+	private void getListEtat() {
+		selectEtats.getItems().addAll( "Neuf","Bon","Moyen");
+	}
+	
 	private void getListEtatSelect() {
-		selectEtats.getItems().addAll( "Neuf","Bon","Abimé");
+		selectEtats.getItems().addAll( "Neuf","Bon","Moyen","Abimé");
+	}
+	
+	private void getListExemplairesUnDeleted() {
+		select.setItems(gestionExemplaire.ListerExemplairesUnDeleted());
 	}
 	
 	/*
@@ -137,7 +148,7 @@ public class IHM_Exemplaire implements Initializable{
     }    
 	
 	private void getListExemplaires() {
-		tabViewEx.setItems(gestionExemplaire.ListerExemplaire());
+		tabViewEx.setItems(gestionExemplaire.ListerExemplaires());
 	}
 
 	@FXML
@@ -166,6 +177,7 @@ public class IHM_Exemplaire implements Initializable{
 				
 			//save data in Gestion Exemplaire
 			gestionExemplaire.ajouterExemplaire(etat, oeuvre);
+			gestionOeuvre.setNbTotalDisponibles(oeuvre);
 			result.setText("L'exemplaire a été ajouté !");
 			result.setTextFill(Color.GREEN);
 	      } else {
@@ -205,6 +217,7 @@ public class IHM_Exemplaire implements Initializable{
 			gestionExemplaire.modifierExemplaire(exemplaire, etat);
 			if (etat.equals("Abimé")) {
    	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
+   	     	  gestionOeuvre.setNbIndisponibles(exemplaire.getOeuvre());
    	     	} else {
    	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Disponible");
    	     	}
@@ -244,6 +257,17 @@ public class IHM_Exemplaire implements Initializable{
 		} else {
 			Exemplaire exemplaire = tabViewEx.getSelectionModel().getSelectedItem();
 			int exemplaireID = exemplaire.getId();
+			if (exemplaire.getEtat().equals("Abimé") && exemplaire.getDateArchivage() == null) {
+				//2
+				gestionOeuvre.setNbTotalDel(exemplaire.getOeuvre());
+				
+			} else if  (!exemplaire.getEtat().equals("Abimé") && exemplaire.getDateArchivage() == null) {
+				//4
+				gestionOeuvre.setNbTotalDispoDel(exemplaire.getOeuvre());
+			} else {
+				//1 && 3
+				System.out.println("je ne suis pas abimé et je suis  archivé");
+			}
 			gestionExemplaire.supprimerExemplaire(exemplaireID);
 			resultEx.setText("L'exemplaire avec l'ID " + exemplaireID + " a été supprimé !");
 			resultEx.setTextFill(Color.GREEN);
@@ -261,6 +285,12 @@ public class IHM_Exemplaire implements Initializable{
 			int exemplaireID = exemplaire.getId();
 			resultEx.setText("L'exemplaire avec l'ID " + exemplaireID + " a été archivé !");
 			resultEx.setTextFill(Color.GREEN);
+			if (exemplaire.getEtat().equals("Abimé")) {
+				gestionOeuvre.setNbTotalDel(exemplaire.getOeuvre());
+			} else {
+				gestionOeuvre.setNbTotalDispoDel(exemplaire.getOeuvre());
+				gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
+			}
 			gestionExemplaire.archiverExemplaire(exemplaireID);
 			getListExemplaires();
 		}

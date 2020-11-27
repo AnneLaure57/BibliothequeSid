@@ -149,7 +149,7 @@ public class IHM_Emprunt implements Initializable{
 	}
 	
 	public void getListEtatSelect() {
-		selectEtats.getItems().addAll("Neuf","Bon", "Abimé");
+		selectEtats.getItems().addAll( "Neuf","Bon","Moyen","Abimé");
 	}
 	
 	/*
