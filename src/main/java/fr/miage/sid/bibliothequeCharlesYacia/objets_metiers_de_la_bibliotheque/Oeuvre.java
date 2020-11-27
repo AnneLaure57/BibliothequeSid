@@ -56,7 +56,7 @@ public class Oeuvre {
 	protected int nbExemplairesTotal;
 	
 	@Column(name = "prix")
-	protected int prix;
+	protected Double prix;
 	
 	@Column(name = "nb_reservation")
 	protected int nbResa;
@@ -121,11 +121,11 @@ public class Oeuvre {
 		this.nbExemplairesTotal = nbExemplairesTotal;
 	}
 
-	public int getPrix() {
+	public Double getPrix() {
 		return prix;
 	}
 
-	public void setPrix(int prix) {
+	public void setPrix(Double prix) {
 		this.prix = prix;
 	}
 
@@ -156,44 +156,27 @@ public class Oeuvre {
 	public Date getDateArchivage() {
 		return dateArchivage;
 	}
-	
-	public void setDateArchivage(Date dateSuppression) {
-		this.dateArchivage = dateSuppression;
-	}
 
-	public void findOeuvre() {
-		throw new UnsupportedOperationException();
-	}
-
-	public Oeuvre e_identification(String titre) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void supprimerOeuvre(Oeuvre oeuvre) {
-		throw new UnsupportedOperationException();
-	}
-	
-	
-	public Oeuvre(String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix, String editeur, Date dateEdition) {
+	public Oeuvre(String titre, String description, Double prix, String editeur, Date dateEdition) {
 		super();
 		this.titre = titre;
 		this.description = description;
 		// nbExemplairesDispo replace by nbExemplairesTotal, when the oeuvre add nbDispo = nbTotal
-		this.nbExemplairesDispo = nbExemplairesTotal;
-		this.nbExemplairesTotal = nbExemplairesTotal;
+		this.nbExemplairesDispo = 0;
+		this.nbExemplairesTotal = 0;
 		this.prix = prix;
 		this.nbResa = 0;
 		this.editeur = editeur;
 		this.dateEdition = dateEdition;
 	}
 	
-	public Oeuvre(String type, String titre, String description, int nbExemplairesDispo,int nbExemplairesTotal, int prix, String editeur, Date dateEdition) {
+	public Oeuvre(String type, String titre, String description, Double prix, String editeur, Date dateEdition) {
 		super();
 		this.type = type;
 		this.titre = titre;
 		this.description = description;
-		this.nbExemplairesDispo = nbExemplairesTotal;
-		this.nbExemplairesTotal = nbExemplairesTotal;
+		this.nbExemplairesDispo = 0;
+		this.nbExemplairesTotal = 0;
 		this.prix = prix;
 		this.nbResa = 0;
 		this.editeur = editeur;

@@ -10,19 +10,19 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Oeuvre">
    <children>
-      <SplitPane dividerPositions="0.25646123260437376" orientation="VERTICAL" prefHeight="505.0" prefWidth="1042.0">
+      <SplitPane dividerPositions="0.21272365805168986" orientation="VERTICAL" prefHeight="505.0" prefWidth="1042.0">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="109.0" prefWidth="1040.0">
                <children>
-                  <Button fx:id="butAddO" layoutX="136.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormOB" text="Ajouter Livre" />
-                  <Button layoutX="347.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverOeuvre" text="Archiver Oeuvre" />
-                  <TextField fx:id="searchOeuvre" layoutX="623.0" layoutY="54.0" />
-                  <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverOeuvre" text="Rechercher" />
-                  <Label layoutX="28.0" layoutY="102.0" text="Résultat : " />
-                  <Label fx:id="resultO" layoutX="80.0" layoutY="102.0" prefHeight="17.0" prefWidth="405.0" />
-                  <Button layoutX="455.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerOeuvre" text="Supprimer Oeuvre" />
-                  <Button layoutX="888.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
-                  <Button fx:id="butAddO1" layoutX="228.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormOM" text="Ajouter Magazine" />
+                  <Button fx:id="butAddO" layoutX="38.0" layoutY="38.0" mnemonicParsing="false" onAction="#ajoutFormOB" text="Ajouter Livre" />
+                  <Button layoutX="310.0" layoutY="38.0" mnemonicParsing="false" onAction="#archiverOeuvre" text="Archiver Oeuvre" />
+                  <TextField fx:id="searchOeuvre" layoutX="622.0" layoutY="38.0" />
+                  <Button layoutX="804.0" layoutY="38.0" mnemonicParsing="false" onAction="#trouverOeuvre" text="Rechercher" />
+                  <Label layoutX="28.0" layoutY="77.0" text="Résultat : " />
+                  <Label fx:id="resultO" layoutX="80.0" layoutY="77.0" prefHeight="17.0" prefWidth="405.0" />
+                  <Button layoutX="453.0" layoutY="38.0" mnemonicParsing="false" onAction="#supprimerOeuvre" text="Supprimer Oeuvre" />
+                  <Button layoutX="918.0" layoutY="38.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
+                  <Button fx:id="butAddO1" layoutX="163.0" layoutY="38.0" mnemonicParsing="false" onAction="#ajoutFormOM" text="Ajouter Magazine" />
                   <!--<Button fx:id="butAddO2" layoutX="32.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormO" text="Ajouter Oeuvre" />-->
                </children>
             </AnchorPane>
@@ -35,7 +35,7 @@
                       <TableColumn fx:id="tabTitle" prefWidth="75.0" text="Titre" />
                         <TableColumn fx:id="tabDesc" prefWidth="75.0" text="Description" />
                         <TableColumn fx:id="tabPrix" prefWidth="75.0" text="Prix" />
-                        <TableColumn fx:id="tabAv" prefWidth="75.0" text="Disponiles" />
+                        <TableColumn fx:id="tabAv" prefWidth="75.0" text="Disponibles" />
                         <TableColumn fx:id="tabTotal" prefWidth="75.0" text="Total" />
                         <TableColumn fx:id="tabNbResa" prefWidth="100.0" text="Nombre Résev" />
                         <TableColumn fx:id="tabEditor" prefWidth="140.0" text="Editeur" />

@@ -46,13 +46,13 @@ public class Livre extends Oeuvre {
 		this.resume = resume;
 	}
 
-	public Livre(String type, String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix, String editeur, Date dateEdition) {
+	public Livre(String type, String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, Double prix, String editeur, Date dateEdition) {
 		//super(titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
-		super(titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
+		super(titre, description, prix, editeur, dateEdition);
 	}
 
-	public Livre(String type, String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix, String editeur, Date dateEdition, String resume) {
-		super(type,titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
+	public Livre(String type, String titre, String description, Double prix, String editeur, Date dateEdition, String resume) {
+		super(type,titre, description, prix, editeur, dateEdition);
 		this.resume = resume;
 	}
 

@@ -20,22 +20,17 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="43.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre Total">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
       <Text layoutX="39.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="40.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Édition">
+      <Text layoutX="40.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Édition">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="42.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editeur">
+      <Text layoutX="42.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editeur">
          <font>
             <Font size="14.0" />
          </font>
@@ -43,18 +38,17 @@
       <TextField fx:id="title" layoutX="165.0" layoutY="68.0" prefHeight="25.0" prefWidth="220.0" />
       <TextField fx:id="desc" layoutX="165.0" layoutY="109.0" prefHeight="25.0" prefWidth="220.0" />
       <TextField fx:id="price" layoutX="165.0" layoutY="155.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField fx:id="editor" layoutX="165.0" layoutY="232.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField fx:id="nbTotal" layoutX="165.0" layoutY="271.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField fx:id="editor" layoutX="165.0" layoutY="244.0" prefHeight="25.0" prefWidth="220.0" />
       <Button fx:id="submit" layoutX="420.0" layoutY="379.0" mnemonicParsing="false" onAction="#ajouterOeuvreMagazine" prefHeight="42.0" prefWidth="87.0" text="Valider" />
       <Button fx:id="cancel" layoutX="535.0" layoutY="379.0" mnemonicParsing="false" onAction="#closeView" prefHeight="42.0" prefWidth="87.0" text="Annuler" />
       <Label fx:id="result" layoutX="50.0" layoutY="31.0" prefHeight="17.0" prefWidth="337.0" />
-      <DatePicker fx:id="dateE" layoutX="165.0" layoutY="191.0" prefHeight="25.0" prefWidth="220.0" />
-      <Text layoutX="45.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro de Réf.">
+      <DatePicker fx:id="dateE" layoutX="165.0" layoutY="201.0" prefHeight="25.0" prefWidth="220.0" />
+      <Text layoutX="42.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro de Réf.">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="num" layoutX="165.0" layoutY="308.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField fx:id="num" layoutX="165.0" layoutY="295.0" prefHeight="25.0" prefWidth="220.0" />
       <Text layoutX="45.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Périodicité">
          <font>
             <Font size="14.0" />

@@ -139,14 +139,14 @@ public class Gestion_Oeuvre {
 		//TODO archive Exemplaires
 	}
 	
-	public void ajouterMagazine(String type,String titre, String description, int nombreDispo, int nombreTotal, int prix,String editeur, Date dateEdition, String numero, int periodicite) {
+	public void ajouterMagazine(String type,String titre, String description, Double prix,String editeur, Date dateEdition, String numero, int periodicite) {
 		// TODO Auto-generated method stub
 	     //add magazine
 	     EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	     EntityTransaction entityTransaction = entityManager.getTransaction();
 	     entityTransaction.begin();
 	      
-	     Magazine mag= new Magazine(type, titre, description,nombreDispo, nombreTotal, prix, editeur, dateEdition, numero, periodicite);
+	     Magazine mag= new Magazine(type, titre, description, prix, editeur, dateEdition, numero, periodicite);
 	     entityManager.persist(mag);
 	     //Get the infos
 	     LOG.finer(mag.toString());
@@ -155,14 +155,14 @@ public class Gestion_Oeuvre {
 	     entityManager.close();
 	}
 	
-	public void ajouterLivre(String type,String titre, String description, int nombreDispo, int nombreTotal, int prix,String editeur, Date dateEdition, String resume) {
+	public void ajouterLivre(String type,String titre, String description, Double prix,String editeur, Date dateEdition, String resume) {
 		// TODO Auto-generated method stub
 	     //add magazine
 	     EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	     EntityTransaction entityTransaction = entityManager.getTransaction();
 	     entityTransaction.begin();
 	      
-	     Livre livre= new Livre(type, titre, description,nombreDispo, nombreTotal, prix, editeur, dateEdition, resume);
+	     Livre livre= new Livre(type, titre, description, prix, editeur, dateEdition, resume);
 	     entityManager.persist(livre);
 	     //Get the infos
 	     LOG.finer(livre.toString());

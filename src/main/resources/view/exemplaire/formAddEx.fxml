@@ -22,8 +22,8 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <ComboBox fx:id="selectOeuvres" layoutX="270.0" layoutY="130.0" onAction="#selectOeuvre" prefHeight="25.0" prefWidth="220.0" />
-      <ComboBox fx:id="selectEtats" layoutX="270.0" layoutY="197.0" onAction="#selectEtat" prefHeight="25.0" prefWidth="220.0" />
+      <ComboBox fx:id="selectOeuvres" layoutX="270.0" layoutY="130.0" prefHeight="25.0" prefWidth="220.0" />
+      <ComboBox fx:id="selectEtats" layoutX="270.0" layoutY="197.0" prefHeight="25.0" prefWidth="220.0" />
       <Label fx:id="result" layoutX="36.0" layoutY="37.0" prefHeight="17.0" prefWidth="278.0" />
    </children>
 </AnchorPane>

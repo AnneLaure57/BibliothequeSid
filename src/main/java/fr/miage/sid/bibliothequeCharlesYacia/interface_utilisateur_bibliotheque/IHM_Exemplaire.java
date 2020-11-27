@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
@@ -35,6 +36,8 @@ public class IHM_Exemplaire implements Initializable{
 	private static final Logger LOG = Logger.getLogger(Gestion_Exemplaire.class.getName());
 	
 	private Gestion_Exemplaire gestionExemplaire = new Gestion_Exemplaire();
+	
+	private Gestion_Emprunt gestionEmprunt = new Gestion_Emprunt();
 	
 	@FXML
 	private Parent root;
@@ -96,7 +99,6 @@ public class IHM_Exemplaire implements Initializable{
 	}
 	
 	private void getListExemplairesSelect() {
-		// TODO Auto-generated method stub
 		select.setItems(gestionExemplaire.ListerExemplaire());
 	}
 
@@ -110,11 +112,7 @@ public class IHM_Exemplaire implements Initializable{
 	}
 
 	private void getListEtatSelect() {
-		selectEtats.getItems().addAll(
-			    "Neuf",
-			    "Bon",
-			    "Abimé"
-			);
+		selectEtats.getItems().addAll( "Neuf","Bon","Abimé");
 	}
 	
 	/*
@@ -139,7 +137,6 @@ public class IHM_Exemplaire implements Initializable{
     }    
 	
 	private void getListExemplaires() {
-		// TODO Auto-generated method stub
 		tabViewEx.setItems(gestionExemplaire.ListerExemplaire());
 	}
 
@@ -161,15 +158,24 @@ public class IHM_Exemplaire implements Initializable{
     
     @FXML
 	private void ajouterExemplaire(ActionEvent event) {
-    	
-		String etat = (String) selectEtats.getSelectionModel().getSelectedItem();
-		
-		Oeuvre oeuvre = gestionExemplaire.getOeuvreByName(selectOeuvres.getSelectionModel().getSelectedItem());
-		
-		//save data in Gestion Back
-		gestionExemplaire.ajouterExemplaire(etat, oeuvre);
-		result.setText("L'usager a été ajouté !");
-		result.setTextFill(Color.GREEN);
+		try {
+		  if (textFieldsValid()) {
+			//get values from form
+			String etat = (String) selectEtats.getSelectionModel().getSelectedItem();
+			Oeuvre oeuvre = gestionExemplaire.getOeuvreByName(selectOeuvres.getSelectionModel().getSelectedItem());
+				
+			//save data in Gestion Exemplaire
+			gestionExemplaire.ajouterExemplaire(etat, oeuvre);
+			result.setText("L'exemplaire a été ajouté !");
+			result.setTextFill(Color.GREEN);
+	      } else {
+	        result.setText("  Veuillez remplir tout les champs !");
+			result.setTextFill(Color.RED);
+	       }
+    	} catch(Exception e) {
+			result.setText(" Impossible d'ajouter l'exemplaire ! ");
+			result.setTextFill(Color.RED);
+		}
 	}
 	
 	@FXML
@@ -189,15 +195,29 @@ public class IHM_Exemplaire implements Initializable{
 	
 	@FXML
 	private void modifierExemplaire(ActionEvent event) {
-    	
-		Exemplaire exemplaire = (Exemplaire) select.getSelectionModel().getSelectedItem();
-		String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
-		
-		//save data in Gestion Back
-		gestionExemplaire.modifierExemplaire(exemplaire, etat);
-
-		result.setText("L'usager a été modifié !");
-		result.setTextFill(Color.GREEN);
+		try {
+		  if (SelectFieldsValid()) {
+			//get values from form
+			Exemplaire exemplaire = (Exemplaire) select.getSelectionModel().getSelectedItem();
+			String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
+				
+			//save data in Gestion Exemplaire
+			gestionExemplaire.modifierExemplaire(exemplaire, etat);
+			if (etat.equals("Abimé")) {
+   	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
+   	     	} else {
+   	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Disponible");
+   	     	}
+			result.setText("L'exemplaire a été modifié !");
+			result.setTextFill(Color.GREEN);
+	        } else {
+	        	result.setText("  Veuillez remplir tout les champs !");
+				result.setTextFill(Color.RED);
+	        }
+		} catch(Exception e) {
+			result.setText(" Impossible de modifier l'exemplaire ! ");
+			result.setTextFill(Color.RED);
+		}
 
 	}
 	
@@ -252,30 +272,52 @@ public class IHM_Exemplaire implements Initializable{
 	 */
 	@FXML
 	public void  selectExemplaire() {
-		
-			if (select.getSelectionModel().getSelectedItem() == null) {
-	        	result.setText("Veuillez selectionner un exemplaire à modifier avant !");
-				result.setTextFill(Color.RED);
-			} else {
-				Exemplaire exemplaire = (Exemplaire) select.getSelectionModel().getSelectedItem();
-				int exemplaireID = exemplaire.getId();
-				//auto complement fields
-				Exemplaire modExemplaire = gestionExemplaire.trouverExemplaire(exemplaireID);
-				
-				titre.setText(modExemplaire.getTitre());
-				selectEtats.getSelectionModel().select(modExemplaire.getEtat());
-			}
-		}
-    
-	
-    @FXML
-	public void selectOeuvre() {
+		if (select.getSelectionModel().getSelectedItem() == null) {
+        	result.setText("Veuillez selectionner un exemplaire à modifier !");
+			result.setTextFill(Color.RED);
+		} else {
+			Exemplaire exemplaire = (Exemplaire) select.getSelectionModel().getSelectedItem();
+			int exemplaireID = exemplaire.getId();
+			//auto complement fields
+			Exemplaire modExemplaire = gestionExemplaire.trouverExemplaire(exemplaireID);
 			
-    }
-   
-    
-    @FXML
-	public void selectEtat() {
-    	
+			titre.setText(modExemplaire.getTitre());
+			selectEtats.getSelectionModel().select(modExemplaire.getEtat());
+		}
 	}
+	
+	private boolean textFieldsValid() {
+
+        boolean validTextFields = true;
+
+        if (selectOeuvres.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectOeuvres.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+        }
+
+        if (selectEtats.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectEtats.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+        }
+
+        return validTextFields;
+    }
+	
+	private boolean SelectFieldsValid() {
+
+        boolean validTextFields = true;
+
+        if (select.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            select.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+        }
+
+        if (selectEtats.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectEtats.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+        }
+
+        return validTextFields;
+    }
+	
 }

@@ -15,45 +15,39 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="42.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+      <Text layoutX="41.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="43.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre Total">
+      <Text layoutX="39.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="39.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix">
+      <Text layoutX="39.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Édition">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="40.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Édition">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
-      <Text layoutX="42.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editeur">
+      <Text layoutX="42.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editeur">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
       <TextField fx:id="title" layoutX="165.0" layoutY="68.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField fx:id="desc" layoutX="165.0" layoutY="109.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField fx:id="price" layoutX="165.0" layoutY="155.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField fx:id="editor" layoutX="165.0" layoutY="232.0" prefHeight="25.0" prefWidth="220.0" />
-      <TextField fx:id="nbTotal" layoutX="165.0" layoutY="271.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField fx:id="desc" layoutX="165.0" layoutY="121.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField fx:id="price" layoutX="165.0" layoutY="167.0" prefHeight="25.0" prefWidth="220.0" />
+      <TextField fx:id="editor" layoutX="165.0" layoutY="272.0" prefHeight="25.0" prefWidth="220.0" />
       <Button fx:id="submit" layoutX="420.0" layoutY="379.0" mnemonicParsing="false" onAction="#ajouterOeuvreLivre" prefHeight="42.0" prefWidth="87.0" text="Valider" />
       <Button fx:id="cancel" layoutX="535.0" layoutY="379.0" mnemonicParsing="false" onAction="#closeView" prefHeight="42.0" prefWidth="87.0" text="Annuler" />
       <Label fx:id="result" layoutX="50.0" layoutY="31.0" prefHeight="17.0" prefWidth="337.0" />
-      <DatePicker fx:id="dateE" layoutX="165.0" layoutY="191.0" prefHeight="25.0" prefWidth="220.0" />
+      <DatePicker fx:id="dateE" layoutX="165.0" layoutY="219.0" prefHeight="25.0" prefWidth="220.0" />
       <Text layoutX="43.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Résumé">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="resum" layoutX="165.0" layoutY="321.0" prefHeight="50.0" prefWidth="220.0" />
+      <TextField fx:id="resum" layoutX="165.0" layoutY="321.0" prefHeight="57.0" prefWidth="220.0" />
    </children>
 </AnchorPane>

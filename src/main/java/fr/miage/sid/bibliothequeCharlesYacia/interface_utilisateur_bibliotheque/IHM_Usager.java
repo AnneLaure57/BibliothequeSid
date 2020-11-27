@@ -76,7 +76,7 @@ public class IHM_Usager implements Initializable{
 	@FXML TableColumn<Usager, Date> tabDateDU;
 	
 	@Override
-   	public void initialize(URL location, ResourceBundle resources){
+   	public void initialize(URL location, ResourceBundle resources) {
 	
 		if (location.equals(getClass().getClassLoader().getResource("view/usager/UsagerView.fxml"))) {
 			tabIdU.setCellValueFactory(new PropertyValueFactory<Usager, Number>("id"));
@@ -116,7 +116,7 @@ public class IHM_Usager implements Initializable{
 	}
 	
 	@FXML
-    private void closeView(){
+    private void closeView() {
         // get a handle to the stage
         Stage stage = (Stage) cancel.getScene().getWindow();
         // do what you have to do
@@ -127,8 +127,7 @@ public class IHM_Usager implements Initializable{
 	 * List all usagers in tableView
 	 */
 	
-	public void getListUsagers()
-	{
+	public void getListUsagers() {
 		tabViewU.setItems(gestionBack.ListerUsagers());
 	}
 	
@@ -136,8 +135,7 @@ public class IHM_Usager implements Initializable{
 	 * Get the list of Usagers inside select for modForm
 	 */
 	
-	public void getListUsagersSelect()
-	{
+	public void getListUsagersSelect() {
 		select.setItems(gestionBack.ListerUsagersUnDeleted());
 	}
 	
@@ -152,10 +150,14 @@ public class IHM_Usager implements Initializable{
 		tabViewU.setItems(list);
 	}
 	
+	/*
+	 * Find a usager by lastname/firstname research
+	 */
+	
 	@FXML
 	public void selectUsager() {
 		if (select.getSelectionModel().getSelectedItem() == null) {
-        	result.setText("Veuillez selectionner un usager à modifier avant !");
+        	result.setText("Veuillez selectionner un usager à modifier !");
 			result.setTextFill(Color.RED);
 		} else {
 			Usager usager = (Usager) select.getSelectionModel().getSelectedItem();
@@ -174,16 +176,22 @@ public class IHM_Usager implements Initializable{
 		}
 	}
 	
+	/*
+     * Actualize the list of usagers
+     */
+	
 	@FXML
 	public void actualizeList () {
 		getListUsagers();
 	}
 	
+	/*
+     * Open Add's form
+     */
+	
 	@FXML
 	public void ajoutFormU(ActionEvent event) {
         try {
-        	//FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/formAddU.fxml"));
-        	//Parent part = fxmlLoader.load();
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/usager/formAddU.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Ajouter un nouvel Usager");
@@ -191,112 +199,92 @@ public class IHM_Usager implements Initializable{
             stage.setScene(scene);
             stage.show();
                        
-        }
-        
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     };
     
     @FXML
-	private void ajouterUsager(ActionEvent event) {
-    	if (! textFieldsValid()) {
-            // one or more of the text fields are empty
-    		result.setText("Veuillez remplir les champs manquants !");
-    		result.setTextFill(Color.RED);
-            return;
-        }
-		LOG.fine(lastname.getText() + ", " + firstname.getText() + ", " + dateB.getValue() + ", " + adress.getText() + ", " + cp.getText() + ", " + city.getText()
-		+ ", " + mail.getText() + ", " + tel.getText());
-		String nom = lastname.getText();
-		String prenom = 	firstname.getText();
-		java.sql.Date dateNaissance = java.sql.Date.valueOf(dateB.getValue());
-		String adresse = 	adress.getText();
-		int codePostal = 	Integer.parseInt(cp.getText());
-		String ville = 	city.getText();
-		String email = 	mail.getText();
-		String telephone = 	tel.getText();
-		
-		//save data in Gestion Back
-		gestionBack.ajouterUsager(nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
-		result.setText("L'usager a été ajouté !");
-		result.setTextFill(Color.GREEN);
+	private void ajouterUsager(ActionEvent event) { 	
+    	try {
+			if (textFieldsValid()) {
+				//get values from form
+				String nom = lastname.getText();
+				String prenom = 	firstname.getText();
+				java.sql.Date dateNaissance = java.sql.Date.valueOf(dateB.getValue());
+				String adresse = 	adress.getText();
+				int codePostal = 	Integer.parseInt(cp.getText());
+				String ville = 	city.getText();
+				String email = 	mail.getText();
+				String telephone = 	tel.getText();
+				
+				//save data in Gestion Back
+				gestionBack.ajouterUsager(nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
+				result.setText("L'usager a été ajouté !");
+	    		result.setTextFill(Color.GREEN);
+	        } else {
+	        	result.setText("  Veuillez remplir tout les champs !");
+				result.setTextFill(Color.RED);
+	        }
+    	} catch(Exception e) {
+			result.setText(" Impossible d'ajouter l'usager ! ");
+			result.setTextFill(Color.RED);
+		}
 	}
+    
+    /*
+     * Open Update's form
+     */
 
     @FXML
     public void modFormU(ActionEvent event) {
         try {
-//        	if (tabViewU.getSelectionModel().getSelectedItem() == null) {
-//            	resultU.setText("Veuillez selectionner un usager à modifier avant !");
-//    			resultU.setTextFill(Color.RED);
-//    		} else {
-//    			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
-//    			int usagerID = usager.getId();
-////    			resultU.setText("L'usager avec l'ID : " + usagerID + " a été modifié !");
-////    			resultU.setTextFill(Color.GREEN);
-//    			Usager modusager = gestionBack.trouverUsager(usagerID);
-//    			System.out.println("je suis ici " +modusager.toString() + " nom : "+ modusager.getNom());
-//    			//resultU.setText(modusager.getNom());
-//    			/*Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/usager/formUpdU.fxml"));
-//                Stage stage = new Stage();
-//                stage.setTitle("Modifier un usager");
-//                Scene scene = new Scene(part);
-//                stage.setScene(scene);
-//                stage.show();*/
-//    			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/usager/formUpdU.fxml"));
-//    			root = loader.load();
-//    			IHM_Usager controller = loader.getController();
-//    	        Stage stage = new Stage();
-//    	        stage.setTitle("Modifier un usager");
-//    	        stage.setScene(new Scene(root));  
-//    	        stage.show();
-//    	        //TODO check how get Data between 2 views
-//    			getData(modusager);	
-//    		}
-        	FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/usager/formUpdU.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("view/usager/formUpdU.fxml"));
 			root = loader.load();
 			IHM_Usager controller = loader.getController();
-	        Stage stage = new Stage();
-	        stage.setTitle("Modifier un usager");
-	        stage.setScene(new Scene(root));  
-	        stage.show();
-        }
-        catch (Exception e) {
+			Stage stage = new Stage();
+			stage.setTitle("Modifier un usager");
+			stage.setScene(new Scene(root));  
+			stage.show();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     };
 
 	@FXML
 	private void modifierUsager(ActionEvent event) {
-		if (! textFieldsValid()) {
-            // one or more of the text fields are empty
-    		result.setText("Veuillez remplir les champs manquants !");
-    		result.setTextFill(Color.RED);
-    		return;
-        }
-		System.out.println(lastname.getText() + ", " + firstname.getText() + ", " + dateB.getValue() + ", " + adress.getText() + ", " + cp.getText() + ", " + city.getText()
-		+ ", " + mail.getText() + ", " + tel.getText());
-		Usager us = (Usager) select.getSelectionModel().getSelectedItem();
-		int id = us.getId();
-		String nom = lastname.getText();
-		String prenom = 	firstname.getText();
-		java.sql.Date dateNaissance = java.sql.Date.valueOf(dateB.getValue());
-		String adresse = 	adress.getText();
-		int codePostal = 	Integer.parseInt(cp.getText());
-		String ville = 	city.getText();
-		String email = 	mail.getText();
-		String telephone = 	tel.getText();
-		
-		//save data in Gestion Back
-		gestionBack.modifierUsager(id,nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
-		result.setText("L'usager a été modifié !");
-		result.setTextFill(Color.GREEN);
+		try {
+			if (textFieldsValid()) {
+				//get values from form
+				Usager us = (Usager) select.getSelectionModel().getSelectedItem();
+				int id = us.getId();
+				String nom = lastname.getText();
+				String prenom = 	firstname.getText();
+				java.sql.Date dateNaissance = java.sql.Date.valueOf(dateB.getValue());
+				String adresse = 	adress.getText();
+				int codePostal = 	Integer.parseInt(cp.getText());
+				String ville = 	city.getText();
+				String email = 	mail.getText();
+				String telephone = 	tel.getText();
+				
+				//save data in Gestion Back
+				gestionBack.modifierUsager(id,nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
+				result.setText("L'usager a été modifié !");
+				result.setTextFill(Color.GREEN);
+	        } else {
+	        	result.setText("  Veuillez remplir tout les champs !");
+				result.setTextFill(Color.RED);
+	        }
+    	} catch(Exception e) {
+			result.setText(" Impossible de modifier l'usager ! ");
+			result.setTextFill(Color.RED);
+		}
 	}
     
     @FXML
     public void supprimerUsager(ActionEvent event) throws IOException, SQLException {
         if (tabViewU.getSelectionModel().getSelectedItem() == null) {
-        	resultU.setText("Veuillez sélectionner un usager à supprimer avant !");
+        	resultU.setText("Veuillez sélectionner un usager à supprimer !");
 			resultU.setTextFill(Color.RED);
 		} else {
 			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
@@ -312,12 +300,12 @@ public class IHM_Usager implements Initializable{
     @FXML
     public void archiverUsager(ActionEvent event) throws IOException, SQLException {
         if (tabViewU.getSelectionModel().getSelectedItem() == null) {
-        	resultU.setText("Veuillez sélectionner un usager à archiver avant !");
+        	resultU.setText("Veuillez sélectionner un usager à archiver !");
 			resultU.setTextFill(Color.RED);
 		} else {
 			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
 			int usagerID = usager.getId();
-			resultU.setText("L'usager avec l'ID " + usagerID + " a été supprimé !");
+			resultU.setText("L'usager avec l'ID " + usagerID + " a été archivé !");
 			resultU.setTextFill(Color.GREEN);
 			gestionBack.archiverUsager(usagerID);
 			getListUsagers();
@@ -356,7 +344,7 @@ public class IHM_Usager implements Initializable{
         
         if (dateB.getValue() == null) {
             validTextFields = false;
-            dateB.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+            dateB.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
         }
 
         return validTextFields;

@@ -18,7 +18,6 @@
       <TextField fx:id="titre" editable="false" layoutX="270.0" layoutY="129.0" prefHeight="25.0" prefWidth="220.0" />
       <Button fx:id="submit" layoutX="419.0" layoutY="311.0" mnemonicParsing="false" onAction="#modifierExemplaire" prefHeight="42.0" prefWidth="87.0" text="Valider" />
       <Button fx:id="cancel" layoutX="530.0" layoutY="311.0" mnemonicParsing="false" onAction="#closeView" prefHeight="42.0" prefWidth="87.0" text="Annuler" />
-      <Text fx:id="msg" fill="TRANSPARENT" layoutX="54.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="message" />
       <Text layoutX="43.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oeuvre" AnchorPane.leftAnchor="43.0">
          <font>
             <Font size="14.0" />

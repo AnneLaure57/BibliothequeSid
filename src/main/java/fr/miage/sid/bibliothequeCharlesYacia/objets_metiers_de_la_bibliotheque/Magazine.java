@@ -50,8 +50,8 @@ public class Magazine extends Oeuvre {
 		this.periodicite = periodicite;
 	}
 	
-	public Magazine(String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix, String editeur, Date dateEdition) {
-		super(titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
+	public Magazine(String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, Double prix, String editeur, Date dateEdition) {
+		super(titre, description, prix, editeur, dateEdition);
 	}
 	
 	/*public Magazine(String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix,String editeur, Date dateEdition, String numero, int periodicite) {
@@ -61,8 +61,8 @@ public class Magazine extends Oeuvre {
 		this.periodicite = periodicite;
 	}*/
 	
-	public Magazine(String type, String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, int prix,String editeur, Date dateEdition, String numero, int periodicite) {
-		super(type,titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
+	public Magazine(String type, String titre, String description, Double prix,String editeur, Date dateEdition, String numero, int periodicite) {
+		super(type,titre, description, prix, editeur, dateEdition);
 		this.numero = numero;
 		//this.dateParution = dateParution;
 		this.periodicite = periodicite;

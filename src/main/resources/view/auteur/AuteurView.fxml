@@ -10,30 +10,30 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="1042.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.IHM_Auteur">
    <children>
-      <SplitPane dividerPositions="0.2869198312236287" orientation="VERTICAL" prefHeight="476.0" prefWidth="1042.0">
+      <SplitPane dividerPositions="0.20874751491053678" orientation="VERTICAL" prefHeight="505.0" prefWidth="1042.0">
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button layoutX="79.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormA" text="Ajouter Auteur" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="865.0" />
-                  <Button layoutX="202.0" layoutY="54.0" mnemonicParsing="false" onAction="#modFormA" text="Modifier Auteur" AnchorPane.leftAnchor="202.0" AnchorPane.rightAnchor="736.0" />
-                  <Button layoutX="341.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerAuteur" prefHeight="25.0" prefWidth="119.0" text="Supprimer Auteur" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="591.0" />
-                  <TextField fx:id="searchAuteur" layoutX="623.0" layoutY="54.0" />
-                  <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverAuteur" text="Rechercher" />
-                  <Button layoutX="902.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
-                  <Label layoutX="14.0" layoutY="102.0" text="Résultat : " />
-                  <Label fx:id="resultA" layoutX="66.0" layoutY="102.0" prefHeight="17.0" prefWidth="340.0" />
-                  <Button layoutX="470.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverAuteur" text="Archiver Auteur" AnchorPane.leftAnchor="470.0" />
+                  <Button layoutX="38.0" layoutY="38.0" mnemonicParsing="false" onAction="#ajoutFormA" text="Ajouter Auteur" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="865.0" AnchorPane.topAnchor="38.0" />
+                  <Button layoutX="205.0" layoutY="38.0" mnemonicParsing="false" onAction="#modFormA" prefHeight="25.0" prefWidth="109.0" text="Modifier Auteur" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="726.0" AnchorPane.topAnchor="38.0" />
+                  <Button layoutX="461.0" layoutY="38.0" mnemonicParsing="false" onAction="#supprimerAuteur" prefHeight="25.0" prefWidth="119.0" text="Supprimer Auteur" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="461.0" AnchorPane.rightAnchor="460.0" AnchorPane.topAnchor="38.0" />
+                  <TextField fx:id="searchAuteur" layoutX="622.0" layoutY="38.0" />
+                  <Button layoutX="791.0" layoutY="38.0" mnemonicParsing="false" onAction="#trouverAuteur" text="Rechercher" />
+                  <Button layoutX="902.0" layoutY="38.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
+                  <Label layoutX="14.0" layoutY="71.0" text="Résultat : " />
+                  <Label fx:id="resultA" layoutX="66.0" layoutY="71.0" prefHeight="17.0" prefWidth="340.0" />
+                  <Button layoutX="338.0" layoutY="38.0" mnemonicParsing="false" onAction="#archiverAuteur" text="Archiver Auteur" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="603.0" AnchorPane.topAnchor="38.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tabViewA" layoutX="5.0" prefHeight="337.0" prefWidth="1042.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0">
+                  <TableView fx:id="tabViewA" prefHeight="337.0" prefWidth="1042.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0">
                     <columns>
                       <TableColumn fx:id="tabIdA" prefWidth="50.0" text="ID" />
                       <TableColumn fx:id="tabNameA" minWidth="9.0" prefWidth="202.0" text="Nom" />
                         <TableColumn fx:id="tabFNameA" prefWidth="202.0" text="Prénom" />
                         <TableColumn fx:id="tabO" prefWidth="420.0" text="Oeuvres" />
-                        <TableColumn fx:id="tabDateS" prefWidth="163.0" text="Date Suppression" />
+                        <TableColumn fx:id="tabDateS" prefWidth="160.0" text="Date Suppression" />
                     </columns>
                   </TableView>
                </children>

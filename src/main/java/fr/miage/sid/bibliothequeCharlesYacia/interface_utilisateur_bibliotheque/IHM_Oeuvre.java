@@ -8,8 +8,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Oeuvre;
-import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
-import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,7 +45,6 @@ public class IHM_Oeuvre implements Initializable{
 	@FXML private DatePicker dateE;
 	@FXML private TextField price;
 	@FXML private TextField editor;
-	@FXML private TextField nbTotal;
 	@FXML private TextField searchOeuvre;
 	
 	//Magazine
@@ -69,35 +66,6 @@ public class IHM_Oeuvre implements Initializable{
 	@FXML TableColumn<Oeuvre, String> tabEditor;
 	@FXML TableColumn<Oeuvre, Date> tabDateE;
 	@FXML TableColumn<Oeuvre, Date> tabDateS;
-	
-	/*@FXML TableView<Oeuvre> tabViewOB;
-	@FXML TableColumn<Oeuvre, Number> tabIdB;
-	@FXML TableColumn<Oeuvre, String> tabTypeB;
-	@FXML TableColumn<Oeuvre, String> tabTitleB;
-	@FXML TableColumn<Oeuvre, String> tabDescB;
-	@FXML TableColumn<Oeuvre, Number> tabAvB;
-	@FXML TableColumn<Oeuvre, Number> tabTotalB;
-	@FXML TableColumn<Oeuvre, Number> tabPrixB;
-	@FXML TableColumn<Oeuvre, Number> tabNbResaB;
-	@FXML TableColumn<Oeuvre, String> tabEditorB;
-	@FXML TableColumn<Oeuvre, Date> tabDateEB;
-	@FXML TableColumn<Oeuvre, Date> tabDateSB;
-	@FXML TableColumn<Livre, String> tabResum;
-	
-	@FXML TableView<Oeuvre> tabViewOM;
-	@FXML TableColumn<Oeuvre, Number> tabIdM;
-	@FXML TableColumn<Oeuvre, String> tabTypeM;
-	@FXML TableColumn<Oeuvre, String> tabTitleM;
-	@FXML TableColumn<Oeuvre, String> tabDescM;
-	@FXML TableColumn<Oeuvre, Number> tabAvM;
-	@FXML TableColumn<Oeuvre, Number> tabTotalM;
-	@FXML TableColumn<Oeuvre, Number> tabPrixM;
-	@FXML TableColumn<Oeuvre, Number> tabNbResaM;
-	@FXML TableColumn<Oeuvre, String> tabEditorM;
-	@FXML TableColumn<Oeuvre, Date> tabDateEM;
-	@FXML TableColumn<Oeuvre, Date> tabDateSM;
-	@FXML TableColumn<Magazine, Number> tabRef;
-	@FXML TableColumn<Magazine, Number> tabPer;*/
 	
 	public void initialize(URL location, ResourceBundle resources){
 		
@@ -128,60 +96,7 @@ public class IHM_Oeuvre implements Initializable{
 			resultO.setTextFill(Color.BLUE);
 			
 			getListOeuvres();
-		}
-		
-		/*if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/listMags.fxml"))) {
-			
-			tabIdM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("id"));
-			tabTitleM.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("titre"));
-			tabDescM.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("description"));
-			tabPrixM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("prix"));
-			tabAvM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbExemplairesDispo"));
-			tabTotalM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbExemplairesTotal"));
-			tabNbResaM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbResa"));
-			tabEditorM.setCellValueFactory(new PropertyValueFactory<Oeuvre,String>("editeur"));
-			tabDateEM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateEdition"));
-			tabDateSM.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateSuppression"));
-		
-			tabTitleM.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
-			tabDescM.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
-			tabPrixM.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
-			tabAvM.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
-			tabTotalM.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
-			tabAvM.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
-			tabNbResaM.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
-			tabEditorM.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
-			
-			getListMags();
-		}
-		
-		if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/listBooks.fxml"))) {
-			
-			//TODO find how display O + L
-			
-			tabIdB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("id"));
-			tabTitleB.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("titre"));
-			tabDescB.setCellValueFactory(new PropertyValueFactory<Oeuvre, String>("description"));
-			tabPrixB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("prix"));
-			tabAvB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbExemplairesDispo"));
-			tabTotalB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbExemplairesTotal"));
-			tabNbResaB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Number>("nbResa"));
-			tabEditorB.setCellValueFactory(new PropertyValueFactory<Oeuvre,String>("editeur"));
-			tabDateEB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateEdition"));
-			tabDateSB.setCellValueFactory(new PropertyValueFactory<Oeuvre, Date>("dateSuppression"));
-		
-			tabTitleB.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
-			tabDescB.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
-			tabPrixB.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
-			tabAvB.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
-			tabTotalB.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
-			tabAvB.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
-			tabNbResaB.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
-			tabEditorB.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
-			
-			getListLivres();
-		}*/
-			
+		}		
 	}
 	
 	/*
@@ -193,16 +108,6 @@ public class IHM_Oeuvre implements Initializable{
 		//tabViewO.setItems(gestionOeuvre.ListerMagazines());
 		
 	}
-	
-	/*private void getListMags() {
-		tabViewOM.setItems(gestionOeuvre.ListerMagazines());
-		
-	}
-	
-	private void getListLivres() {
-		tabViewOB.setItems(gestionOeuvre.ListerLivres());
-		
-	}*/
 	
 	/*
 	 * Close forms like Add
@@ -236,48 +141,6 @@ public class IHM_Oeuvre implements Initializable{
 		LOG.fine(searchOeuvre.getText());
 		tabViewO.setItems(list);
 	}
-	
-	/*
-     * Add oeuvre V1
-     */
-	
-	@FXML
-    public void ajoutFormO(ActionEvent event) {
-        try {
-        	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/oeuvre/formAddO.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Ajouter une nouvelle oeuvre");
-            Scene scene = new Scene(part);
-            stage.setScene(scene);
-            stage.show();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    };
-    
-    @FXML
-	private void ajouterOeuvre(ActionEvent event) {
-    	if (! textFieldsValid()) {
-            // one or more of the text fields are empty
-    		result.setText("Veuillez remplir les champs manquants !");
-    		result.setTextFill(Color.RED);
-            return;
-        }
-		LOG.fine(title.getText() + ", " + desc.getText() + ", " + dateE.getValue() + ", " + price.getText() + ", " + editor.getText() + ", " + nbTotal.getText());
-		String titre = title.getText();
-		String description = 	desc.getText();
-		java.sql.Date dateEdition = java.sql.Date.valueOf(dateE.getValue());
-		int prix = 	Integer.parseInt(price.getText());
-		int nombreTotal = 	Integer.parseInt(nbTotal.getText());
-		String editeur = editor.getText();
-		
-		//save data in Gestion Oeuvre
-		//(String titre, String description, int nbExemplairesTotal, int prix, String editeur, Date dateEdition)
-		//gestionOeuvre.ajouterOeuvre(titre, description,nombreTotal, nombreTotal,prix, editeur,dateEdition);
-		result.setText("L'oeuvre a été ajouté !");
-		result.setTextFill(Color.GREEN);
-	}
     
     /*
      * Add magazine
@@ -299,31 +162,31 @@ public class IHM_Oeuvre implements Initializable{
     };
     
     @FXML
-	private void ajouterOeuvreMagazine(ActionEvent event) {
-    	if (! textFieldsValid()) {
-            // one or more of the text fields are empty
-    		result.setText("Veuillez remplir les champs manquants !");
-    		result.setTextFill(Color.RED);
-            return;
-        }
-		LOG.fine(title.getText() + ", " + desc.getText() + ", " + dateE.getValue() + ", " + price.getText() + ", " + editor.getText() + ", " + nbTotal.getText()
-		+ ", " + num.getText() +period.getText());
-		String titre = title.getText();
-		String description = 	desc.getText();
-		java.sql.Date dateEdition = java.sql.Date.valueOf(dateE.getValue());
-		int prix = 	Integer.parseInt(price.getText());
-		int nombreTotal = 	Integer.parseInt(nbTotal.getText());
-		String editeur = editor.getText();
-		String numero = num.getText();
-		int periodicite = Integer.parseInt(period.getText());
-		String type = "Magazine";
-		
-		//save data in Gestion Oeuvre
-		//gestionOeuvre.ajouterOeuvre(type,titre, description,nombreTotal, nombreTotal,prix, editeur,dateEdition);
-		//TODO correct FXML Exception (maybe add tab in table view)
-		gestionOeuvre.ajouterMagazine(type,titre,description,nombreTotal, nombreTotal,prix, editeur,dateEdition, numero, periodicite);
-		result.setText("Le magazine a été ajouté !");
-		result.setTextFill(Color.GREEN);
+	private void ajouterOeuvreMagazine(ActionEvent event) {	
+		try {
+			if (textFieldsValid()) {
+				//get values from form
+				String titre = title.getText();
+				String description = 	desc.getText();
+				java.sql.Date dateEdition = java.sql.Date.valueOf(dateE.getValue());
+				Double prix = 	Double.parseDouble(price.getText());
+				String editeur = editor.getText();
+				String numero = num.getText();
+				int periodicite = Integer.parseInt(period.getText());
+				String type = "Magazine";
+				
+				//save data in Gestion Oeuvre
+				gestionOeuvre.ajouterMagazine(type,titre,description,prix, editeur,dateEdition, numero, periodicite);
+				result.setText("Le magazine a été ajouté !");
+				result.setTextFill(Color.GREEN);
+	        } else {
+	        	result.setText("  Veuillez remplir tout les champs !");
+				result.setTextFill(Color.RED);
+	        }
+    	} catch(Exception e) {
+			result.setText(" Impossible d'ajouter le magazine ! ");
+			result.setTextFill(Color.RED);
+		}
 	}
     
     /*
@@ -347,29 +210,29 @@ public class IHM_Oeuvre implements Initializable{
     
     @FXML
 	private void ajouterOeuvreLivre(ActionEvent event) {
-    	if (! textFieldsValid()) {
-            // one or more of the text fields are empty
-    		result.setText("Veuillez remplir les champs manquants !");
-    		result.setTextFill(Color.RED);
-            return;
-        }
-		LOG.fine(title.getText() + ", " + desc.getText() + ", " + dateE.getValue() + ", " + price.getText() + ", " + editor.getText() + ", " + nbTotal.getText()
-		+ ", " + resum.getText());
-		String titre = title.getText();
-		String description = 	desc.getText();
-		java.sql.Date dateEdition = java.sql.Date.valueOf(dateE.getValue());
-		int prix = 	Integer.parseInt(price.getText());
-		int nombreTotal = 	Integer.parseInt(nbTotal.getText());
-		String editeur = editor.getText();
-		String resume = resum.getText();
-		String type = "Livre";
-		
-		//save data in Gestion Oeuvre
-		//gestionOeuvre.ajouterOeuvre(type,titre, description,nombreTotal, nombreTotal,prix, editeur,dateEdition);
-		//TODO correct FXML Exception (maybe add tab in table view)
-		gestionOeuvre.ajouterLivre(type,titre,description,nombreTotal, nombreTotal,prix, editeur,dateEdition, resume);
-		result.setText("Le livre a été ajouté !");
-		result.setTextFill(Color.GREEN);
+		try {
+			if (textFieldsValid()) {
+				//get values from form
+				String titre = title.getText();
+				String description = 	desc.getText();
+				java.sql.Date dateEdition = java.sql.Date.valueOf(dateE.getValue());
+				Double prix = 	Double.parseDouble(price.getText());
+				String editeur = editor.getText();
+				String resume = resum.getText();
+				String type = "Livre";
+				
+				//save data in Gestion Oeuvre
+				gestionOeuvre.ajouterLivre(type,titre,description,prix, editeur,dateEdition, resume);
+				result.setText("Le livre a été ajouté !");
+				result.setTextFill(Color.GREEN);
+	        } else {
+	        	result.setText("  Veuillez remplir tout les champs !");
+				result.setTextFill(Color.RED);
+	        }
+    	} catch(Exception e) {
+			result.setText(" Impossible d'ajouter le magazine ! ");
+			result.setTextFill(Color.RED);
+		}
 	}
     
     /*
@@ -435,14 +298,10 @@ public class IHM_Oeuvre implements Initializable{
             price.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
         }
         
-        if (nbTotal.getText().isEmpty()) {
-            validTextFields = false;
-            nbTotal.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
-        }
         
         if (dateE.getValue() == null) {
             validTextFields = false;
-            dateE.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+            dateE.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
         }
 
         return validTextFields;
