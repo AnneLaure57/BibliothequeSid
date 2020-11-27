@@ -194,7 +194,7 @@ public class IHM_Exemplaire implements Initializable{
 		String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
 		
 		//save data in Gestion Back
-		gestionExemplaire.modiferExemplaire(exemplaire, etat);
+		gestionExemplaire.modifierExemplaire(exemplaire, etat);
 
 		result.setText("L'usager a été modifié !");
 		result.setTextFill(Color.GREEN);

@@ -17,7 +17,7 @@
                <children>
                   <Button layoutX="37.0" layoutY="54.0" mnemonicParsing="false" onAction="#formAddEm" text="Emprunter Exemplaire" />
                   <Button layoutX="328.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverEmprunt" text="Archiver Emprunt" />
-                  <Button layoutX="190.0" layoutY="54.0" mnemonicParsing="false" onAction="#rendreExemplaire" text="Rendre Exemplaire" />
+                  <Button layoutX="190.0" layoutY="54.0" mnemonicParsing="false" onAction="#formUpdEm" text="Rendre Exemplaire" />
                   <TextField fx:id="searchEmprunt" layoutX="623.0" layoutY="54.0" />
                   <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverEmprunt" text="Rechercher" />
                   <Button layoutX="893.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />

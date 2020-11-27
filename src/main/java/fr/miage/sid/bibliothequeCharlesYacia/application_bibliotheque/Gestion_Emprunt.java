@@ -128,7 +128,46 @@ public class Gestion_Emprunt {
 		
 	}
 	
-	public void setStatutExemplaire(Exemplaire exemplaire) {
+	public ObservableList<Emprunt> ListerEmpruntsUsager(int usagerID) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    ObservableList<Emprunt> list = FXCollections.observableArrayList();
+	    entityTransaction.begin();
+	    
+	    @SuppressWarnings("unchecked")
+		List<Emprunt> emprunts = entityManager.createQuery("from Emprunt where date_archivage is null and statut='En cours' and  id_usager='"+ usagerID +"'").getResultList();
+
+	    for(Emprunt em : emprunts)
+		{
+			list.add(em);
+		    LOG.fine(em.toString());
+			
+		}
+	    entityManager.close();
+		return list;
+	}
+	
+	public void rendreExemplaire(int empruntID, String statut, Date dateRetour) {
+      EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+      EntityTransaction entityTransaction = entityManager.getTransaction();
+      entityTransaction.begin();
+		
+		try {
+			
+    	  Query query = entityManager.createQuery("Update Emprunt "+ "set statut='" + statut + "', date_retour= '" + dateRetour +"'  where id='" + empruntID + "'");
+		  query.executeUpdate();
+			
+		  entityTransaction.commit();
+	      entityManager.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void setStatutExemplaire(Exemplaire exemplaire, String statut) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -137,7 +176,7 @@ public class Gestion_Emprunt {
 		    Exemplaire exemp = entityManager.find(Exemplaire.class, exemplaire.getId());
 		    
 		    if(exemp != null) {
-		    	exemp.setStatut("Emprunté");
+		    	exemp.setStatut(statut);
 		    }
 		      LOG.finer(exemp.toString());
 		
@@ -174,7 +213,7 @@ public class Gestion_Emprunt {
 
 	public void archiverEmprunt(int empruntID) {
 		Calendar calendar = Calendar.getInstance();
-		 java.sql.Date dateD = new java.sql.Date(calendar.getTime().getTime());
+		java.sql.Date dateD = new java.sql.Date(calendar.getTime().getTime());
 		    
 	    EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();

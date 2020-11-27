@@ -128,7 +128,7 @@ public class Gestion_Exemplaire {
 		return list;
 	}
 
-	public void modiferExemplaire(Exemplaire exemp, String etat) {
+	public void modifierExemplaire(Exemplaire exemp, String etat) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		

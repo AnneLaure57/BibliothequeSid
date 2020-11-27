@@ -5,10 +5,12 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Emprunt;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Reservation;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
@@ -39,6 +41,8 @@ public class IHM_Emprunt implements Initializable{
 		
 	private Gestion_Emprunt gestionEmprunt = new Gestion_Emprunt();
 	
+	private Gestion_Exemplaire gestionExemplaire = new Gestion_Exemplaire();
+	
 	@FXML
 	private Parent root;
 	
@@ -49,6 +53,8 @@ public class IHM_Emprunt implements Initializable{
 	@FXML private ComboBox selectUs;
 	@FXML private ComboBox selectOe;
 	@FXML private ComboBox selectEx;
+	@FXML private ComboBox selectEm;
+	@FXML private ComboBox selectEtats;
 	
 	@FXML private DatePicker dateEm;
 	@FXML private DatePicker dateRe;
@@ -87,10 +93,18 @@ public class IHM_Emprunt implements Initializable{
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/emprunt/formAddEm.fxml"))) {
 			
-            result.setText("Aucune modification enregistrée !");
+            result.setText("Aucun ajout enregistré !");
             result.setTextFill(Color.BLUE);
             getListUsagersSelect();
             getListOeuvresSelect();
+            	
+		}
+		
+       if (location.equals(getClass().getClassLoader().getResource("view/emprunt/formUpdEm.fxml"))) {
+            result.setText("Aucune modification enregistré !");
+            result.setTextFill(Color.BLUE);
+            getListUsagersSelect();
+            getListEtatSelect();
             	
 		}
 	}
@@ -115,7 +129,7 @@ public class IHM_Emprunt implements Initializable{
 	@FXML
 	public void selectExemplaires() {
 		if (selectOe.getSelectionModel().getSelectedItem() == null) {
-        	result.setText("Veuillez selectionner un usager à modifier avant !");
+        	result.setText("Veuillez selectionner une oeuvre !");
 			result.setTextFill(Color.RED);
 		} else {
 			Oeuvre oeuvre = (Oeuvre) selectOe.getSelectionModel().getSelectedItem();
@@ -126,13 +140,33 @@ public class IHM_Emprunt implements Initializable{
 	}
 
 	public void getListUsagersSelect() {
-		System.out.println("je suis ici");
 		selectUs.setItems(gestionEmprunt.ListerUsagersUnDeleted());
 	}
 
 	public void getListEmprunts() {
 		tabViewEm.setItems(gestionEmprunt.ListerEmprunts());
 		
+	}
+	
+	public void getListEtatSelect() {
+		selectEtats.getItems().addAll("Neuf","Bon", "Abimé");
+	}
+	
+	/*
+	 * List all loans for an usager (rendre exemplaire)
+	 */
+	
+	@FXML
+	public void selectEmpruntsUsager() {
+		if (selectUs.getSelectionModel().getSelectedItem() == null) {
+        	result.setText("Veuillez selectionner un usager !");
+			result.setTextFill(Color.RED);
+		} else {
+			Usager usager = (Usager) selectUs.getSelectionModel().getSelectedItem();
+			int usagerID = usager.getId();
+			//auto complement fields
+			selectEm.setItems(gestionEmprunt.ListerEmpruntsUsager(usagerID));
+		}
 	}
 	
 	/*
@@ -178,7 +212,7 @@ public class IHM_Emprunt implements Initializable{
    	   		//save data in Gestion Exemplaire
    	   		gestionEmprunt.emprunterExemplaire(oeuvre,usager,exemplaire, dateEmprunt, dateRetour);
    	   		//TODO set state exemplaire
-   	     	gestionEmprunt.setStatutExemplaire(exemplaire);
+   	     	gestionEmprunt.setStatutExemplaire(exemplaire, "Emprunté");
    	   		result.setText("L'emprunt a été ajouté !");
    	   		result.setTextFill(Color.GREEN);
 		}
@@ -190,7 +224,56 @@ public class IHM_Emprunt implements Initializable{
     };
     
     @FXML
+	public void formUpdEm(ActionEvent event) {
+        try {
+        	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/emprunt/formUpdEm.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Modifier un emprunt");
+            Scene scene = new Scene(part);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    };
+    
+    @FXML
     public void rendreExemplaire(ActionEvent event) {
+    	
+    	try
+		{
+   	    	Emprunt emprunt = (Emprunt) selectEm.getSelectionModel().getSelectedItem();
+   	    	System.out.println(emprunt.toString());
+   	    	
+   	    	Exemplaire exemplaire = emprunt.getExemplaire();
+   	    	int empruntID = emprunt.getId();
+   			
+   			java.sql.Date dateRetour = java.sql.Date.valueOf(dateRe.getValue());
+   			
+   			String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
+   	   		
+   	   		//save data in Gestion Exemplaire
+   			if (!emprunt.getDateRetour().equals(dateRetour)) {
+   	   	   		gestionEmprunt.rendreExemplaire(empruntID,"En retard",dateRetour);
+   			} else {
+   	   			gestionEmprunt.rendreExemplaire(empruntID,"Rendu",dateRetour);
+   			}
+   	   		gestionExemplaire.modifierExemplaire(exemplaire, etat);
+   	   		System.out.println();
+   	     	if (etat.equals("Abimé")) {
+   	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
+   	     	} else {
+   	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Disponible");
+   	     	}
+   	   		result.setText("L'emprunt a été modifié !");
+   	   		result.setTextFill(Color.GREEN);
+		}
+		catch(Exception e)
+		{
+			result.setText(" Aucun emprunt ne correspond aux informations saisies");
+			result.setTextFill(Color.GREEN);
+		}
        
     };
     
