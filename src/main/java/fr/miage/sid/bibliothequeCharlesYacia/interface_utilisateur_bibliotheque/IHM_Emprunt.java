@@ -11,11 +11,10 @@ import java.util.logging.Logger;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Exemplaire;
-import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Reservation;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
-import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Reservation;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,6 +41,8 @@ public class IHM_Emprunt implements Initializable{
 	private Gestion_Emprunt gestionEmprunt = new Gestion_Emprunt();
 	
 	private Gestion_Exemplaire gestionExemplaire = new Gestion_Exemplaire();
+	
+	private Gestion_Oeuvre gestionOeuvre = new Gestion_Oeuvre();
 	
 	@FXML
 	private Parent root;
@@ -211,8 +212,10 @@ public class IHM_Emprunt implements Initializable{
    	   		
    	   		//save data in Gestion Exemplaire
    	   		gestionEmprunt.emprunterExemplaire(oeuvre,usager,exemplaire, dateEmprunt, dateRetour);
-   	   		//TODO set state exemplaire
+   	   		//Set emprunté 
    	     	gestionEmprunt.setStatutExemplaire(exemplaire, "Emprunté");
+   	     	//remove -1 nbDispo
+   	     	gestionOeuvre.setNbIndisponibles(exemplaire.getOeuvre());
    	   		result.setText("L'emprunt a été ajouté !");
    	   		result.setTextFill(Color.GREEN);
 		}
@@ -254,7 +257,8 @@ public class IHM_Emprunt implements Initializable{
    			String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
    	   		
    	   		//save data in Gestion Exemplaire
-   			if (!emprunt.getDateRetour().equals(dateRetour)) {
+   			//TODO check date
+   			if (emprunt.getDateRetour().before(dateRetour)) {
    	   	   		gestionEmprunt.rendreExemplaire(empruntID,"En retard",dateRetour);
    			} else {
    	   			gestionEmprunt.rendreExemplaire(empruntID,"Rendu",dateRetour);
@@ -264,6 +268,8 @@ public class IHM_Emprunt implements Initializable{
    	     	if (etat.equals("Abimé")) {
    	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
    	     	} else {
+   	     	  // add +1 NbDispo
+ 	   	   	  gestionOeuvre.setNbDisponibles(exemplaire.getOeuvre());
    	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Disponible");
    	     	}
    	   		result.setText("L'emprunt a été modifié !");
@@ -284,10 +290,14 @@ public class IHM_Emprunt implements Initializable{
         	resultEm.setTextFill(Color.RED);
 		} else {
 			Emprunt emprunt = tabViewEm.getSelectionModel().getSelectedItem();
-			int empruntID = emprunt.getId();
-			resultEm.setText("L'emprunt avec l'ID " + empruntID + " a été supprimé !");
-			resultEm.setTextFill(Color.GREEN);
-			gestionEmprunt.supprimerEmprunt(empruntID);
+			if (!emprunt.getStatut().equals("En cours")) {
+				int empruntID = emprunt.getId();
+				resultEm.setText("L'emprunt avec l'ID " + empruntID + " a été supprimé !");
+				resultEm.setTextFill(Color.GREEN);
+				gestionEmprunt.supprimerEmprunt(empruntID);
+			}
+			resultEm.setText("Impossible de supprimer un emprunt en cours !");
+        	resultEm.setTextFill(Color.RED);
 			getListEmprunts();
 		}
 		
@@ -299,12 +309,17 @@ public class IHM_Emprunt implements Initializable{
         	resultEm.setText("Veuillez sélectionner un emprunt à archiver !");
         	resultEm.setTextFill(Color.RED);
 		} else {
-			Emprunt emprunt = tabViewEm.getSelectionModel().getSelectedItem();
-			int empruntID = emprunt.getId();
-			resultEm.setText("La réservation avec l'ID " + empruntID + " a été archivé !");
-			resultEm.setTextFill(Color.GREEN);
-			gestionEmprunt.archiverEmprunt(empruntID);
-			getListEmprunts();
+			Emprunt emprunt = tabViewEm.getSelectionModel().getSelectedItem();	
+			if (!emprunt.getStatut().equals("En cours")) {
+				int empruntID = emprunt.getId();
+				gestionEmprunt.archiverEmprunt(empruntID);
+				resultEm.setText("La réservation avec l'ID " + empruntID + " a été archivé !");
+				resultEm.setTextFill(Color.GREEN);
+				
+			}
+			resultEm.setText("Impossible d'archiver un emprunt en cours !");
+        	resultEm.setTextFill(Color.RED);
+			getListEmprunts();	
 		}
 		
     };
