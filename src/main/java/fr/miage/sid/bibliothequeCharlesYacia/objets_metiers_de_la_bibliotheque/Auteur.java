@@ -32,8 +32,6 @@ public class Auteur {
 	@Column(name = "id_auteur")
     private Integer id;
 	
-	//remove eager
-	
 	@ManyToMany(mappedBy = "auteurs", cascade = { CascadeType.MERGE, CascadeType.REFRESH})
 	private List<Livre> livres = new ArrayList<>();
 	

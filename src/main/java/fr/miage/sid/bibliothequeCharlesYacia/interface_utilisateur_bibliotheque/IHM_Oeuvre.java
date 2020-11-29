@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Oeuvre;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Auteur;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -36,6 +39,8 @@ public class IHM_Oeuvre implements Initializable{
     @FXML private Button submit;
 	@FXML private Button cancel;
 	@FXML private Button actualize;
+	
+	@FXML private ComboBox selectA;
 	
 	@FXML private Label result;
 	@FXML private Label resultO;
@@ -96,7 +101,12 @@ public class IHM_Oeuvre implements Initializable{
 			resultO.setTextFill(Color.BLUE);
 			
 			getListOeuvres();
-		}		
+		}	
+		
+		if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/formAddOB.fxml"))) {
+			getListAuteursSelect();
+            	
+		}
 	}
 	
 	/*
@@ -107,6 +117,16 @@ public class IHM_Oeuvre implements Initializable{
 		tabViewO.setItems(gestionOeuvre.ListerOeuvres());
 		//tabViewO.setItems(gestionOeuvre.ListerMagazines());
 		
+	}
+	
+	
+	/*
+	 * List all authors for book add 
+	 */
+	
+	public void getListAuteursSelect()
+	{
+		selectA.setItems(gestionOeuvre.ListerAuteursUnDeleted());
 	}
 	
 	/*
@@ -220,9 +240,14 @@ public class IHM_Oeuvre implements Initializable{
 				String editeur = editor.getText();
 				String resume = resum.getText();
 				String type = "Livre";
+				Auteur auteur = (Auteur) selectA.getSelectionModel().getSelectedItem();
 				
 				//save data in Gestion Oeuvre
-				gestionOeuvre.ajouterLivre(type,titre,description,prix, editeur,dateEdition, resume);
+				if (selectA.getSelectionModel().getSelectedItem() == null ) {
+					gestionOeuvre.ajouterLivre(type,titre,description,prix, editeur,dateEdition, resume);
+				} else {
+					gestionOeuvre.ajouterLivreAuteur(type,titre,description,prix, editeur,dateEdition, resume, auteur);
+				}
 				result.setText("Le livre a été ajouté !");
 				result.setTextFill(Color.GREEN);
 	        } else {

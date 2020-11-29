@@ -31,7 +31,7 @@ public class Gestion_Auteur {
 		for(Auteur au : auteurs)
 		{
 			list.add(au);
-			System.out.println(au.toString());
+			//System.out.println(au.toString());
 		}
 		entityManager.close();
 		return list;
@@ -90,24 +90,37 @@ public class Gestion_Auteur {
 		return list;
 	}
 
-	public void ajouterAuteur(String nom, String prenom, Livre livre ) {
+	public void ajouterAuteur(String nom, String prenom) {
 	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
       EntityTransaction entityTransaction = entityManager.getTransaction();
       entityTransaction.begin();
       
       Auteur auteur = new Auteur(nom,prenom);
-      //auteur.addLivres(livre);
-      //Set the list of books of the auteur
-      auteur.setLivres(auteur.addLivres(livre));
       entityManager.persist(auteur);
-      entityManager.merge(auteur);
-      //Get the infos
-      System.out.println(auteur.toString());
-      System.out.println(auteur.getLivres());
-      LOG.finer("Auteur ajouté : " + auteur.toString());
 
       entityTransaction.commit();
       entityManager.close();
+		
+	}
+	
+	public void ajouterAuteurLivre(String nom, String prenom, Livre livre) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	      EntityTransaction entityTransaction = entityManager.getTransaction();
+	      entityTransaction.begin();
+	      
+	      Auteur auteur = new Auteur(nom,prenom);
+	      //auteur.addLivres(livre);
+	      //Set the list of books of the auteur
+	      auteur.setLivres(auteur.addLivres(livre));
+	      entityManager.persist(auteur);
+	      entityManager.merge(auteur);
+	      //Get the infos
+	     // System.out.println(auteur.toString());
+	      //System.out.println(auteur.getLivres());
+	      LOG.finer("Auteur ajouté : " + auteur.toString());
+
+	      entityTransaction.commit();
+	      entityManager.close();
 		
 	}
 
@@ -187,5 +200,7 @@ public class Gestion_Auteur {
 		 }
 		return auteur;
 	}
+
+	
 
 }

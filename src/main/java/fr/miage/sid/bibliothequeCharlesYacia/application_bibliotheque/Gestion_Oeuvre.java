@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Auteur;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
@@ -68,6 +69,23 @@ public class Gestion_Oeuvre {
 		for(Oeuvre o : oeuvres)
 		{
 			list.add(o);
+		}
+		entityManager.close();
+		return list;
+	}
+	
+	public ObservableList<Auteur> ListerAuteursUnDeleted() {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+		ObservableList<Auteur> list = FXCollections.observableArrayList();
+		entityTransaction.begin();
+		
+		@SuppressWarnings("unchecked")
+		List<Auteur> auteurs = entityManager.createQuery("from Auteur where date_archivage is null ").getResultList();
+		for(Auteur au : auteurs)
+		{
+			list.add(au);
 		}
 		entityManager.close();
 		return list;
@@ -164,6 +182,25 @@ public class Gestion_Oeuvre {
 	     entityManager.persist(livre);
 	     //Get the infos
 	     LOG.finer(livre.toString());
+
+	     entityTransaction.commit();
+	     entityManager.close();
+	}
+	
+	public void ajouterLivreAuteur(String type,String titre, String description, Double prix,String editeur, Date dateEdition, String resume, Auteur auteur) {
+	     //add magazine
+	     EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	     EntityTransaction entityTransaction = entityManager.getTransaction();
+	     entityTransaction.begin();
+	      
+	     Livre livre= new Livre(type, titre, description, prix, editeur, dateEdition, resume);
+	     //Set the list of authors of the book
+	     auteur.setLivres(auteur.addLivres(livre));
+	     //entityManager.persist(livre);
+	     entityManager.merge(livre);
+	     //Get the infos
+	     LOG.finer(livre.toString());
+	     LOG.finer("Auteur ajouté : " + auteur.toString());
 
 	     entityTransaction.commit();
 	     entityManager.close();

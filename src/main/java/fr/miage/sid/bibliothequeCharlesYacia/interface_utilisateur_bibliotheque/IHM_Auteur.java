@@ -206,8 +206,12 @@ public class IHM_Auteur implements Initializable{
 		String prenom = 	firstname.getText();
 		Livre livre = (Livre) selectL.getSelectionModel().getSelectedItem();
 		
-		//save data in Gestion Back
-		gestionAuteur.ajouterAuteur(nom,prenom,livre);
+		//save data in Gestion Auteur
+		if (selectL.getSelectionModel().getSelectedItem() == null ) {
+			gestionAuteur.ajouterAuteur(nom,prenom);
+		} else {
+			gestionAuteur.ajouterAuteurLivre(nom,prenom,livre);
+		}
 		result.setText("L'auteur a été ajouté !");
 		result.setTextFill(Color.GREEN);
 	}

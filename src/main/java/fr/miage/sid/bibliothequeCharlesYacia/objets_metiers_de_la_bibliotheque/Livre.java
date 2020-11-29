@@ -68,6 +68,7 @@ public class Livre extends Oeuvre {
 	public String toString() {
 		return titre;
 	}
+	
 	/*public String toString() {
 		return "Livre [ auteurs=" + auteurs + ", id=" + id + ", type=" + type + ", titre=" + titre
 				+ ", description=" + description + ", nbExemplairesDispo=" + nbExemplairesDispo
