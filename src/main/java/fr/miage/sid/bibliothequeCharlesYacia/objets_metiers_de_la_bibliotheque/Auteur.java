@@ -3,10 +3,12 @@ package fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +32,9 @@ public class Auteur {
 	@Column(name = "id_auteur")
     private Integer id;
 	
-	@ManyToMany(mappedBy = "auteurs", cascade = CascadeType.MERGE)
+	//remove eager
+	
+	@ManyToMany(mappedBy = "auteurs", cascade = { CascadeType.MERGE, CascadeType.REFRESH})
 	private List<Livre> livres = new ArrayList<>();
 	
 	@Column(name = "nom", nullable=false) // NOT NULL
@@ -40,14 +44,9 @@ public class Auteur {
 	private String prenom;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date_suppression")
-	private Date dateSuppression;
+	@Column(name = "date_archivage")
+	private Date dateArchivage;
 	
-	public Auteur(String nom, String prenom) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-	}
 	public String getNom() {
 		return nom;
 	}
@@ -61,12 +60,39 @@ public class Auteur {
 		this.prenom = prenom;
 	}
 	
-	public Date getDateSuppression() {
-		return dateSuppression;
+	public Date getDateArchivage() {
+		return dateArchivage;
 	}
 
-	public void setDateSuppression(Date dateSuppression) {
-		this.dateSuppression = dateSuppression;
+	public void setDateArchivage(Date dateArchivage) {
+		this.dateArchivage = dateArchivage;
+	}
+	
+	public List<Livre> getLivres() {
+		return livres;
+	}
+
+	public void setLivres(List<Livre> livres) {
+		this.livres = livres;
+	}
+	
+	public List<Livre> addLivres(Livre livre) {
+		livres.add(livre);
+        livre.getAuteurs().add(this);
+		return livres;
+    }
+	
+	public Auteur(String nom, String prenom) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+	}
+	
+	public Auteur(String nom, String prenom, Livre livre) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.livres = addLivres(livre);
 	}
 	
 	public Auteur(Integer id, List<Livre> livres, String nom, String prenom) {
@@ -79,7 +105,7 @@ public class Auteur {
 	
 	@Override
 	public String toString() {
-		return "Auteur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";
+		return "Auteur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", livres=" + /*livres.stream().collect(Collectors.toList())*/ livres + "]";
 	}
 	
 }

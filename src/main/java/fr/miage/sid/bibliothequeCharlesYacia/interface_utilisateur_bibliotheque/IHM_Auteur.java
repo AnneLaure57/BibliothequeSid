@@ -4,13 +4,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Auteur;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Auteur;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,8 +23,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,7 +32,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.converter.NumberStringConverter;
 
 public class IHM_Auteur implements Initializable{
 	
@@ -50,6 +51,7 @@ public class IHM_Auteur implements Initializable{
 	@FXML private Button actualize;
 	
 	@FXML private ComboBox select;
+	@FXML private ComboBox selectL;
 	
 	@FXML private Label result;
 	@FXML private Label resultA;
@@ -62,7 +64,7 @@ public class IHM_Auteur implements Initializable{
 	@FXML TableColumn<Auteur, Number> tabIdA;
 	@FXML TableColumn<Auteur, String> tabNameA;
 	@FXML TableColumn<Auteur, String> tabFNameA;
-	@FXML TableColumn<Auteur, ArrayList> tabO;
+	@FXML TableColumn<Auteur, List<Livre>> tabO;
 	@FXML TableColumn<Auteur, Date> tabDateS;
 	
 	@Override
@@ -72,16 +74,28 @@ public class IHM_Auteur implements Initializable{
 			tabIdA.setCellValueFactory(new PropertyValueFactory<Auteur, Number>("id"));
 			tabNameA.setCellValueFactory(new PropertyValueFactory<Auteur, String>("nom"));
 			tabFNameA.setCellValueFactory(new PropertyValueFactory<Auteur, String>("prenom"));
-			tabO.setCellValueFactory(new PropertyValueFactory<Auteur, ArrayList>("livres"));
-			tabDateS.setCellValueFactory(new PropertyValueFactory<Auteur, Date>("dateSuppression"));
+			tabO.setCellValueFactory(new PropertyValueFactory<Auteur, List<Livre>>("livres"));
+			tabDateS.setCellValueFactory(new PropertyValueFactory<Auteur, Date>("dateArchivage"));
 		
 			tabNameA.setCellFactory(TextFieldTableCell.<Auteur>forTableColumn());
 			tabFNameA.setCellFactory(TextFieldTableCell.<Auteur>forTableColumn());
+			
+			/*tabO.setCellFactory(col -> new TableCell<Auteur, List<Livre>>() {
+				@Override
+			    public void updateItem(List<Livre> livres, boolean empty) {
+			        super.updateItem(livres, empty);
+			    }
+			});*/
 			
 			resultA.setText("Aucune action effectuée !");
 			resultA.setTextFill(Color.BLUE);
 			
 			getListAuteurs();
+		}
+		
+		if (location.equals(getClass().getClassLoader().getResource("view/auteur/formAddA.fxml"))) {
+            getListLivres();
+            	
 		}
 			
 		if (location.equals(getClass().getClassLoader().getResource("view/auteur/formUpdA.fxml"))) {
@@ -93,7 +107,7 @@ public class IHM_Auteur implements Initializable{
 		}
 		
 	}
-	
+
 	@FXML
     private void closeView(){
         // get a handle to the stage
@@ -109,6 +123,15 @@ public class IHM_Auteur implements Initializable{
 	public void getListAuteurs()
 	{
 		tabViewA.setItems(gestionAuteur.ListerAuteurs());
+	}
+	
+	/*
+	 * List all books in tableView
+	 */
+	
+	public void getListLivres()
+	{
+		selectL.setItems(gestionAuteur.ListerLivres());
 	}
 	
 	/*
@@ -181,9 +204,10 @@ public class IHM_Auteur implements Initializable{
 		LOG.fine(lastname.getText() + ", " + firstname.getText());
 		String nom = lastname.getText();
 		String prenom = 	firstname.getText();
+		Livre livre = (Livre) selectL.getSelectionModel().getSelectedItem();
 		
 		//save data in Gestion Back
-		gestionAuteur.ajouterAuteur(nom,prenom);
+		gestionAuteur.ajouterAuteur(nom,prenom,livre);
 		result.setText("L'auteur a été ajouté !");
 		result.setTextFill(Color.GREEN);
 	}

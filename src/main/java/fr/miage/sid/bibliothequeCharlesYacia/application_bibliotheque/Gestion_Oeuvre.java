@@ -12,7 +12,6 @@ import javax.persistence.Query;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Magazine;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
-import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.utilitaires.JPAUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

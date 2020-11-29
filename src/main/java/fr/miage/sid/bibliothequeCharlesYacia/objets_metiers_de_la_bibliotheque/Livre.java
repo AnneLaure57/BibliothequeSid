@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -30,7 +30,7 @@ public class Livre extends Oeuvre {
 	@Column(name = "resume")
 	private String resume;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(
             name = "LIVREAUTEUR",
             joinColumns = {@JoinColumn(name = "id_livre", referencedColumnName="id_oeuvre")},
@@ -44,6 +44,14 @@ public class Livre extends Oeuvre {
 
 	public void setResume(String resume) {
 		this.resume = resume;
+	}
+	
+	public List<Auteur> getAuteurs() {
+		return auteurs;
+	}
+
+	public void setLivres(List<Auteur> auteurs) {
+		this.auteurs = auteurs;
 	}
 
 	public Livre(String type, String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, Double prix, String editeur, Date dateEdition) {

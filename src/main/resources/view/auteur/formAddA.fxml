@@ -30,6 +30,6 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <ComboBox layoutX="118.0" layoutY="236.0" prefHeight="25.0" prefWidth="232.0" />
+      <ComboBox fx:id="selectL" layoutX="118.0" layoutY="236.0" prefHeight="25.0" prefWidth="232.0" />
    </children>
 </AnchorPane>

@@ -208,6 +208,7 @@ public class Gestion_Exemplaire {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			entityTransaction.rollback(); 
 		}
 	}
 

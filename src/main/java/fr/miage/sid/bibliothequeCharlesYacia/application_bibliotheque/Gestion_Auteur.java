@@ -9,6 +9,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Auteur;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.utilitaires.JPAUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +31,7 @@ public class Gestion_Auteur {
 		for(Auteur au : auteurs)
 		{
 			list.add(au);
+			System.out.println(au.toString());
 		}
 		entityManager.close();
 		return list;
@@ -42,10 +45,27 @@ public class Gestion_Auteur {
 		entityTransaction.begin();
 		
 		@SuppressWarnings("unchecked")
-		List<Auteur> auteurs = entityManager.createQuery("from Auteur where date_suppression is null ").getResultList();
+		List<Auteur> auteurs = entityManager.createQuery("from Auteur where date_archivage is null ").getResultList();
 		for(Auteur au : auteurs)
 		{
 			list.add(au);
+		}
+		entityManager.close();
+		return list;
+	}
+	
+	public ObservableList<Oeuvre> ListerLivres() {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+		ObservableList<Oeuvre> list = FXCollections.observableArrayList();
+		entityTransaction.begin();
+		
+		@SuppressWarnings("unchecked")
+		List<Oeuvre> oeuvres = entityManager.createQuery("from Oeuvre where type='Livre'").getResultList();
+		for(Oeuvre o : oeuvres)
+		{
+			list.add(o);
 		}
 		entityManager.close();
 		return list;
@@ -70,15 +90,21 @@ public class Gestion_Auteur {
 		return list;
 	}
 
-	public void ajouterAuteur(String nom, String prenom) {
+	public void ajouterAuteur(String nom, String prenom, Livre livre ) {
 	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
       EntityTransaction entityTransaction = entityManager.getTransaction();
       entityTransaction.begin();
       
       Auteur auteur = new Auteur(nom,prenom);
+      //auteur.addLivres(livre);
+      //Set the list of books of the auteur
+      auteur.setLivres(auteur.addLivres(livre));
       entityManager.persist(auteur);
+      entityManager.merge(auteur);
       //Get the infos
-      LOG.finer(auteur.toString());
+      System.out.println(auteur.toString());
+      System.out.println(auteur.getLivres());
+      LOG.finer("Auteur ajouté : " + auteur.toString());
 
       entityTransaction.commit();
       entityManager.close();
@@ -132,7 +158,7 @@ public class Gestion_Auteur {
 	    entityTransaction.begin();
 		try {
 			
-		  Query query = entityManager.createQuery("Update Auteur set date_suppression='" + dateD + "'  where id='" + auteurID + "'");
+		  Query query = entityManager.createQuery("Update Auteur set date_archivage='" + dateD + "'  where id='" + auteurID + "'");
 		  query.executeUpdate();
 			
 		  entityTransaction.commit();
@@ -161,6 +187,5 @@ public class Gestion_Auteur {
 		 }
 		return auteur;
 	}
-
 
 }
