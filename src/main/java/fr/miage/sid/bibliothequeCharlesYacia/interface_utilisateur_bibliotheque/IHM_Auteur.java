@@ -97,6 +97,12 @@ public class IHM_Auteur implements Initializable{
             getListLivres();
             	
 		}
+		
+		if (location.equals(getClass().getClassLoader().getResource("view/auteur/formAddAO.fxml"))) {
+			getListAuteursSelect();
+            getListLivres();
+            	
+		}
 			
 		if (location.equals(getClass().getClassLoader().getResource("view/auteur/formUpdA.fxml"))) {
 			
@@ -213,6 +219,42 @@ public class IHM_Auteur implements Initializable{
 			gestionAuteur.ajouterAuteurLivre(nom,prenom,livre);
 		}
 		result.setText("L'auteur a été ajouté !");
+		result.setTextFill(Color.GREEN);
+	}
+    
+    @FXML
+	public void ajoutFormAO(ActionEvent event) {
+        try {
+        	//FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/formAddU.fxml"));
+        	//Parent part = fxmlLoader.load();
+        	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/auteur/formAddAO.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Ajouter une nouvelle oeuvre pour un auteur");
+            Scene scene = new Scene(part);
+            stage.setScene(scene);
+            stage.show();
+                       
+        }
+        
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    };
+    
+    @FXML
+    private void lierAuteurLivre(ActionEvent event) {
+    	if (selectL.getSelectionModel().getSelectedItem() == null || select.getSelectionModel().getSelectedItem() == null) {
+            // one or more of the text fields are empty
+    		result.setText("Veuillez remplir les champs manquants !");
+    		result.setTextFill(Color.RED);
+            return;
+        }
+    	Auteur auteur = (Auteur) select.getSelectionModel().getSelectedItem();
+		Livre livre = (Livre) selectL.getSelectionModel().getSelectedItem();
+		
+		//save data in Gestion Auteur
+		gestionAuteur.lierAuteurLivre(auteur,livre);
+		result.setText("Le livre a été associé à l'auteur !");
 		result.setTextFill(Color.GREEN);
 	}
 

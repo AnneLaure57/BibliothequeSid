@@ -201,6 +201,21 @@ public class Gestion_Auteur {
 		return auteur;
 	}
 
-	
+	public void lierAuteurLivre(Auteur auteur, Livre livre) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    entityTransaction.begin();
+		auteur.setLivres(auteur.addLivres(livre));
+	    entityManager.merge(auteur);
+	    //Get the infos
+	    // System.out.println(auteur.toString());
+	    //System.out.println(auteur.getLivres());
+	    LOG.finer("Auteur ajouté : " + auteur.toString());
+
+	    entityTransaction.commit();
+	    entityManager.close();
+		
+	}
 
 }
