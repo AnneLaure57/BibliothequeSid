@@ -190,4 +190,26 @@ public class Gestion_Reservation {
 		return list;
 	}
 
+	public ObservableList<Reservation> verifierReservationE(Oeuvre oeuvre) {
+
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    ObservableList<Reservation> list = FXCollections.observableArrayList();
+	    entityTransaction.begin();
+	    
+	    @SuppressWarnings("unchecked")
+		List<Reservation> reservations = entityManager.createQuery("from Reservation where id_oeuvre='" + oeuvre.getId() + "' and statut='Réservée' order by date_reservation").getResultList();
+
+	    for(Reservation res : reservations)
+		{
+			list.add(res);
+		    LOG.fine(res.toString());
+		    System.out.println(res.toString());
+			
+		}
+	    entityManager.close();
+		return list;
+	}
+
 }

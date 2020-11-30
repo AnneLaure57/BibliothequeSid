@@ -37,5 +37,6 @@
          </font>
       </Text>
       <ComboBox fx:id="selectEtats" layoutX="213.0" layoutY="218.0" prefHeight="25.0" prefWidth="205.0" />
+      <Label fx:id="resultNote" layoutX="50.0" layoutY="62.0" prefHeight="17.0" prefWidth="573.0" />
    </children>
 </AnchorPane>

@@ -16,6 +16,7 @@ import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Re
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Reservation;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,6 +68,7 @@ public class IHM_Emprunt implements Initializable{
 	
 	@FXML private Label result;
 	@FXML private Label resultEm;
+	@FXML private Label resultNote;
 	
 	@FXML TableView<Emprunt> tabViewEm;
 	@FXML TableColumn<Emprunt, Number> tabIdEm;
@@ -254,22 +256,25 @@ public class IHM_Emprunt implements Initializable{
     	
     	try
 		{
-   	    	Emprunt emprunt = (Emprunt) selectEm.getSelectionModel().getSelectedItem();
-   	    	System.out.println(emprunt.toString());
-   	    	
+    		Emprunt emprunt = (Emprunt) selectEm.getSelectionModel().getSelectedItem();
    	    	Exemplaire exemplaire = emprunt.getExemplaire();
    	    	int empruntID = emprunt.getId();
+   	    	Oeuvre oeuvre = emprunt.getOeuvre();
    			
    			java.sql.Date dateRetour = java.sql.Date.valueOf(dateRe.getValue());
    			
    			String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
    	   		
    	   		//save data in Gestion Exemplaire
-   			//TODO check date
    			if (emprunt.getDateRetour().before(dateRetour)) {
    	   	   		gestionEmprunt.rendreExemplaire(empruntID,"En retard",dateRetour);
    			} else {
    	   			gestionEmprunt.rendreExemplaire(empruntID,"Rendu",dateRetour);
+   			}
+   			if(!gestionReservation.verifierReservationE(oeuvre).isEmpty()) {
+   				Reservation reservation = gestionReservation.verifierReservationE(oeuvre).get(0);
+   				resultNote.setText("Il y a une réservation pour l'oeuvre " + oeuvre.getTitre() + ", le " + reservation.getDateReservation() + ", au nom de " + reservation.getNomPrenom());
+   	   	   		resultNote.setTextFill(Color.BLUE);
    			}
    	   		gestionExemplaire.modifierExemplaire(exemplaire, etat);
    	   		System.out.println();
