@@ -30,7 +30,8 @@ public class Livre extends Oeuvre {
 	@Column(name = "resume")
 	private String resume;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	// remove type ALL, to avoid exception merge problème
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinTable(
             name = "LIVREAUTEUR",
             joinColumns = {@JoinColumn(name = "id_livre", referencedColumnName="id_oeuvre")},

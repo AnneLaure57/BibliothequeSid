@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Oeuvre;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Reservation;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
@@ -43,6 +44,8 @@ public class IHM_Emprunt implements Initializable{
 	private Gestion_Exemplaire gestionExemplaire = new Gestion_Exemplaire();
 	
 	private Gestion_Oeuvre gestionOeuvre = new Gestion_Oeuvre();
+	
+	private Gestion_Reservation gestionReservation = new Gestion_Reservation();
 	
 	@FXML
 	private Parent root;
@@ -210,19 +213,24 @@ public class IHM_Emprunt implements Initializable{
    			
    			java.sql.Date dateRetour = java.sql.Date.valueOf(dateRe.getValue());
    	   		
-   	   		//save data in Gestion Exemplaire
-   	   		gestionEmprunt.emprunterExemplaire(oeuvre,usager,exemplaire, dateEmprunt, dateRetour);
-   	   		//Set emprunté 
-   	     	gestionEmprunt.setStatutExemplaire(exemplaire, "Emprunté");
-   	     	//remove -1 nbDispo
-   	     	gestionOeuvre.setNbIndisponibles(exemplaire.getOeuvre());
-   	   		result.setText("L'emprunt a été ajouté !");
-   	   		result.setTextFill(Color.GREEN);
+   	   		//check if there are a list of reservations for the usager and for this oeuvre
+   			if (!(gestionReservation.verifierReservation(oeuvre,usager)).isEmpty()) {
+   				result.setText(" Veuillez annuler les réservations de l'usager pour cette oeuvre !");
+   				result.setTextFill(Color.RED);
+   			} else {
+   				gestionEmprunt.emprunterExemplaire(oeuvre,usager,exemplaire, dateEmprunt, dateRetour);
+   	   	   		//Set emprunt 
+   	   	     	gestionEmprunt.setStatutExemplaire(exemplaire, "Emprunté");
+   	   	     	//remove -1 nbDispo
+   	   	     	gestionOeuvre.setNbIndisponibles(exemplaire.getOeuvre());
+   	   	   		result.setText("L'emprunt a été ajouté !");
+   	   	   		result.setTextFill(Color.GREEN);
+   			};
 		}
 		catch(Exception e)
 		{
 			result.setText(" L'emprunt entré existe déja dans la BDD !");
-			result.setTextFill(Color.GREEN);
+			result.setTextFill(Color.RED);
 		}
     };
     

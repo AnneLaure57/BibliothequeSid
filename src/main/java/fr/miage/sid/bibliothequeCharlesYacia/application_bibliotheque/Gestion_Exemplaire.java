@@ -19,7 +19,6 @@ public class Gestion_Exemplaire {
 	private static final Logger LOG = Logger.getLogger(Gestion_Exemplaire.class.getName());
 	
 	public ObservableList<Exemplaire> ListerExemplaires() {
-		// TODO Auto-generated method stub
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -32,6 +31,7 @@ public class Gestion_Exemplaire {
 		{
 			list.add(ex);
 		}
+		entityTransaction.commit();
 		entityManager.close();
 		return list;
 	}
@@ -52,6 +52,7 @@ public class Gestion_Exemplaire {
 		    LOG.fine(ex.toString());
 			
 		}
+	    entityTransaction.commit();
 	    entityManager.close();
 		return list;
 	}
@@ -71,6 +72,7 @@ public class Gestion_Exemplaire {
 		{
 			list.add(oe);
 		}
+		entityTransaction.commit();
 		entityManager.close();
 		return list;
 	}
@@ -78,7 +80,6 @@ public class Gestion_Exemplaire {
 	
 
 	public void ajouterExemplaire(String etat, Oeuvre oeuvre ) {
-		// TODO Auto-generated method stub
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	      EntityTransaction entityTransaction = entityManager.getTransaction();
 	      entityTransaction.begin();
@@ -106,7 +107,6 @@ public class Gestion_Exemplaire {
 	}
 
 	public Exemplaire trouverExemplaire(int exemplaireID) {
-		// TODO Auto-generated method stub
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -116,7 +116,8 @@ public class Gestion_Exemplaire {
 		  
 		  exemplaire = entityManager.find(Exemplaire.class,exemplaireID);
 		  LOG.fine(exemplaire.toString());
-			
+
+		  entityTransaction.commit();
 		  entityManager.close();
 		    	  
 		 } catch(Exception e) {
@@ -143,6 +144,7 @@ public class Gestion_Exemplaire {
 		    LOG.fine(e.toString());
 			
 		}
+	    entityTransaction.commit();
 	    entityManager.close();
 		return list;
 	}

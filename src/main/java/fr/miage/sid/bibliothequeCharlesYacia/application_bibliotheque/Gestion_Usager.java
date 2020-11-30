@@ -32,6 +32,7 @@ public class Gestion_Usager {
 		{
 			list.add(us);
 		}
+		entityTransaction.commit();
 		entityManager.close();
 		return list;
 	}
@@ -50,6 +51,7 @@ public class Gestion_Usager {
 		{
 			list.add(us);
 		}
+		entityTransaction.commit();
 		entityManager.close();
 		return list;
 	}
@@ -71,6 +73,7 @@ public class Gestion_Usager {
 		    LOG.fine(us.toString());
 			
 		}
+	    entityTransaction.commit();
 	    entityManager.close();
 		return list;
 	}
@@ -168,7 +171,7 @@ public class Gestion_Usager {
 	      //query.executeUpdate();
 		  usager = entityManager.find(Usager.class,usagerID);
 		  LOG.fine(usager.toString());
-			
+		  entityTransaction.commit();
 		  entityManager.close();
 		    	  
 		 } catch(Exception e) {
