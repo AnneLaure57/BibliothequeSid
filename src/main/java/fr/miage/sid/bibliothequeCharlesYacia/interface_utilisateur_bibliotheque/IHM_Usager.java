@@ -27,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
@@ -104,7 +105,7 @@ public class IHM_Usager implements Initializable{
 			tabTelU.setCellFactory(TextFieldTableCell.<Usager>forTableColumn());
 			tabMailU.setCellFactory(TextFieldTableCell.<Usager>forTableColumn());
 			
-			resultU.setText("Aucune action effectuée !");
+			resultU.setText("aucune action effectuée !");
 			resultU.setTextFill(Color.BLUE);
 			
 			getListUsers();
@@ -157,7 +158,7 @@ public class IHM_Usager implements Initializable{
 		ObservableList<Usager> list =gestionUsager.trouverUsager(searchUsager.getText());
 		LOG.fine(searchUsager.getText());
 		tabViewU.setItems(list);
-		resultU.setText("Nombres d'éléments trouvé(s) : " + list.size());
+		resultU.setText("nombres d'éléments trouvé(s) : " + list.size());
 	}
 	
 	/*
@@ -193,7 +194,7 @@ public class IHM_Usager implements Initializable{
 	@FXML
 	public void actualiserListe () {
 		getListUsers();
-		resultU.setText("Actualisation terminée !");
+		resultU.setText("actualisation terminée !");
 		resultU.setTextFill(Color.BLUE);
 	}
 	
@@ -207,6 +208,7 @@ public class IHM_Usager implements Initializable{
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/usager/formAddU.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Ajouter un nouvel Usager");
+            stage.getIcons().add(new Image("images/open-book.png"));
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.show();
@@ -235,7 +237,7 @@ public class IHM_Usager implements Initializable{
 				result.setText("L'usager a été ajouté !");
 	    		result.setTextFill(Color.GREEN);
 	        } else {
-	        	result.setText("  Veuillez remplir tout les champs !");
+	        	result.setText("Veuillez remplir tout les champs !");
 				result.setTextFill(Color.RED);
 	        }
     	} catch(Exception e) {
@@ -255,6 +257,7 @@ public class IHM_Usager implements Initializable{
 			root = loader.load();
 			Stage stage = new Stage();
 			stage.setTitle("Modifier un usager");
+            stage.getIcons().add(new Image("images/open-book.png"));
 			stage.setScene(new Scene(root));  
 			stage.show();
         } catch (Exception e) {
@@ -283,7 +286,7 @@ public class IHM_Usager implements Initializable{
 				result.setText("L'usager a été modifié !");
 				result.setTextFill(Color.GREEN);
 	        } else {
-	        	result.setText("  Veuillez remplir tout les champs !");
+	        	result.setText("Veuillez remplir tout les champs !");
 				result.setTextFill(Color.RED);
 	        }
     	} catch(Exception e) {
@@ -295,7 +298,7 @@ public class IHM_Usager implements Initializable{
     @FXML
     public void supprimerUsager(ActionEvent event) throws IOException, SQLException {
         if (tabViewU.getSelectionModel().getSelectedItem() == null) {
-        	resultU.setText("Veuillez sélectionner un usager à supprimer !");
+        	resultU.setText("veuillez sélectionner un usager à supprimer !");
 			resultU.setTextFill(Color.RED);
 		} else {
 			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
@@ -311,7 +314,7 @@ public class IHM_Usager implements Initializable{
     @FXML
     public void archiverUsager(ActionEvent event) throws IOException, SQLException {
         if (tabViewU.getSelectionModel().getSelectedItem() == null) {
-        	resultU.setText("Veuillez sélectionner un usager à archiver !");
+        	resultU.setText("veuillez sélectionner un usager à archiver !");
 			resultU.setTextFill(Color.RED);
 		} else {
 			Usager usager = tabViewU.getSelectionModel().getSelectedItem();

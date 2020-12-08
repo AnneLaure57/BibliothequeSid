@@ -36,7 +36,7 @@
                         <TableColumn fx:id="tabCPU" prefWidth="75.0" text="Code postal" />
                         <TableColumn fx:id="tabCityU" prefWidth="75.0" text="Ville" />
                         <TableColumn fx:id="tabTelU" prefWidth="75.0" text="Téléphone" />
-                        <TableColumn fx:id="tabMailU" prefWidth="136.0" text="Mail" />
+                        <TableColumn fx:id="tabMailU" prefWidth="136.0" text="Email" />
                         <TableColumn fx:id="tabDateBU" prefWidth="124.0" text="Date de naissance" />
                         <TableColumn fx:id="tabDateCU" prefWidth="115.0" text="Date de création" />
                         <TableColumn fx:id="tabDateDU" prefWidth="134.0" text="Date de suppression" />

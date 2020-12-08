@@ -27,6 +27,7 @@ import lombok.NoArgsConstructor;
 @Table( name = "USAGER")
 @NamedQuery(name="findUsagerByNom", query="SELECT u FROM Usager u WHERE u.nom = :nom")
 public class Usager {
+	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_usager")

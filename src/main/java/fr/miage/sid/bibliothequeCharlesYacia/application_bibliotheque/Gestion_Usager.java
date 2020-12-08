@@ -123,7 +123,6 @@ public class Gestion_Usager {
 		    //S1
 			//	    	  Query query = entityManager.createQuery("delete from Usager where id = '" + usagerID + "'");
 		    //			  query.executeUpdate();
-		  
 		    //S2
 		    Usager usager = entityManager.find(Usager.class,usagerID);
 		    entityManager.remove(usager);

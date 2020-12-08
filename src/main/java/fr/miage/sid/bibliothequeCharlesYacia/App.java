@@ -6,27 +6,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-/**
- * Hello world!
- *
- */
 public class App  extends Application {
-
-    /*@Override
-    public void start(Stage primaryStage) throws Exception {
-         final String javaVersion = System.getProperty("java.version");
-         final String javafxVersion = System.getProperty("javafx.version");
-         final Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-         final Scene scene = new Scene(new StackPane(l), 640, 480);
-         primaryStage.setScene(scene);
-         primaryStage.show();
-     }
-
-    public static void main(String[] args) {
-        launch();
-    }*/
 	
 	public void start(Stage primaryStage) {
 		Parent root =  null;
@@ -42,7 +25,7 @@ public class App  extends Application {
 		}
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Projet -Bibliothèque ");
-		//primaryStage.getIcons().add(new Image("images/logo.jpg"));
+		primaryStage.getIcons().add(new Image("images/open-book.png"));
 		//scene.getStylesheets().add(getClass().getResource("/app.css").toExternalForm());
 		//not allow to modify the window 
 		//primaryStage.setResizable(false);
