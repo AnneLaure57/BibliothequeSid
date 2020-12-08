@@ -37,7 +37,7 @@ public class Gestion_Usager {
 		return list;
 	}
 	
-	public static ObservableList<Usager> ListerUsagersUnDeleted() 
+	public static ObservableList<Usager> ListerUsagersDispo() 
 	{
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();

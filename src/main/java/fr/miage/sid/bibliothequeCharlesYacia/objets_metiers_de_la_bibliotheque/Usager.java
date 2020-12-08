@@ -46,10 +46,10 @@ public class Usager {
 	@Column(name = "ville", nullable=false)
 	private String ville;
 	
-	@Column(name = "telephone", length=10)
+	@Column(name = "telephone", nullable=false, length=10)
 	private String telephone;
 	
-	@Column(name = "mail")
+	@Column(name = "mail", nullable=false)
 	private String mail;
 	
 	@Temporal(TemporalType.DATE)

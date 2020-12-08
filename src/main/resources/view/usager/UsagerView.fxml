@@ -19,7 +19,7 @@
                   <Button layoutX="341.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerUsager" prefHeight="25.0" prefWidth="119.0" text="Supprimer Usager" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="591.0" />
                   <TextField fx:id="searchUsager" layoutX="623.0" layoutY="54.0" />
                   <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverUsager" text="Rechercher" />
-                  <Button layoutX="902.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
+                  <Button layoutX="902.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualiserListe" text="Actualiser" />
                   <Label layoutX="14.0" layoutY="102.0" text="Résultat : " />
                   <Label fx:id="resultU" layoutX="66.0" layoutY="102.0" prefHeight="17.0" prefWidth="340.0" />
                   <Button layoutX="470.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverUsager" text="Archiver Usager" AnchorPane.leftAnchor="470.0" />
