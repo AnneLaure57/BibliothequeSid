@@ -138,7 +138,7 @@ public class IHM_Usager implements Initializable{
 	 */
 	
 	public void getListUsers() {
-		tabViewU.setItems(gestionUsager.ListerUsagers());
+		tabViewU.setItems(gestionUsager.listerUsagers());
 	}
 	
 	/*
@@ -146,7 +146,7 @@ public class IHM_Usager implements Initializable{
 	 */
 	
 	public void getListUsersSelect() {
-		select.setItems(gestionUsager.ListerUsagersDispo());
+		select.setItems(gestionUsager.listerUsagersDispo());
 	}
 	
 	/*

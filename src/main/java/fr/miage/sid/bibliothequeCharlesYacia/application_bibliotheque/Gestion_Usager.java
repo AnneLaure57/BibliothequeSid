@@ -18,7 +18,7 @@ public class Gestion_Usager {
 	
 	private static final Logger LOG = Logger.getLogger(Gestion_Usager.class.getName());
 	
-	public static ObservableList<Usager> ListerUsagers() 
+	public static ObservableList<Usager> listerUsagers() 
 	{
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -37,7 +37,7 @@ public class Gestion_Usager {
 		return list;
 	}
 	
-	public static ObservableList<Usager> ListerUsagersDispo() 
+	public static ObservableList<Usager> listerUsagersDispo() 
 	{
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
