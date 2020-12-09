@@ -327,6 +327,10 @@ public class IHM_Usager implements Initializable{
 		
     };
     
+    /*
+     *  Vérifier les champs
+     */
+    
     private boolean verifierChamps() {
 
         boolean validTextFields = true;
