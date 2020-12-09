@@ -207,7 +207,7 @@ public class IHM_Usager implements Initializable{
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/usager/formAddU.fxml"));
             Stage stage = new Stage();
-            stage.setTitle("Ajouter un nouvel Usager");
+            stage.setTitle("Ajouter un nouvel usager");
             stage.getIcons().add(new Image("images/open-book.png"));
             Scene scene = new Scene(part);
             stage.setScene(scene);

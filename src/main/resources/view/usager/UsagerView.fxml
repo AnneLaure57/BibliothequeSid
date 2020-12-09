@@ -14,15 +14,15 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button layoutX="102.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormU" text="Ajouter Usager" AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="842.0" />
-                  <Button layoutX="223.0" layoutY="54.0" mnemonicParsing="false" onAction="#modFormU" text="Modifier Usager" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="715.0" />
-                  <Button layoutX="471.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerUsager" prefHeight="25.0" prefWidth="119.0" text="Supprimer Usager" AnchorPane.leftAnchor="471.0" AnchorPane.rightAnchor="450.0" />
+                  <Button layoutX="102.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormU" text="Ajouter usager" AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="842.0" />
+                  <Button layoutX="223.0" layoutY="54.0" mnemonicParsing="false" onAction="#modFormU" text="Modifier usager" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="715.0" />
+                  <Button layoutX="471.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerUsager" prefHeight="25.0" prefWidth="119.0" text="Supprimer usager" AnchorPane.leftAnchor="471.0" AnchorPane.rightAnchor="450.0" />
                   <TextField fx:id="searchUsager" layoutX="623.0" layoutY="54.0" />
                   <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverUsager" text="Rechercher" />
                   <Button layoutX="902.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualiserListe" text="Actualiser" />
                   <Label layoutX="14.0" layoutY="102.0" text="Résultat : " />
                   <Label fx:id="resultU" layoutX="66.0" layoutY="102.0" prefHeight="17.0" prefWidth="340.0" />
-                  <Button layoutX="347.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverUsager" text="Archiver Usager" AnchorPane.leftAnchor="347.0" />
+                  <Button layoutX="347.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverUsager" text="Archiver usager" AnchorPane.leftAnchor="347.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
