@@ -162,7 +162,7 @@ public class IHM_Usager implements Initializable{
 	}
 	
 	/*
-	 * Find a user by lastname/firstname research
+	 * Select a user for form upd
 	 */
 	
 	@FXML
@@ -281,7 +281,7 @@ public class IHM_Usager implements Initializable{
 				String email = 	mail.getText();
 				String telephone = 	tel.getText();
 				
-				//save data in Gestion Back
+				//save data in Gestion Usager
 				gestionUsager.modifierUsager(id,nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
 				result.setText("L'usager a été modifié !");
 				result.setTextFill(Color.GREEN);
@@ -334,8 +334,6 @@ public class IHM_Usager implements Initializable{
     private boolean verifierChamps() {
 
         boolean validTextFields = true;
-        Calendar calendar = Calendar.getInstance();
-	    java.sql.Date dateD = new java.sql.Date(calendar.getTime().getTime());
 
         if (lastname.getText().isEmpty()) {
             validTextFields = false;
