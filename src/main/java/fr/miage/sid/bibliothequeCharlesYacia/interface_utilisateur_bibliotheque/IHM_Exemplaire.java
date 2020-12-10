@@ -234,21 +234,6 @@ public class IHM_Exemplaire implements Initializable{
 
 	}
 	
-	@FXML
-    public void formDltExemplaire(ActionEvent event) {
-        try {
-        	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/exemplaire/formDelEx.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Supprimer un exemplaire");
-            Scene scene = new Scene(part);
-            stage.setScene(scene);
-            stage.show();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-	
 	@FXML 
 	public void supprimerExemplaire(ActionEvent event) throws IOException, SQLException {
 	 if (tabViewEx.getSelectionModel().getSelectedItem() == null) {

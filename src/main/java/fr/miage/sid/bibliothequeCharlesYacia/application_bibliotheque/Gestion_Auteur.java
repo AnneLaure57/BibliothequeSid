@@ -19,7 +19,7 @@ public class Gestion_Auteur {
 	
 	private static final Logger LOG = Logger.getLogger(Gestion_Auteur.class.getName());
 
-	public ObservableList<Auteur> listerAuteurs() {
+	public static ObservableList<Auteur> listerAuteurs() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -37,7 +37,7 @@ public class Gestion_Auteur {
 		return list;
 	}
 
-	public ObservableList<Auteur> listerAuteursDispo() {
+	public static ObservableList<Auteur> listerAuteursDispo() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -54,7 +54,7 @@ public class Gestion_Auteur {
 		return list;
 	}
 	
-	public ObservableList<Oeuvre> listerLivres() {
+	public static ObservableList<Oeuvre> listerLivres() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -71,7 +71,7 @@ public class Gestion_Auteur {
 		return list;
 	}
 
-	public ObservableList<Auteur> trouverAuteur(String recherche) {
+	public static ObservableList<Auteur> trouverAuteur(String recherche) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
