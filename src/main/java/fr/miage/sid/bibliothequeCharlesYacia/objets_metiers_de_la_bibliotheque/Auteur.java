@@ -74,7 +74,6 @@ public class Auteur {
 	
 	@Override
 	public String toString() {
-		return "Auteur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", livres=" + /*livres.stream().collect(Collectors.toList())*/ livres + "]";
+		return "id :" + id + ", " + nom + " - " + prenom;
 	}
-	
 }
