@@ -32,7 +32,7 @@ public class Auteur {
 	@Column(name = "id_auteur")
     private Integer id;
 	
-	@ManyToMany(mappedBy = "auteurs", cascade = { CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToMany(mappedBy = "auteurs", cascade = { CascadeType.MERGE, CascadeType.REMOVE})
 	private List<Livre> livres = new ArrayList<>();
 	
 	@Column(name = "nom", nullable=false) // NOT NULL
@@ -44,35 +44,6 @@ public class Auteur {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_archivage")
 	private Date dateArchivage;
-	
-	public String getNom() {
-		return nom;
-	}
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-	public String getPrenom() {
-		return prenom;
-	}
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-	
-	public Date getDateArchivage() {
-		return dateArchivage;
-	}
-
-	public void setDateArchivage(Date dateArchivage) {
-		this.dateArchivage = dateArchivage;
-	}
-	
-	public List<Livre> getLivres() {
-		return livres;
-	}
-
-	public void setLivres(List<Livre> livres) {
-		this.livres = livres;
-	}
 	
 	public List<Livre> addLivres(Livre livre) {
 		livres.add(livre);

@@ -23,7 +23,7 @@
       <TextField fx:id="lastname" layoutX="118.0" layoutY="105.0" prefHeight="25.0" prefWidth="232.0" />
       <TextField fx:id="firstname" layoutX="118.0" layoutY="167.0" prefHeight="25.0" prefWidth="232.0" />
       <Button fx:id="submit" layoutX="408.0" layoutY="301.0" mnemonicParsing="false" onAction="#ajouterAuteur" prefHeight="42.0" prefWidth="87.0" text="Valider" />
-      <Button fx:id="cancel" layoutX="521.0" layoutY="301.0" mnemonicParsing="false" onAction="#closeView" prefHeight="42.0" prefWidth="87.0" text="Annuler" />
+      <Button fx:id="cancel" layoutX="521.0" layoutY="301.0" mnemonicParsing="false" onAction="#fermerVue" prefHeight="42.0" prefWidth="87.0" text="Annuler" />
       <Label fx:id="result" layoutX="26.0" layoutY="27.0" prefHeight="17.0" prefWidth="278.0" />
       <Text layoutX="40.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oeuvres">
          <font>

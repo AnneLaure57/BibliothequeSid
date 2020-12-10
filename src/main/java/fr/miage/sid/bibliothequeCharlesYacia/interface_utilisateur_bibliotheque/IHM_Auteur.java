@@ -30,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -87,35 +88,39 @@ public class IHM_Auteur implements Initializable{
 			    }
 			});*/
 			
-			resultA.setText("Aucune action effectuée !");
+			resultA.setText("aucune action effectuée !");
 			resultA.setTextFill(Color.BLUE);
 			
-			getListAuteurs();
+			getListAuthors();
 		}
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/auteur/formAddA.fxml"))) {
-            getListLivres();
+			result.setText("Aucune modification enregistrée !");
+			result.setTextFill(Color.BLUE);
+            getListBooks();
             	
 		}
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/auteur/formAddAO.fxml"))) {
-			getListAuteursSelect();
-            getListLivres();
+			result.setText("Aucune modification enregistrée !");
+			result.setTextFill(Color.BLUE);
+			getListAuthorsSelect();
+            getListBooks();
             	
 		}
 			
 		if (location.equals(getClass().getClassLoader().getResource("view/auteur/formUpdA.fxml"))) {
 			
-            result.setText("Aucune modification enregistrée !");
+            result.setText("aucune modification enregistrée !");
             result.setTextFill(Color.BLUE);
-            getListAuteursSelect();
+            getListAuthorsSelect();
             	
 		}
 		
 	}
 
 	@FXML
-    private void closeView(){
+    private void fermerVue(){
         // get a handle to the stage
         Stage stage = (Stage) cancel.getScene().getWindow();
         // do what you have to do
@@ -123,10 +128,10 @@ public class IHM_Auteur implements Initializable{
     }    
 	
 	/*
-	 * List all autors in tableView
+	 * List all authors in tableView
 	 */
 	
-	public void getListAuteurs()
+	public void getListAuthors()
 	{
 		tabViewA.setItems(gestionAuteur.ListerAuteurs());
 	}
@@ -135,7 +140,7 @@ public class IHM_Auteur implements Initializable{
 	 * List all books in tableView
 	 */
 	
-	public void getListLivres()
+	public void getListBooks()
 	{
 		selectL.setItems(gestionAuteur.ListerLivres());
 	}
@@ -144,9 +149,9 @@ public class IHM_Auteur implements Initializable{
 	 * Get the list of autors inside select for modForm
 	 */
 	
-	public void getListAuteursSelect()
+	public void getListAuthorsSelect()
 	{
-		select.setItems(gestionAuteur.ListerAuteursUnDeleted());
+		select.setItems(gestionAuteur.ListerAuteursDispo());
 	}
 	
 	/*
@@ -158,6 +163,7 @@ public class IHM_Auteur implements Initializable{
 		ObservableList<Auteur> list = gestionAuteur.trouverAuteur(searchAuteur.getText());
 		LOG.fine(searchAuteur.getText());
 		tabViewA.setItems(list);
+		resultA.setText("nombres d'éléments trouvé(s) : " + list.size());
 	}
 	
 	@FXML
@@ -176,18 +182,19 @@ public class IHM_Auteur implements Initializable{
 	}
 	
 	@FXML
-	public void actualizeList () {
-		getListAuteurs();
+	public void actualiserListe () {
+		getListAuthors();
+		resultA.setText("actualisation terminée !");
+		resultA.setTextFill(Color.BLUE);
 	}
 	
 	@FXML
 	public void ajoutFormA(ActionEvent event) {
         try {
-        	//FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/formAddU.fxml"));
-        	//Parent part = fxmlLoader.load();
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/auteur/formAddA.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Ajouter un nouvel Auteur");
+            stage.getIcons().add(new Image("images/open-book.png"));
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.show();
@@ -201,25 +208,30 @@ public class IHM_Auteur implements Initializable{
     
     @FXML
 	private void ajouterAuteur(ActionEvent event) {
-    	if (! textFieldsValid()) {
-            // one or more of the text fields are empty
-    		result.setText("Veuillez remplir les champs manquants !");
-    		result.setTextFill(Color.RED);
-            return;
-        }
-		LOG.fine(lastname.getText() + ", " + firstname.getText());
-		String nom = lastname.getText();
-		String prenom = 	firstname.getText();
-		Livre livre = (Livre) selectL.getSelectionModel().getSelectedItem();
-		
-		//save data in Gestion Auteur
-		if (selectL.getSelectionModel().getSelectedItem() == null ) {
-			gestionAuteur.ajouterAuteur(nom,prenom);
-		} else {
-			gestionAuteur.ajouterAuteurLivre(nom,prenom,livre);
+		try {
+			if (verifierChamps()) {
+				//get values from form
+				LOG.fine(lastname.getText() + ", " + firstname.getText());
+				String nom = lastname.getText();
+				String prenom = 	firstname.getText();
+				Livre livre = (Livre) selectL.getSelectionModel().getSelectedItem();
+				
+				//save data in Gestion Auteur
+				if (selectL.getSelectionModel().getSelectedItem() == null ) {
+					gestionAuteur.ajouterAuteur(nom,prenom);
+				} else {
+					gestionAuteur.ajouterAuteurLivre(nom,prenom,livre);
+				}
+				result.setText("L'auteur a été ajouté !");
+				result.setTextFill(Color.GREEN);
+	        } else {
+	        	result.setText("Veuillez remplir tout les champs !");
+				result.setTextFill(Color.RED);
+	        }
+    	} catch(Exception e) {
+			result.setText(" Impossible d'ajouter l'auteur ! ");
+			result.setTextFill(Color.RED);
 		}
-		result.setText("L'auteur a été ajouté !");
-		result.setTextFill(Color.GREEN);
 	}
     
     @FXML
@@ -230,12 +242,12 @@ public class IHM_Auteur implements Initializable{
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/auteur/formAddAO.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Ajouter une nouvelle oeuvre pour un auteur");
+            stage.getIcons().add(new Image("images/open-book.png"));
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.show();
                        
         }
-        
         catch (IOException e) {
             e.printStackTrace();
         }
@@ -243,19 +255,24 @@ public class IHM_Auteur implements Initializable{
     
     @FXML
     private void lierAuteurLivre(ActionEvent event) {
-    	if (selectL.getSelectionModel().getSelectedItem() == null || select.getSelectionModel().getSelectedItem() == null) {
-            // one or more of the text fields are empty
-    		result.setText("Veuillez remplir les champs manquants !");
-    		result.setTextFill(Color.RED);
-            return;
-        }
-    	Auteur auteur = (Auteur) select.getSelectionModel().getSelectedItem();
-		Livre livre = (Livre) selectL.getSelectionModel().getSelectedItem();
-		
-		//save data in Gestion Auteur
-		gestionAuteur.lierAuteurLivre(auteur,livre);
-		result.setText("Le livre a été associé à l'auteur !");
-		result.setTextFill(Color.GREEN);
+    	try {
+    		if (selectL.getSelectionModel().getSelectedItem() == null || select.getSelectionModel().getSelectedItem() == null) {
+                // one or more of the text fields are empty
+        		result.setText("Veuillez remplir les champs manquants !");
+        		result.setTextFill(Color.RED);
+                return;
+            }
+        	Auteur auteur = (Auteur) select.getSelectionModel().getSelectedItem();
+    		Livre livre = (Livre) selectL.getSelectionModel().getSelectedItem();
+    		//save data in Gestion Auteur
+    		gestionAuteur.lierAuteurLivre(auteur,livre);
+    		result.setText("Le livre a été associé à l'auteur !");
+    		result.setTextFill(Color.GREEN);
+    	} catch(Exception e) {
+			result.setText(" Impossible de lier le livre à l'auteur ! ");
+			result.setTextFill(Color.RED);
+		}
+    	
 	}
 
     @FXML
@@ -266,6 +283,7 @@ public class IHM_Auteur implements Initializable{
 			IHM_Auteur controller = loader.getController();
 	        Stage stage = new Stage();
 	        stage.setTitle("Modifier un auteur");
+	        stage.getIcons().add(new Image("images/open-book.png"));
 	        stage.setScene(new Scene(root));  
 	        stage.show();
         }
@@ -276,22 +294,26 @@ public class IHM_Auteur implements Initializable{
 
 	@FXML
 	private void modifierAuteur(ActionEvent event) {
-		if (! textFieldsValid()) {
-            // one or more of the text fields are empty
-    		result.setText("Veuillez remplir les champs manquants !");
-    		result.setTextFill(Color.RED);
-    		return;
-        }
-		System.out.println(lastname.getText() + ", " + firstname.getText());
-		Auteur us = (Auteur) select.getSelectionModel().getSelectedItem();
-		int id = us.getId();
-		String nom = lastname.getText();
-		String prenom = 	firstname.getText();
-		
-		//save data in Gestion Back
-		gestionAuteur.modifierAuteur(id,nom,prenom);
-		result.setText("L'auteur a été modifié !");
-		result.setTextFill(Color.GREEN);
+		try {
+			if (verifierChamps()) {
+				//get values from form
+				Auteur us = (Auteur) select.getSelectionModel().getSelectedItem();
+				int id = us.getId();
+				String nom = lastname.getText();
+				String prenom = 	firstname.getText();
+				
+				//save data in Gestion Auteur
+				gestionAuteur.modifierAuteur(id,nom,prenom);
+				result.setText("L'auteur a été modifié !");
+				result.setTextFill(Color.GREEN);
+	        } else {
+	        	result.setText("Veuillez remplir tout les champs !");
+				result.setTextFill(Color.RED);
+	        }
+    	} catch(Exception e) {
+			result.setText(" Impossible de modifier l'auteur ! ");
+			result.setTextFill(Color.RED);
+		}
 	}
 	
 	/*
@@ -301,15 +323,15 @@ public class IHM_Auteur implements Initializable{
     @FXML
     public void supprimerAuteur(ActionEvent event) throws IOException, SQLException {
         if (tabViewA.getSelectionModel().getSelectedItem() == null) {
-        	resultA.setText("Veuillez sélectionner un auteur à supprimer avant !");
+        	resultA.setText("veuillez sélectionner un auteur à supprimer avant !");
 			resultA.setTextFill(Color.RED);
 		} else {
 			Auteur auteur = tabViewA.getSelectionModel().getSelectedItem();
 			int auteurID = auteur.getId();
-			resultA.setText("L'auteur avec l'ID " + auteurID + " a été supprimé !");
+			resultA.setText("l'auteur avec l'ID " + auteurID + " a été supprimé !");
 			resultA.setTextFill(Color.GREEN);
 			gestionAuteur.supprimerAuteur(auteurID);
-			getListAuteurs();
+			getListAuthors();
 		}
 		
     };
@@ -322,20 +344,20 @@ public class IHM_Auteur implements Initializable{
     @FXML
     public void archiverAuteur(ActionEvent event) throws IOException, SQLException {
         if (tabViewA.getSelectionModel().getSelectedItem() == null) {
-        	resultA.setText("Veuillez sélectionner un usager à archiver avant !");
+        	resultA.setText("veuillez sélectionner un usager à archiver avant !");
 			resultA.setTextFill(Color.RED);
 		} else {
 			Auteur auteur = tabViewA.getSelectionModel().getSelectedItem();
 			int auteurID = auteur.getId();
-			resultA.setText("L'usager avec l'ID " + auteurID + " a été supprimé !");
+			resultA.setText("l'usager avec l'ID " + auteurID + " a été supprimé !");
 			resultA.setTextFill(Color.GREEN);
 			gestionAuteur.archiverAuteur(auteurID);
-			getListAuteurs();
+			getListAuthors();
 		}
 		
     };
     
-    private boolean textFieldsValid() {
+    private boolean verifierChamps() {
 
         boolean validTextFields = true;
 

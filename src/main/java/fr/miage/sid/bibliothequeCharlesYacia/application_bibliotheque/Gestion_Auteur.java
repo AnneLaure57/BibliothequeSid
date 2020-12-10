@@ -37,7 +37,7 @@ public class Gestion_Auteur {
 		return list;
 	}
 
-	public ObservableList<Auteur> ListerAuteursUnDeleted() {
+	public ObservableList<Auteur> ListerAuteursDispo() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -151,13 +151,12 @@ public class Gestion_Auteur {
 		  try {
 		    Auteur auteur = entityManager.find(Auteur.class,usagerID);
 		    entityManager.remove(auteur);
-	
-	        entityTransaction.commit();
+		    System.out.println(auteur);
+		    entityTransaction.commit();
 	        entityManager.close();
 			  
 		  } catch(Exception e) {
 			  e.printStackTrace();
-			  entityTransaction.rollback(); 
 		  }
 		
 	}
