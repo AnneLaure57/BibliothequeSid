@@ -45,6 +45,8 @@ git clone git@github.com:AnneLaure57/BibliothequeSid.git
 
 ## Démarrer le projet
 
+Ouvrez un terminal ou une console et entrez la ligne suivante :
+
 ```
 java -jar bibliothequeCharlesYacia-0.0.1-SNAPSHOT.jar
 ```
