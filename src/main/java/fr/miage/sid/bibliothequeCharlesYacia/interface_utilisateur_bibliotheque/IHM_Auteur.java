@@ -133,7 +133,7 @@ public class IHM_Auteur implements Initializable{
 	
 	public void getListAuthors()
 	{
-		tabViewA.setItems(gestionAuteur.ListerAuteurs());
+		tabViewA.setItems(gestionAuteur.listerAuteurs());
 	}
 	
 	/*
@@ -142,7 +142,7 @@ public class IHM_Auteur implements Initializable{
 	
 	public void getListBooks()
 	{
-		selectL.setItems(gestionAuteur.ListerLivres());
+		selectL.setItems(gestionAuteur.listerLivres());
 	}
 	
 	/*
@@ -151,7 +151,7 @@ public class IHM_Auteur implements Initializable{
 	
 	public void getListAuthorsSelect()
 	{
-		select.setItems(gestionAuteur.ListerAuteursDispo());
+		select.setItems(gestionAuteur.listerAuteursDispo());
 	}
 	
 	/*
