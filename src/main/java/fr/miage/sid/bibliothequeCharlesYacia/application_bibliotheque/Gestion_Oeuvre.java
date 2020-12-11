@@ -38,42 +38,6 @@ public class Gestion_Oeuvre {
 		return list;
 	}
 	
-	public ObservableList<Oeuvre> listerMagazines() {
-		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	    EntityTransaction entityTransaction = entityManager.getTransaction();
-		
-		ObservableList<Oeuvre> list = FXCollections.observableArrayList();
-		entityTransaction.begin();
-		
-		@SuppressWarnings("unchecked")
-		List<Oeuvre> oeuvres = entityManager.createQuery("from Magazine").getResultList();
-		for(Oeuvre o : oeuvres)
-		{
-			list.add(o);
-			((Magazine) o).toString();
-			System.out.println(((Magazine) o).toString());
-		}
-		entityManager.close();
-		return list;
-	}
-	
-	public ObservableList<Oeuvre> listerLivres() {
-		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	    EntityTransaction entityTransaction = entityManager.getTransaction();
-		
-		ObservableList<Oeuvre> list = FXCollections.observableArrayList();
-		entityTransaction.begin();
-		
-		@SuppressWarnings("unchecked")
-		List<Oeuvre> oeuvres = entityManager.createQuery("from Livre").getResultList();
-		for(Oeuvre o : oeuvres)
-		{
-			list.add(o);
-		}
-		entityManager.close();
-		return list;
-	}
-	
 	public ObservableList<Auteur> listerAuteursDispo() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -110,50 +74,6 @@ public class Gestion_Oeuvre {
 		}
 	    entityManager.close();
 		return list;
-	}
-
-	public void supprimerOeuvre(int oeuvreID) {
-		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-		EntityTransaction entityTransaction = entityManager.getTransaction();
-		entityTransaction.begin();
-		  
-		  try {
-		    Oeuvre oeuvre = entityManager.find(Oeuvre.class,oeuvreID);
-		    oeuvre.getExemplaires().clear();
-		    entityManager.remove(oeuvre);
-			//Remove Oeuvres + Exemplaires
-			//Query query = entityManager.createQuery("Delete Oeuvre o, Exemplaire e from e inner join o where e.id_oeuvre = o.id and o.id='" + oeuvreID + "'");
-			//Query query = entityManager.createQuery("Delete Exemplaire e, Oeuvre o where e.id_oeuvre = o.id and o.id='" + oeuvreID + "'");
-			//query.executeUpdate();
-	
-	        entityTransaction.commit();
-	        entityManager.close();
-			  
-		  } catch(Exception e) {
-			  e.printStackTrace();
-			  entityTransaction.rollback(); 
-		  }
-	}
-
-	public void archiverOeuvre(int oeuvreID) {
-		 Calendar calendar = Calendar.getInstance();
-		 java.sql.Date dateD = new java.sql.Date(calendar.getTime().getTime());
-		    
-	    EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	    EntityTransaction entityTransaction = entityManager.getTransaction();
-	    entityTransaction.begin();
-		try {
-			
-		  Query query = entityManager.createQuery("Update Oeuvre set date_archivage='" + dateD + "'  where id='" + oeuvreID  + "'");
-		  query.executeUpdate();
-			
-		  entityTransaction.commit();
-	      entityManager.close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//TODO archive Exemplaires
 	}
 	
 	public void ajouterMagazine(String type,String titre, String description, Double prix,String editeur, Date dateEdition, String numero, int periodicite) {
@@ -206,6 +126,50 @@ public class Gestion_Oeuvre {
 	     entityManager.close();
 	}
 	
+	public void supprimerOeuvre(int oeuvreID) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		  
+		  try {
+		    Oeuvre oeuvre = entityManager.find(Oeuvre.class,oeuvreID);
+		    oeuvre.getExemplaires().clear();
+		    entityManager.remove(oeuvre);
+			//Remove Oeuvres + Exemplaires
+			//Query query = entityManager.createQuery("Delete Oeuvre o, Exemplaire e from e inner join o where e.id_oeuvre = o.id and o.id='" + oeuvreID + "'");
+			//Query query = entityManager.createQuery("Delete Exemplaire e, Oeuvre o where e.id_oeuvre = o.id and o.id='" + oeuvreID + "'");
+			//query.executeUpdate();
+	
+	        entityTransaction.commit();
+	        entityManager.close();
+			  
+		  } catch(Exception e) {
+			  e.printStackTrace();
+			  entityTransaction.rollback(); 
+		  }
+	}
+
+	public void archiverOeuvre(int oeuvreID) {
+		 Calendar calendar = Calendar.getInstance();
+		 java.sql.Date dateD = new java.sql.Date(calendar.getTime().getTime());
+		    
+	    EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+	    entityTransaction.begin();
+		try {
+			
+		  Query query = entityManager.createQuery("Update Oeuvre set date_archivage='" + dateD + "'  where id='" + oeuvreID  + "'");
+		  query.executeUpdate();
+			
+		  entityTransaction.commit();
+	      entityManager.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//TODO archive Exemplaires
+	}
+	
 	public void setNbTotalDisponibles(Oeuvre oeuvre) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -233,7 +197,7 @@ public class Gestion_Oeuvre {
 		
 	}
 
-	public void setNbTotalDispoDel(Oeuvre oeuvre) {
+	public void setNbTotalDispoSup(Oeuvre oeuvre) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -260,7 +224,7 @@ public class Gestion_Oeuvre {
 		
 	}
 	
-	public void setNbTotalDel(Oeuvre oeuvre) {
+	public void setNbTotalSup(Oeuvre oeuvre) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -338,7 +302,7 @@ public class Gestion_Oeuvre {
 		
 	}
 	
-	public void setNbResaAdd(Oeuvre oeuvre) {
+	public void setNbResAjout(Oeuvre oeuvre) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -364,7 +328,7 @@ public class Gestion_Oeuvre {
 		
 	}
 	
-	public void setNbResaRem(Oeuvre oeuvre) {
+	public void setNbResaSup(Oeuvre oeuvre) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		

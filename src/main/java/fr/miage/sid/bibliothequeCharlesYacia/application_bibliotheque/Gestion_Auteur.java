@@ -180,7 +180,7 @@ public class Gestion_Auteur {
 		}
 	}
 
-	public Auteur trouverAuteur(int usagerID) {
+	public Auteur trouverAuteurParID(int usagerID) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		

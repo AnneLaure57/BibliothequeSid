@@ -185,7 +185,7 @@ public class IHM_Reservation implements Initializable{
 	   	   		
 	   	   		//save data in Gestion Back
 	   	   		gestionReservation.ajouterReservation(oeuvre,usager,dateReservation);
-	   	   		gestionOeuvre.setNbResaAdd(oeuvre);
+	   	   		gestionOeuvre.setNbResAjout(oeuvre);
 	   	   		result.setText("La réservation a été ajouté !");
 	   	   		result.setTextFill(Color.GREEN);
 	        } else {
@@ -213,7 +213,7 @@ public class IHM_Reservation implements Initializable{
  			resultRes.setTextFill(Color.GREEN);
  			gestionReservation.annulerReservation(reservationID);
  			if (reservation.getDateArchivage() == null) {
-				gestionOeuvre.setNbResaRem(reservation.getOeuvre());
+				gestionOeuvre.setNbResaSup(reservation.getOeuvre());
 			}
  			getListReservations();
  		}
@@ -231,7 +231,7 @@ public class IHM_Reservation implements Initializable{
 			resultRes.setText("La réservation avec l'ID " + reservationID + " a été supprimé !");
 			resultRes.setTextFill(Color.GREEN);
 			if (reservation.getDateArchivage() == null && reservation.getDateAnnulation() == null) {
-				gestionOeuvre.setNbResaRem(reservation.getOeuvre());
+				gestionOeuvre.setNbResaSup(reservation.getOeuvre());
 			}
 			gestionReservation.supprimerReservation(reservationID);
 			getListReservations();
@@ -252,7 +252,7 @@ public class IHM_Reservation implements Initializable{
 			gestionReservation.archiverReservation(reservationID);
 			gestionReservation.annulerReservation(reservationID);
 			if (reservation.getDateAnnulation() == null) {
-				gestionOeuvre.setNbResaRem(reservation.getOeuvre());
+				gestionOeuvre.setNbResaSup(reservation.getOeuvre());
 			}
 			getListReservations();
 		}

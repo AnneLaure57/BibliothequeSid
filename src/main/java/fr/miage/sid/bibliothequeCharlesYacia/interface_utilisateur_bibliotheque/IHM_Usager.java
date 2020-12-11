@@ -174,7 +174,7 @@ public class IHM_Usager implements Initializable{
 			Usager usager = (Usager) select.getSelectionModel().getSelectedItem();
 			int usagerID = usager.getId();
 			//auto complement fields
-			Usager modusager = gestionUsager.trouverUsager(usagerID);
+			Usager modusager = gestionUsager.trouverUsagerParID(usagerID);
 			lastname.setText(modusager.getNom());
 			firstname.setText(modusager.getPrenom());
 			adress.setText(modusager.getAdresse());

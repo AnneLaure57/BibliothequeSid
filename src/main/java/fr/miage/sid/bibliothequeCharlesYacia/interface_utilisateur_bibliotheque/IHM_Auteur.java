@@ -175,7 +175,7 @@ public class IHM_Auteur implements Initializable{
 			Auteur auteur = (Auteur) select.getSelectionModel().getSelectedItem();
 			int usagerID = auteur.getId();
 			//auto complement fields
-			Auteur modauteur = gestionAuteur.trouverAuteur(usagerID);
+			Auteur modauteur = gestionAuteur.trouverAuteurParID(usagerID);
 			lastname.setText(modauteur.getNom());
 			firstname.setText(modauteur.getPrenom());
 		}

@@ -105,7 +105,7 @@ public class IHM_Oeuvre implements Initializable{
 		}	
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/formAddOB.fxml"))) {
-			getListAuteursSelect();
+			getListAuthorsSelect();
             	
 		}
 	}
@@ -116,7 +116,6 @@ public class IHM_Oeuvre implements Initializable{
 	
 	private void getListArtworks() {
 		tabViewO.setItems(gestionOeuvre.listerOeuvres());
-		//tabViewO.setItems(gestionOeuvre.ListerMagazines());
 		
 	}
 	
@@ -125,7 +124,7 @@ public class IHM_Oeuvre implements Initializable{
 	 * List all authors for book add 
 	 */
 	
-	public void getListAuteursSelect()
+	public void getListAuthorsSelect()
 	{
 		selectA.setItems(gestionOeuvre.listerAuteursDispo());
 	}
@@ -149,6 +148,8 @@ public class IHM_Oeuvre implements Initializable{
 	@FXML
 	public void actualiserListe () {
 		getListArtworks();
+		resultO.setText("actualisation terminée !");
+		resultO.setTextFill(Color.BLUE);
 	}
 	
 	/*
@@ -161,6 +162,7 @@ public class IHM_Oeuvre implements Initializable{
 		ObservableList<Oeuvre> list = gestionOeuvre.trouverOeuvre(searchOeuvre.getText());
 		LOG.fine(searchOeuvre.getText());
 		tabViewO.setItems(list);
+		resultO.setText("nombres d'éléments trouvé(s) : " + list.size());
 	}
     
     /*

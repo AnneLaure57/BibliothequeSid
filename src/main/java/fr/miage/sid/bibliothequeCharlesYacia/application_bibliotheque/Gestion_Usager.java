@@ -157,7 +157,7 @@ public class Gestion_Usager {
 		
 	}
 
-	public Usager trouverUsager(int usagerID) {
+	public Usager trouverUsagerParID(int usagerID) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		

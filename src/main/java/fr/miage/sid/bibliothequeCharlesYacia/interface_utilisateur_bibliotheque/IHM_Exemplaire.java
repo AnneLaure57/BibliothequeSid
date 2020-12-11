@@ -244,11 +244,11 @@ public class IHM_Exemplaire implements Initializable{
 			int exemplaireID = exemplaire.getId();
 			if (exemplaire.getEtat().equals("Abimé") && exemplaire.getDateArchivage() == null) {
 				//2
-				gestionOeuvre.setNbTotalDel(exemplaire.getOeuvre());
+				gestionOeuvre.setNbTotalSup(exemplaire.getOeuvre());
 				
 			} else if  (!exemplaire.getEtat().equals("Abimé") && exemplaire.getDateArchivage() == null) {
 				//4
-				gestionOeuvre.setNbTotalDispoDel(exemplaire.getOeuvre());
+				gestionOeuvre.setNbTotalDispoSup(exemplaire.getOeuvre());
 			} else {
 				//1 && 3
 				System.out.println("je ne suis pas abimé et je suis  archivé");
@@ -271,9 +271,9 @@ public class IHM_Exemplaire implements Initializable{
 			resultEx.setText("L'exemplaire avec l'ID " + exemplaireID + " a été archivé !");
 			resultEx.setTextFill(Color.GREEN);
 			if (exemplaire.getEtat().equals("Abimé")) {
-				gestionOeuvre.setNbTotalDel(exemplaire.getOeuvre());
+				gestionOeuvre.setNbTotalSup(exemplaire.getOeuvre());
 			} else {
-				gestionOeuvre.setNbTotalDispoDel(exemplaire.getOeuvre());
+				gestionOeuvre.setNbTotalDispoSup(exemplaire.getOeuvre());
 				gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
 			}
 			gestionExemplaire.archiverExemplaire(exemplaireID);
