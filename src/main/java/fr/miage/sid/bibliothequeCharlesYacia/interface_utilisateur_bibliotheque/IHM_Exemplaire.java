@@ -29,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -74,56 +75,61 @@ public class IHM_Exemplaire implements Initializable{
 			tabStatutEx.setCellValueFactory(new PropertyValueFactory<Exemplaire, String>("statut"));
 			tabDateAr.setCellValueFactory(new PropertyValueFactory<Exemplaire, Date>("dateArchivage"));
 			
-		
 			tabTitreEx.setCellFactory(TextFieldTableCell.<Exemplaire>forTableColumn());
 			tabEtatEx.setCellFactory(TextFieldTableCell.<Exemplaire>forTableColumn());
 			tabStatutEx.setCellFactory(TextFieldTableCell.<Exemplaire>forTableColumn());
+			
+			resultEx.setText("aucune action effectuée !");
+			resultEx.setTextFill(Color.BLUE);
+			
 
-			getListExemplaires();
+			getListExemplars();
 		}
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/exemplaire/formAddEx.fxml"))) {
 			
-            result.setText("Aucune modification enregistrée !");
+            result.setText("aucune modification enregistrée !");
             result.setTextFill(Color.BLUE);
-            getListEtat();
-            getListOeuvreSelect();
+            getListStates();
+            getListArtworksSelect();
             	
 		}
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/exemplaire/formUpdEx.fxml"))) {
 			
-            result.setText("Aucune modification enregistrée !");
+            result.setText("aucune modification enregistrée !");
             result.setTextFill(Color.BLUE);
-            getListExemplairesUnDeleted();
-            getListEtatSelect();
+            getListExemplarsUnDeleted();
+            getListStatesSelect();
             	
 		}
 	}
 	
-	private void getListExemplairesSelect() {
-		select.setItems(gestionExemplaire.ListerExemplaires());
+	private void getListExemplarsSelect() {
+		select.setItems(gestionExemplaire.listerExemplaires());
 	}
 
 	@FXML
-	public void actualizeList () {
-		getListExemplaires();
+	public void actualiserListe () {
+		getListExemplars();
+		resultEx.setText("actualisation terminée !");
+		resultEx.setTextFill(Color.BLUE);
 	}
 	
-	private void getListOeuvreSelect() {
-		selectOeuvres.setItems(gestionExemplaire.ListerOeuvres());
+	private void getListArtworksSelect() {
+		selectOeuvres.setItems(gestionExemplaire.listerOeuvres());
 	}
 
-	private void getListEtat() {
+	private void getListStates() {
 		selectEtats.getItems().addAll( "Neuf","Bon","Moyen");
 	}
 	
-	private void getListEtatSelect() {
+	private void getListStatesSelect() {
 		selectEtats.getItems().addAll( "Neuf","Bon","Moyen","Abimé");
 	}
 	
-	private void getListExemplairesUnDeleted() {
-		select.setItems(gestionExemplaire.ListerExemplairesUnDeleted());
+	private void getListExemplarsUnDeleted() {
+		select.setItems(gestionExemplaire.listerExemplairesDispo());
 	}
 	
 	/*
@@ -136,27 +142,29 @@ public class IHM_Exemplaire implements Initializable{
 		ObservableList<Exemplaire> list = gestionExemplaire.trouverOeuvre(searchExemplaire.getText());
 		LOG.fine(searchExemplaire.getText());
 		tabViewEx.setItems(list);
+		resultEx.setText("nombres d'éléments trouvé(s) : " + list.size());
 	}
 	
 
 	@FXML
-    private void closeView(){
+    private void fermerVue(){
         // get a handle to the stage
         Stage stage = (Stage) cancel.getScene().getWindow();
         // do what you have to do
         stage.close();
     }    
 	
-	private void getListExemplaires() {
-		tabViewEx.setItems(gestionExemplaire.ListerExemplaires());
+	private void getListExemplars() {
+		tabViewEx.setItems(gestionExemplaire.listerExemplaires());
 	}
 
 	@FXML
-	public void formAddExemplaire(ActionEvent event) {
+	public void ajoutFormEx(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/exemplaire/formAddEx.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Ajouter un nouvel exemplaire");
+            stage.getIcons().add(new Image("images/open-book.png"));
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.show();
@@ -170,10 +178,10 @@ public class IHM_Exemplaire implements Initializable{
     @FXML
 	private void ajouterExemplaire(ActionEvent event) {
 		try {
-		  if (textFieldsValid()) {
+		  if (verifierChamps()) {
 			//get values from form
 			String etat = (String) selectEtats.getSelectionModel().getSelectedItem();
-			Oeuvre oeuvre = gestionExemplaire.getOeuvreByName(selectOeuvres.getSelectionModel().getSelectedItem());
+			Oeuvre oeuvre = gestionExemplaire.getOeuvreParNom(selectOeuvres.getSelectionModel().getSelectedItem());
 				
 			//save data in Gestion Exemplaire
 			gestionExemplaire.ajouterExemplaire(etat, oeuvre);
@@ -181,21 +189,22 @@ public class IHM_Exemplaire implements Initializable{
 			result.setText("L'exemplaire a été ajouté !");
 			result.setTextFill(Color.GREEN);
 	      } else {
-	        result.setText("  Veuillez remplir tout les champs !");
+	        result.setText("Veuillez remplir tout les champs !");
 			result.setTextFill(Color.RED);
 	       }
     	} catch(Exception e) {
-			result.setText(" Impossible d'ajouter l'exemplaire ! ");
+			result.setText("Impossible d'ajouter l'exemplaire ! ");
 			result.setTextFill(Color.RED);
 		}
 	}
 	
 	@FXML
-    public void formUpExemplaire(ActionEvent event) {
+    public void modFormEx(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/exemplaire/formUpdEx.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Modifier un exemplaire");
+            stage.getIcons().add(new Image("images/open-book.png"));
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.show();
@@ -224,7 +233,7 @@ public class IHM_Exemplaire implements Initializable{
 			result.setText("L'exemplaire a été modifié !");
 			result.setTextFill(Color.GREEN);
 	        } else {
-	        	result.setText("  Veuillez remplir tout les champs !");
+	        	result.setText("Veuillez remplir tout les champs !");
 				result.setTextFill(Color.RED);
 	        }
 		} catch(Exception e) {
@@ -251,12 +260,12 @@ public class IHM_Exemplaire implements Initializable{
 				gestionOeuvre.setNbTotalDispoSup(exemplaire.getOeuvre());
 			} else {
 				//1 && 3
-				System.out.println("je ne suis pas abimé et je suis  archivé");
+				LOG.finer("je ne suis pas abimé et je suis  archivé");
 			}
 			gestionExemplaire.supprimerExemplaire(exemplaireID);
 			resultEx.setText("L'exemplaire avec l'ID " + exemplaireID + " a été supprimé !");
 			resultEx.setTextFill(Color.GREEN);
-			getListExemplaires();
+			getListExemplars();
 		}
 	}
 	
@@ -277,14 +286,15 @@ public class IHM_Exemplaire implements Initializable{
 				gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
 			}
 			gestionExemplaire.archiverExemplaire(exemplaireID);
-			getListExemplaires();
+			getListExemplars();
 		}
 		
-    };
+    }
 	
 	/**
 	 * 
 	 */
+    
 	@FXML
 	public void  selectExemplaire() {
 		if (select.getSelectionModel().getSelectedItem() == null) {
@@ -294,14 +304,14 @@ public class IHM_Exemplaire implements Initializable{
 			Exemplaire exemplaire = (Exemplaire) select.getSelectionModel().getSelectedItem();
 			int exemplaireID = exemplaire.getId();
 			//auto complement fields
-			Exemplaire modExemplaire = gestionExemplaire.trouverExemplaire(exemplaireID);
+			Exemplaire modExemplaire = gestionExemplaire.trouverExemplaireParID(exemplaireID);
 			
 			titre.setText(modExemplaire.getTitre());
 			selectEtats.getSelectionModel().select(modExemplaire.getEtat());
 		}
 	}
 	
-	private boolean textFieldsValid() {
+	private boolean verifierChamps() {
 
         boolean validTextFields = true;
 

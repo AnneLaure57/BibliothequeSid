@@ -110,6 +110,13 @@ public class IHM_Usager implements Initializable{
 			
 			getListUsers();
 		}
+		
+		if (location.equals(getClass().getClassLoader().getResource("view/usager/formAddU.fxml"))) {
+			
+            result.setText("Aucune modification enregistrée !");
+            result.setTextFill(Color.BLUE);
+            	
+		}
 			
 		if (location.equals(getClass().getClassLoader().getResource("view/usager/formUpdU.fxml"))) {
 			

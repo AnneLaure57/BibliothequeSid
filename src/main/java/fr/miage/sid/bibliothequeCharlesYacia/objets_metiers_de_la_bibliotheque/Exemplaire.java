@@ -53,48 +53,6 @@ public class Exemplaire {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_oeuvre")
     private Oeuvre oeuvre = new Oeuvre ();
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getEtat() {
-		return etat;
-	}
-
-	public void setEtat(String etat) {
-		this.etat = etat;
-	}
-	
-	
-	public String getStatut() {
-		return statut;
-	}
-
-	public void setStatut(String statut) {
-		this.statut = statut;
-	}
-	
-	public Date getDateArchivage() {
-		return dateArchivage;
-	}
-
-	public void setDateArchivage(Date dateArchivage) {
-		this.dateArchivage = dateArchivage;
-	}
-
-	public Exemplaire Exemplaire(Oeuvre oeuvre, String etat) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void supprimerExemplaire(Exemplaire exemplaire) {
-		throw new UnsupportedOperationException();
-	}
-	
 
 	public Exemplaire(Oeuvre oeuvre, String etat) {
 		super();

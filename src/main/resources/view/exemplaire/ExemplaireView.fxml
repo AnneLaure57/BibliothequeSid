@@ -14,15 +14,15 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button fx:id="butAddEx" layoutX="54.0" layoutY="54.0" mnemonicParsing="false" onAction="#formAddExemplaire" text="Ajouter Exemplaire" />
-                  <Button layoutX="183.0" layoutY="54.0" mnemonicParsing="false" onAction="#formUpExemplaire" text="Modifier Exemplaire" />
-                  <Button layoutX="464.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerExemplaire" text="Supprimer Exemplaire" />
+                  <Button fx:id="butAddEx" layoutX="54.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormEx" text="Ajouter exemplaire" />
+                  <Button layoutX="183.0" layoutY="54.0" mnemonicParsing="false" onAction="#modFormEx" text="Modifier exemplaire" />
+                  <Button layoutX="464.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerExemplaire" text="Supprimer exemplaire" />
                   <TextField fx:id="searchExemplaire" layoutX="623.0" layoutY="54.0" />
                   <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverExemplaire" text="Rechercher" />
-                  <Button layoutX="902.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
+                  <Button layoutX="902.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualiserListe" text="Actualiser" />
                   <Label layoutX="38.0" layoutY="102.0" text="Résultat : " />
                   <Label fx:id="resultEx" layoutX="90.0" layoutY="102.0" prefHeight="17.0" prefWidth="648.0" />
-                  <Button layoutX="314.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverExemplaire" text="Archiver Exemplaire" />
+                  <Button layoutX="314.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverExemplaire" text="Archiver exemplaire" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

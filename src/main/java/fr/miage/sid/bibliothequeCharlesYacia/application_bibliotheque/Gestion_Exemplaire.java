@@ -18,7 +18,7 @@ public class Gestion_Exemplaire {
 
 	private static final Logger LOG = Logger.getLogger(Gestion_Exemplaire.class.getName());
 	
-	public ObservableList<Exemplaire> ListerExemplaires() {
+	public ObservableList<Exemplaire> listerExemplaires() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -36,7 +36,7 @@ public class Gestion_Exemplaire {
 		return list;
 	}
 	
-	public ObservableList<Exemplaire> ListerExemplairesUnDeleted() {
+	public ObservableList<Exemplaire> listerExemplairesDispo() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -58,7 +58,7 @@ public class Gestion_Exemplaire {
 	}
 
 
-	public ObservableList<String> ListerOeuvres() {
+	public ObservableList<String> listerOeuvres() {
 		// TODO Auto-generated method stub
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -67,7 +67,7 @@ public class Gestion_Exemplaire {
 		entityTransaction.begin();
 		
 		@SuppressWarnings("unchecked")
-		List<String> oeuvres = entityManager.createNativeQuery("select titre from Oeuvre").getResultList();
+		List<String> oeuvres = entityManager.createNativeQuery("select titre from Oeuvre where date_archivage is null").getResultList();
 		for(String oe : oeuvres)
 		{
 			list.add(oe);
@@ -93,7 +93,7 @@ public class Gestion_Exemplaire {
 	      entityManager.close();
 	}
 
-	public Oeuvre getOeuvreByName(Object titre) {
+	public Oeuvre getOeuvreParNom(Object titre) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 	    entityTransaction.begin();
@@ -106,7 +106,7 @@ public class Gestion_Exemplaire {
 		return oeuvre;
 	}
 
-	public Exemplaire trouverExemplaire(int exemplaireID) {
+	public Exemplaire trouverExemplaireParID(int exemplaireID) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -136,7 +136,7 @@ public class Gestion_Exemplaire {
 	    entityTransaction.begin();
 	    
 	    @SuppressWarnings("unchecked")
-		List<Exemplaire> exemplaires = entityManager.createQuery("from Exemplaire where lower(titre) like '%" + recherche + "%' ").getResultList();
+		List<Exemplaire> exemplaires = entityManager.createQuery("from Exemplaire where titre like '%" + recherche + "%' ").getResultList();
 	    // or auteur like '%" + recherche + "%'"
 	    for(Exemplaire e : exemplaires)
 		{
