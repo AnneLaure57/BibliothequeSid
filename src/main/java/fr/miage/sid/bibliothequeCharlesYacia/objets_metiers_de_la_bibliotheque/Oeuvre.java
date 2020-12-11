@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table( name = "OEUVRE" , uniqueConstraints=@UniqueConstraint(columnNames = {"id_oeuvre", "titre", "editeur"})) 
+@Table( name = "OEUVRE" , uniqueConstraints=@UniqueConstraint(columnNames = {"titre", "editeur", "date_edition"})) 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="oeuvre_type", discriminatorType = DiscriminatorType.STRING)
 @NamedQuery(name="findOeuvreByTitre", query="SELECT o FROM Oeuvre o WHERE o.titre = :titre")
@@ -49,16 +49,16 @@ public class Oeuvre {
 	@Column(name = "description")
 	protected String description;
 	
-	@Column(name = "nb_exemp_dispo")
+	@Column(name = "nb_exemp_dispo", nullable=false)
 	protected int nbExemplairesDispo;
 	
-	@Column(name = "nb_exemp_total")
+	@Column(name = "nb_exemp_total", nullable=false)
 	protected int nbExemplairesTotal;
 	
 	@Column(name = "prix")
 	protected Double prix;
 	
-	@Column(name = "nb_reservation")
+	@Column(name = "nb_reservation", nullable=false)
 	protected int nbResa;
 	
 	@Column(name = "editeur")
@@ -80,88 +80,11 @@ public class Oeuvre {
 	
 	@OneToMany(mappedBy = "oeuvre", cascade = CascadeType.ALL, orphanRemoval = true)
 	protected List<Exemplaire> exemplaires = new ArrayList<>();
-	
-	public String getTitre() {
-		return titre;
-	}
-
-	public void setTitre(String titre) {
-		this.titre = titre;
-	}
-	
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getNbExemplairesDispo() {
-		return nbExemplairesDispo;
-	}
-
-	public void setNbExemplairesDispo(int nbExemplairesDispo) {
-		this.nbExemplairesDispo = nbExemplairesDispo;
-	}
-
-	public int getNbExemplairesTotal() {
-		return nbExemplairesTotal;
-	}
-
-	public void setNbExemplairesTotal(int nbExemplairesTotal) {
-		this.nbExemplairesTotal = nbExemplairesTotal;
-	}
-
-	public Double getPrix() {
-		return prix;
-	}
-
-	public void setPrix(Double prix) {
-		this.prix = prix;
-	}
-
-	public int getNbResa() {
-		return nbResa;
-	}
-
-	public void setNbResa(int nbResa) {
-		this.nbResa = nbResa;
-	}
-
-	public String getEditeur() {
-		return editeur;
-	}
-
-	public void setEditeur(String editeur) {
-		this.editeur = editeur;
-	}
-
-	public Date getDateEdition() {
-		return dateEdition;
-	}
-	
-	public void setDateEdition(Date dateEdition) {
-		this.dateEdition = dateEdition;
-	}
-	
-	public Date getDateArchivage() {
-		return dateArchivage;
-	}
 
 	public Oeuvre(String titre, String description, Double prix, String editeur, Date dateEdition) {
 		super();
 		this.titre = titre;
 		this.description = description;
-		// nbExemplairesDispo replace by nbExemplairesTotal, when the oeuvre add nbDispo = nbTotal
 		this.nbExemplairesDispo = 0;
 		this.nbExemplairesTotal = 0;
 		this.prix = prix;

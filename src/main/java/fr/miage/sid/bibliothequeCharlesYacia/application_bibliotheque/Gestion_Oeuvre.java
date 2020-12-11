@@ -21,7 +21,7 @@ public class Gestion_Oeuvre {
 	
 	private static final Logger LOG = Logger.getLogger(Gestion_Oeuvre.class.getName());
 
-	public ObservableList<Oeuvre> ListerOeuvres() {
+	public ObservableList<Oeuvre> listerOeuvres() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -38,7 +38,7 @@ public class Gestion_Oeuvre {
 		return list;
 	}
 	
-	public ObservableList<Oeuvre> ListerMagazines() {
+	public ObservableList<Oeuvre> listerMagazines() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -57,7 +57,7 @@ public class Gestion_Oeuvre {
 		return list;
 	}
 	
-	public ObservableList<Oeuvre> ListerLivres() {
+	public ObservableList<Oeuvre> listerLivres() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -74,7 +74,7 @@ public class Gestion_Oeuvre {
 		return list;
 	}
 	
-	public ObservableList<Auteur> ListerAuteursUnDeleted() {
+	public ObservableList<Auteur> listerAuteursDispo() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -100,7 +100,7 @@ public class Gestion_Oeuvre {
 	    entityTransaction.begin();
 	    
 	    @SuppressWarnings("unchecked")
-		List<Oeuvre> oeuvres = entityManager.createQuery("from Oeuvre where lower(titre) like '%" + recherche + "%' or lower(type) like '%" + recherche + "%'").getResultList();
+		List<Oeuvre> oeuvres = entityManager.createQuery("from Oeuvre where titre like '%" + recherche + "%' or type like '%" + recherche + "%'").getResultList();
 	    // or auteur like '%" + recherche + "%'"
 	    for(Oeuvre o : oeuvres)
 		{

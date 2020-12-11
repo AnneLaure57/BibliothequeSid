@@ -27,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
@@ -97,10 +98,10 @@ public class IHM_Oeuvre implements Initializable{
 			tabNbResa.setCellFactory(TextFieldTableCell.<Oeuvre, Number>forTableColumn(new NumberStringConverter()));
 			tabEditor.setCellFactory(TextFieldTableCell.<Oeuvre>forTableColumn());
 			
-			resultO.setText("Aucune action effectuée !");
+			resultO.setText("aucune action effectuée !");
 			resultO.setTextFill(Color.BLUE);
 			
-			getListOeuvres();
+			getListArtworks();
 		}	
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/oeuvre/formAddOB.fxml"))) {
@@ -113,8 +114,8 @@ public class IHM_Oeuvre implements Initializable{
 	 * List all oeuvres in tableView
 	 */
 	
-	private void getListOeuvres() {
-		tabViewO.setItems(gestionOeuvre.ListerOeuvres());
+	private void getListArtworks() {
+		tabViewO.setItems(gestionOeuvre.listerOeuvres());
 		//tabViewO.setItems(gestionOeuvre.ListerMagazines());
 		
 	}
@@ -126,7 +127,7 @@ public class IHM_Oeuvre implements Initializable{
 	
 	public void getListAuteursSelect()
 	{
-		selectA.setItems(gestionOeuvre.ListerAuteursUnDeleted());
+		selectA.setItems(gestionOeuvre.listerAuteursDispo());
 	}
 	
 	/*
@@ -134,7 +135,7 @@ public class IHM_Oeuvre implements Initializable{
 	 */
 	
 	@FXML
-    private void closeView(){
+    private void fermerVue(){
         // get a handle to the stage
         Stage stage = (Stage) cancel.getScene().getWindow();
         // do what you have to do
@@ -146,8 +147,8 @@ public class IHM_Oeuvre implements Initializable{
 	 */
 	
 	@FXML
-	public void actualizeList () {
-		getListOeuvres();
+	public void actualiserListe () {
+		getListArtworks();
 	}
 	
 	/*
@@ -172,6 +173,7 @@ public class IHM_Oeuvre implements Initializable{
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/oeuvre/formAddOM.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Ajouter un nouveau magazine");
+            stage.getIcons().add(new Image("images/open-book.png"));
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.show();
@@ -184,7 +186,7 @@ public class IHM_Oeuvre implements Initializable{
     @FXML
 	private void ajouterOeuvreMagazine(ActionEvent event) {	
 		try {
-			if (textFieldsValid()) {
+			if (verifierChamps()) {
 				//get values from form
 				String titre = title.getText();
 				String description = 	desc.getText();
@@ -219,6 +221,7 @@ public class IHM_Oeuvre implements Initializable{
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/oeuvre/formAddOB.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Ajouter un nouveau livre");
+            stage.getIcons().add(new Image("images/open-book.png"));
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.show();
@@ -231,7 +234,7 @@ public class IHM_Oeuvre implements Initializable{
     @FXML
 	private void ajouterOeuvreLivre(ActionEvent event) {
 		try {
-			if (textFieldsValid()) {
+			if (verifierChamps()) {
 				//get values from form
 				String titre = title.getText();
 				String description = 	desc.getText();
@@ -251,7 +254,7 @@ public class IHM_Oeuvre implements Initializable{
 				result.setText("Le livre a été ajouté !");
 				result.setTextFill(Color.GREEN);
 	        } else {
-	        	result.setText("  Veuillez remplir tout les champs !");
+	        	result.setText("Veuillez remplir tout les champs !");
 				result.setTextFill(Color.RED);
 	        }
     	} catch(Exception e) {
@@ -261,21 +264,21 @@ public class IHM_Oeuvre implements Initializable{
 	}
     
     /*
-     * Remove oeuvre
+     * Remove Artwork
      */
     
     @FXML
     public void supprimerOeuvre(ActionEvent event) {
     	if (tabViewO.getSelectionModel().getSelectedItem() == null) {
-        	resultO.setText("Veuillez sélectionner une oeuvre à supprimer avant !");
+        	resultO.setText("veuillez sélectionner une oeuvre à supprimer avant !");
 			resultO.setTextFill(Color.RED);
 		} else {
 			Oeuvre oeuvre = tabViewO.getSelectionModel().getSelectedItem();
 			int oeuvreID = oeuvre.getId();
-			resultO.setText("L'oeuvre avec l'ID " + oeuvreID + " a été supprimé !");
+			resultO.setText("l'oeuvre avec l'ID " + oeuvreID + " a été supprimé !");
 			resultO.setTextFill(Color.GREEN);
 			gestionOeuvre.supprimerOeuvre(oeuvreID);
-			getListOeuvres();
+			getListArtworks();
 		}
     };
     
@@ -286,20 +289,24 @@ public class IHM_Oeuvre implements Initializable{
     @FXML
     public void archiverOeuvre(ActionEvent event) throws IOException, SQLException {
     	if (tabViewO.getSelectionModel().getSelectedItem() == null) {
-        	resultO.setText("Veuillez sélectionner une oeuvre à archiver avant !");
+        	resultO.setText("veuillez sélectionner une oeuvre à archiver avant !");
 			resultO.setTextFill(Color.RED);
 		} else {
 			Oeuvre oeuvre = tabViewO.getSelectionModel().getSelectedItem();
 			int oeuvreID = oeuvre.getId();
-			resultO.setText("L'oeuvre avec l'ID " + oeuvreID + " a été archivé !");
+			resultO.setText("l'oeuvre avec l'ID " + oeuvreID + " a été archivé !");
 			resultO.setTextFill(Color.GREEN);
 			gestionOeuvre.archiverOeuvre(oeuvreID);
-			getListOeuvres();
+			getListArtworks();
 		}
 		
     };
     
-    private boolean textFieldsValid() {
+    /*
+     * check fields
+     */
+    
+    private boolean verifierChamps() {
 
         boolean validTextFields = true;
 

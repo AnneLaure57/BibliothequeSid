@@ -13,12 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @DiscriminatorValue("Livre")
@@ -30,7 +28,7 @@ public class Livre extends Oeuvre {
 	@Column(name = "resume")
 	private String resume;
 	
-	// remove type ALL, to avoid exception merge problème
+	// remove type ALL, to avoid exception merge problems
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(
             name = "LIVREAUTEUR",
@@ -38,22 +36,6 @@ public class Livre extends Oeuvre {
             inverseJoinColumns = {@JoinColumn(name = "id_auteur", referencedColumnName="id_auteur")}
     )
 	private List<Auteur> auteurs = new ArrayList<>();
-	
-	public String getResume() {
-		return resume;
-	}
-
-	public void setResume(String resume) {
-		this.resume = resume;
-	}
-	
-	public List<Auteur> getAuteurs() {
-		return auteurs;
-	}
-
-	public void setLivres(List<Auteur> auteurs) {
-		this.auteurs = auteurs;
-	}
 
 	public Livre(String type, String titre, String description, int nbExemplairesDispo, int nbExemplairesTotal, Double prix, String editeur, Date dateEdition) {
 		//super(titre, description, nbExemplairesDispo, nbExemplairesTotal, prix, editeur, dateEdition);
