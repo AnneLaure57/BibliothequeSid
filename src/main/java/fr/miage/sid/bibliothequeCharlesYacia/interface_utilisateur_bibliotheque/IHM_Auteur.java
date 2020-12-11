@@ -111,7 +111,7 @@ public class IHM_Auteur implements Initializable{
 			
 		if (location.equals(getClass().getClassLoader().getResource("view/auteur/formUpdA.fxml"))) {
 			
-            result.setText("aucune modification enregistrée !");
+            result.setText("Aucune modification enregistrée !");
             result.setTextFill(Color.BLUE);
             getListAuthorsSelect();
             	
