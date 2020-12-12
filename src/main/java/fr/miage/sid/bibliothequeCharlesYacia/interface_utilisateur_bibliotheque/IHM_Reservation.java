@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -191,12 +192,17 @@ public class IHM_Reservation implements Initializable{
 	   	    	Usager usager = (Usager) selectU.getSelectionModel().getSelectedItem();
 	   			
 	   			java.sql.Date dateReservation = java.sql.Date.valueOf(dateRes.getValue());
-	   	   		
-	   	   		//save data in Gestion Back
-	   	   		gestionReservation.reserverOeuvre(oeuvre,usager,dateReservation);
-	   	   		gestionOeuvre.setNbResAjout(oeuvre);
-	   	   		result.setText("La réservation a été ajouté !");
-	   	   		result.setTextFill(Color.GREEN);
+	   			
+	   			if (verifierDate(dateReservation)) {
+	   			    //save data in Gestion Back
+		   	   		gestionReservation.reserverOeuvre(oeuvre,usager,dateReservation);
+		   	   		gestionOeuvre.setNbResAjout(oeuvre);
+		   	   		result.setText("La réservation a été ajouté !");
+		   	   		result.setTextFill(Color.GREEN);
+	   			} else {
+	   				result.setText("La date de réservation doit être égale ou ultérieure !");
+	   				result.setTextFill(Color.BLUE);
+	   			}
 	        } else {
 	        	result.setText("Veuillez remplir tout les champs !");
 				result.setTextFill(Color.RED);
@@ -207,7 +213,22 @@ public class IHM_Reservation implements Initializable{
 		}
    	}
     
-    /*
+		
+	private boolean verifierDate(Date dateReservation) {
+		
+		boolean validDate = true;
+		
+        Calendar calendar = Calendar.getInstance();
+		java.sql.Date dateD = new java.sql.Date(calendar.getTime().getTime());
+		
+		if(dateReservation.before(dateD)) {
+			validDate = false;
+		}
+		
+		return validDate;
+	}
+
+	/*
 	 *  Delete Methods
 	 */
 

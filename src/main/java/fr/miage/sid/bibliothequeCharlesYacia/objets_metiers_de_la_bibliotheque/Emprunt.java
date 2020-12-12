@@ -80,11 +80,16 @@ public class Emprunt {
 		
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "Emprunt [id=" + id + ", statut=" + statut + ", nomPrenom=" + nomPrenom
 				+ ", titre=" + titre + ", numero=" + numero + ", dateEmprunt=" + dateEmprunt + ", dateRetour="
 				+ dateRetour + "]";
+	}*/
+	
+	@Override
+	public String toString() {
+		return "id=" + id + ", nomPrenom=" + nomPrenom + ", titre=" + titre ;
 	}
 	
 }
