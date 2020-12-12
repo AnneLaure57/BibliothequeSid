@@ -12,6 +12,7 @@ import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Oe
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Reservation;
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Usager;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Auteur;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Reservation;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
@@ -257,17 +258,21 @@ public class IHM_Reservation implements Initializable{
         	resultRes.setTextFill(Color.RED);
 		} else {
 			Reservation reservation = tabViewRes.getSelectionModel().getSelectedItem();
-			int reservationID = reservation.getId();
-			resultRes.setText("la réservation avec l'ID " + reservationID + " a été supprimé !");
-			resultRes.setTextFill(Color.GREEN);
-			if (reservation.getDateArchivage() == null && reservation.getDateAnnulation() == null) {
-				gestionOeuvre.setNbResaSup(reservation.getOeuvre());
+			if (!reservation.getStatut().equals("Réservée")) {
+				int reservationID = reservation.getId();
+				resultRes.setText("la réservation avec l'ID " + reservationID + " a été supprimé !");
+				resultRes.setTextFill(Color.GREEN);
+				if (reservation.getDateArchivage() == null && reservation.getDateAnnulation() == null) {
+					gestionOeuvre.setNbResaSup(reservation.getOeuvre());
+				}
+				gestionReservation.supprimerReservation(reservationID);
+				getListReservations();
 			}
-			gestionReservation.supprimerReservation(reservationID);
+			resultRes.setText("impossible de supprimer une réservation en cours !");
+			resultRes.setTextFill(Color.RED);
 			getListReservations();
 		}
-		
-    };
+    }
     
     /*
      *  check fields
@@ -280,18 +285,23 @@ public class IHM_Reservation implements Initializable{
         	resultRes.setTextFill(Color.RED);
 		} else {
 			Reservation reservation = tabViewRes.getSelectionModel().getSelectedItem();
-			int reservationID = reservation.getId();
-			resultRes.setText("la réservation avec l'ID " + reservationID + " a été archivé !");
-			resultRes.setTextFill(Color.GREEN);
-			gestionReservation.archiverReservation(reservationID);
-			gestionReservation.annulerReservation(reservationID);
-			if (reservation.getDateAnnulation() == null) {
-				gestionOeuvre.setNbResaSup(reservation.getOeuvre());
+			if (!reservation.getStatut().equals("Réservée")) {
+				int reservationID = reservation.getId();
+				resultRes.setText("la réservation avec l'ID " + reservationID + " a été archivé !");
+				resultRes.setTextFill(Color.GREEN);
+				gestionReservation.archiverReservation(reservationID);
+				gestionReservation.annulerReservation(reservationID);
+				if (reservation.getDateAnnulation() == null) {
+					gestionOeuvre.setNbResaSup(reservation.getOeuvre());
+				}
+				getListReservations();
 			}
+			resultRes.setText("impossible d'archiver une réservation en cours !");
+			resultRes.setTextFill(Color.RED);
 			getListReservations();
 		}
 		
-    };
+    }
     
     private boolean verifierChamps() {
 

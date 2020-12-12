@@ -225,19 +225,24 @@ public class IHM_Emprunt implements Initializable{
 	   			java.sql.Date dateEmprunt = java.sql.Date.valueOf(dateEm.getValue());
 	   			
 	   			java.sql.Date dateRetour = java.sql.Date.valueOf(dateRe.getValue());
-	   	   		
-	   	   		//check if there are a list of reservations for the usager and for this oeuvre
-	   			if (!(gestionReservation.verifierReservation(oeuvre,usager)).isEmpty()) {
-	   				result.setText(" Veuillez annuler les réservations de l'usager pour cette oeuvre !");
-	   				result.setTextFill(Color.RED);
+	   			
+	   			if (dateEmprunt.before(dateRetour) && verifierDate(dateEmprunt)) {
+	   			//check if there are a list of reservations for the usager and for this oeuvre
+		   			if (!(gestionReservation.verifierReservation(oeuvre,usager)).isEmpty()) {
+		   				result.setText(" Veuillez annuler les réservations de l'usager pour cette oeuvre !");
+		   				result.setTextFill(Color.RED);
+		   			} else {
+		   				gestionEmprunt.emprunterExemplaire(oeuvre,usager,exemplaire, dateEmprunt, dateRetour);
+		   	   	   		//Set emprunt 
+		   	   	     	gestionEmprunt.setStatutExemplaire(exemplaire, "Emprunté");
+		   	   	     	//remove -1 nbDispo
+		   	   	     	gestionOeuvre.setNbIndisponibles(exemplaire.getOeuvre());
+		   	   	   		result.setText("L'emprunt a été ajouté !");
+		   	   	   		result.setTextFill(Color.GREEN);
+		   			}
 	   			} else {
-	   				gestionEmprunt.emprunterExemplaire(oeuvre,usager,exemplaire, dateEmprunt, dateRetour);
-	   	   	   		//Set emprunt 
-	   	   	     	gestionEmprunt.setStatutExemplaire(exemplaire, "Emprunté");
-	   	   	     	//remove -1 nbDispo
-	   	   	     	gestionOeuvre.setNbIndisponibles(exemplaire.getOeuvre());
-	   	   	   		result.setText("L'emprunt a été ajouté !");
-	   	   	   		result.setTextFill(Color.GREEN);
+	   				result.setText("Les dates d'emprunt et de retour son incorrectes !");
+	   	   	   		result.setTextFill(Color.RED);
 	   			}
     		}
    			else {
@@ -251,6 +256,20 @@ public class IHM_Emprunt implements Initializable{
 			result.setTextFill(Color.RED);
 		}
     }
+    
+    private boolean verifierDate(Date dateEmprunt) {
+		
+		boolean validDate = true;
+		
+        Calendar calendar = Calendar.getInstance();
+		java.sql.Date dateD = new java.sql.Date(calendar.getTime().getTime());
+		
+		if(dateEmprunt.before(dateD)) {
+			validDate = false;
+		}
+		
+		return validDate;
+	}
     
     @FXML
 	public void modFormEm(ActionEvent event) {
@@ -295,7 +314,6 @@ public class IHM_Emprunt implements Initializable{
 	   	   	   		resultNote.setTextFill(Color.BLUE);
 	   			}
 	   	   		gestionExemplaire.modifierExemplaire(exemplaire, etat);
-	   	   		System.out.println();
 	   	     	if (etat.equals("Abimé")) {
 	   	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
 	   	     	} else {
