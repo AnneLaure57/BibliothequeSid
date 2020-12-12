@@ -21,7 +21,7 @@ public class Gestion_Emprunt {
 	
 	private static final Logger LOG = Logger.getLogger(Gestion_Reservation.class.getName());
 
-	public ObservableList<Emprunt> ListerEmprunts() {
+	public ObservableList<Emprunt> listerEmprunts() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -46,7 +46,7 @@ public class Gestion_Emprunt {
 	    entityTransaction.begin();
 	    
 	    @SuppressWarnings("unchecked")
-		List<Emprunt> emprunts = entityManager.createQuery("from Emprunt where lower(statut) like '%" + recherche + "%'or  lower(titre) like '%" + recherche + "%' or lower(nomPrenom) like '%" + recherche + "%'").getResultList();
+		List<Emprunt> emprunts = entityManager.createQuery("from Emprunt where statut like '%" + recherche + "%'or  titre like '%" + recherche + "%' or nomPrenom like '%" + recherche + "%'").getResultList();
 
 	    for(Emprunt em : emprunts)
 		{
@@ -55,60 +55,6 @@ public class Gestion_Emprunt {
 			
 		}
 	    entityManager.close();
-		return list;
-	}
-	
-	public ObservableList<Exemplaire> ListerExemplairesUnDeleted(int oeuvreID) {
-		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	    EntityTransaction entityTransaction = entityManager.getTransaction();
-		
-	    ObservableList<Exemplaire> list = FXCollections.observableArrayList();
-	    entityTransaction.begin();
-	    
-	    @SuppressWarnings("unchecked")
-		List<Exemplaire> exemplaires = entityManager.createQuery("from Exemplaire where date_archivage is null and statut='Disponible' and  id_oeuvre='"+ oeuvreID +"'").getResultList();
-
-	    for(Exemplaire ex : exemplaires)
-		{
-			list.add(ex);
-		    LOG.fine(ex.toString());
-			
-		}
-	    entityManager.close();
-		return list;
-	}
-
-	public ObservableList<Oeuvre>  ListerOeuvresUnDeleted() {
-		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	    EntityTransaction entityTransaction = entityManager.getTransaction();
-		
-		ObservableList<Oeuvre> list = FXCollections.observableArrayList();
-		entityTransaction.begin();
-		
-		@SuppressWarnings("unchecked")
-		List<Oeuvre> oeuvres = entityManager.createQuery("from Oeuvre where date_archivage is null ").getResultList();
-		for(Oeuvre o : oeuvres)
-		{
-			list.add(o);
-		}
-		entityManager.close();
-		return list;
-	}
-
-	public ObservableList<Usager> ListerUsagersUnDeleted() {
-		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	    EntityTransaction entityTransaction = entityManager.getTransaction();
-		
-		ObservableList<Usager> list = FXCollections.observableArrayList();
-		entityTransaction.begin();
-		
-		@SuppressWarnings("unchecked")
-		List<Usager> usagers = entityManager.createQuery("from Usager where date_archivage is null ").getResultList();
-		for(Usager us : usagers)
-		{
-			list.add(us);
-		}
-		entityManager.close();
 		return list;
 	}
 	
@@ -127,7 +73,7 @@ public class Gestion_Emprunt {
 		
 	}
 	
-	public ObservableList<Emprunt> ListerEmpruntsUsager(int usagerID) {
+	public ObservableList<Emprunt> listerEmpruntsUsager(int usagerID) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		

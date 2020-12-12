@@ -65,38 +65,6 @@ public class Emprunt {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_exemplaire")
     private Exemplaire exemplaire = new Exemplaire ();
-	
-	public Date getDateEmprunt() {
-		return dateEmprunt;
-	}
-
-	public void setDateEmprunt(Date dateEmprunt) {
-		this.dateEmprunt = dateEmprunt;
-	}
-
-	public String getStatut() {
-		return statut;
-	}
-
-	public void setStatut(String statut) {
-		this.statut = statut;
-	}
-
-	public Date getDateRetour() {
-		return dateRetour;
-	}
-
-	public void setDateRetour(Date dateRetour) {
-		this.dateRetour = dateRetour;
-	}
-	
-	public Date getDateArchivage() {
-		return dateArchivage;
-	}
-
-	public void setDateArchivage(Date dateArchivage) {
-		this.dateArchivage = dateArchivage;
-	}
 
 	public Emprunt(Usager usager, Oeuvre oeuvre, Exemplaire exemplaire, Date dateEmprunt, Date dateRetour) {
 		super();

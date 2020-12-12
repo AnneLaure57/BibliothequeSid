@@ -311,7 +311,7 @@ public class IHM_Usager implements Initializable{
 		} else {
 			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
 			int usagerID = usager.getId();
-			resultU.setText("L'usager avec l'ID " + usagerID + " a été supprimé !");
+			resultU.setText("l'usager avec l'ID " + usagerID + " a été supprimé !");
 			resultU.setTextFill(Color.GREEN);
 			gestionUsager.supprimerUsager(usagerID);
 			getListUsers();
@@ -327,7 +327,7 @@ public class IHM_Usager implements Initializable{
 		} else {
 			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
 			int usagerID = usager.getId();
-			resultU.setText("L'usager avec l'ID " + usagerID + " a été archivé !");
+			resultU.setText("l'usager avec l'ID " + usagerID + " a été archivé !");
 			resultU.setTextFill(Color.GREEN);
 			gestionUsager.archiverUsager(usagerID);
 			getListUsers();

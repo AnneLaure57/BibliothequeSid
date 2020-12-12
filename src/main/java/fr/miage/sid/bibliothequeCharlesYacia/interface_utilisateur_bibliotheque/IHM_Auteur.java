@@ -258,7 +258,7 @@ public class IHM_Auteur implements Initializable{
     @FXML
     private void lierAuteurLivre(ActionEvent event) {
     	try {
-    		if (verifierSelect()) {
+    		if (verifierSelects()) {
     			Auteur auteur = (Auteur) select.getSelectionModel().getSelectedItem();
         		Livre livre = (Livre) selectL.getSelectionModel().getSelectedItem();
         		//save data in Gestion Auteur
@@ -375,7 +375,7 @@ public class IHM_Auteur implements Initializable{
         return validTextFields;
     }
     
-    private boolean verifierSelect() {
+    private boolean verifierSelects() {
 
         boolean validTextFields = true;
 

@@ -13,6 +13,7 @@ import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Em
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Reservation;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Usager;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
@@ -33,6 +34,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -43,6 +45,8 @@ public class IHM_Emprunt implements Initializable{
 	private Gestion_Emprunt gestionEmprunt = new Gestion_Emprunt();
 	
 	private Gestion_Exemplaire gestionExemplaire = new Gestion_Exemplaire();
+	
+	private Gestion_Usager gestionUsager = new Gestion_Usager();
 	
 	private Gestion_Oeuvre gestionOeuvre = new Gestion_Oeuvre();
 	
@@ -99,37 +103,39 @@ public class IHM_Emprunt implements Initializable{
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/emprunt/formAddEm.fxml"))) {
 			
-            result.setText("Aucun ajout enregistré !");
+            result.setText("Aucun emprunt enregistré !");
             result.setTextFill(Color.BLUE);
-            getListUsagersSelect();
-            getListOeuvresSelect();
+            getListUsersSelect();
+            getListArtworksSelect();
             	
 		}
 		
        if (location.equals(getClass().getClassLoader().getResource("view/emprunt/formUpdEm.fxml"))) {
             result.setText("Aucune modification enregistré !");
             result.setTextFill(Color.BLUE);
-            getListUsagersSelect();
-            getListEtatSelect();
+            getListUsersSelect();
+            getListStatesSelect();
             	
 		}
 	}
 	
 	@FXML
-	public void actualizeList () {
+	public void actualiserListe () {
 		getListEmprunts();
+		resultEm.setText("actualisation terminée !");
+		resultEm.setTextFill(Color.BLUE);
 	}
 	
 	@FXML
-    private void closeView(){
+    private void fermerVue(){
         // get a handle to the stage
         Stage stage = (Stage) cancel.getScene().getWindow();
         // do what you have to do
         stage.close();
     } 
 
-	public void getListOeuvresSelect() {
-		selectOe.setItems(gestionEmprunt.ListerOeuvresUnDeleted());
+	public void getListArtworksSelect() {
+		selectOe.setItems(gestionOeuvre.listerOeuvresDispo());
 	}
 	
 	@FXML
@@ -141,20 +147,20 @@ public class IHM_Emprunt implements Initializable{
 			Oeuvre oeuvre = (Oeuvre) selectOe.getSelectionModel().getSelectedItem();
 			int oeuvreID = oeuvre.getId();
 			//auto complement fields
-			selectEx.setItems(gestionEmprunt.ListerExemplairesUnDeleted(oeuvreID));
+			selectEx.setItems(gestionExemplaire.listerExemplairesParOeuvreID(oeuvreID));
 		}
 	}
 
-	public void getListUsagersSelect() {
-		selectUs.setItems(gestionEmprunt.ListerUsagersUnDeleted());
+	public void getListUsersSelect() {
+		selectUs.setItems(gestionUsager.listerUsagersDispo());
 	}
 
 	public void getListEmprunts() {
-		tabViewEm.setItems(gestionEmprunt.ListerEmprunts());
+		tabViewEm.setItems(gestionEmprunt.listerEmprunts());
 		
 	}
 	
-	public void getListEtatSelect() {
+	public void getListStatesSelect() {
 		selectEtats.getItems().addAll( "Neuf","Bon","Moyen","Abimé");
 	}
 	
@@ -171,7 +177,7 @@ public class IHM_Emprunt implements Initializable{
 			Usager usager = (Usager) selectUs.getSelectionModel().getSelectedItem();
 			int usagerID = usager.getId();
 			//auto complement fields
-			selectEm.setItems(gestionEmprunt.ListerEmpruntsUsager(usagerID));
+			selectEm.setItems(gestionEmprunt.listerEmpruntsUsager(usagerID));
 		}
 	}
 	
@@ -184,14 +190,17 @@ public class IHM_Emprunt implements Initializable{
 		ObservableList<Emprunt> list = gestionEmprunt.trouverEmprunt(searchEmprunt.getText());
 		LOG.fine(searchEmprunt.getText());
 		tabViewEm.setItems(list);
+		resultEm.setText("nombres d'éléments trouvé(s) : " + list.size());
+		resultEm.setTextFill(Color.BLUE);
 	}
 
 	@FXML
-	public void formAddEm(ActionEvent event) {
+	public void ajoutFormEm(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/emprunt/formAddEm.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Ajouter un nouvel emprunt");
+            stage.getIcons().add(new Image("images/open-book.png"));
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.show();
@@ -237,11 +246,12 @@ public class IHM_Emprunt implements Initializable{
     };
     
     @FXML
-	public void formUpdEm(ActionEvent event) {
+	public void modFormEm(ActionEvent event) {
         try {
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/emprunt/formUpdEm.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Modifier un emprunt");
+            stage.getIcons().add(new Image("images/open-book.png"));
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.show();
@@ -271,6 +281,7 @@ public class IHM_Emprunt implements Initializable{
    			} else {
    	   			gestionEmprunt.rendreExemplaire(empruntID,"Rendu",dateRetour);
    			}
+   			//If list of reservations is not empty, take the user with the oldest date
    			if(!gestionReservation.verifierReservationEmprunt(oeuvre).isEmpty()) {
    				Reservation reservation = gestionReservation.verifierReservationEmprunt(oeuvre).get(0);
    				resultNote.setText("Il y a une réservation pour l'oeuvre " + oeuvre.getTitre() + ", le " + reservation.getDateReservation() + ", au nom de " + reservation.getNomPrenom());
@@ -299,17 +310,17 @@ public class IHM_Emprunt implements Initializable{
     @FXML
     public void supprimerEmprunt(ActionEvent event) throws IOException, SQLException {
         if (tabViewEm.getSelectionModel().getSelectedItem() == null) {
-        	resultEm.setText("Veuillez sélectionner un emprunt à supprimer !");
+        	resultEm.setText("veuillez sélectionner un emprunt à supprimer !");
         	resultEm.setTextFill(Color.RED);
 		} else {
 			Emprunt emprunt = tabViewEm.getSelectionModel().getSelectedItem();
 			if (!emprunt.getStatut().equals("En cours")) {
 				int empruntID = emprunt.getId();
-				resultEm.setText("L'emprunt avec l'ID " + empruntID + " a été supprimé !");
+				resultEm.setText("l'emprunt avec l'ID " + empruntID + " a été supprimé !");
 				resultEm.setTextFill(Color.GREEN);
 				gestionEmprunt.supprimerEmprunt(empruntID);
 			}
-			resultEm.setText("Impossible de supprimer un emprunt en cours !");
+			resultEm.setText("impossible de supprimer un emprunt en cours !");
         	resultEm.setTextFill(Color.RED);
 			getListEmprunts();
 		}
@@ -319,18 +330,18 @@ public class IHM_Emprunt implements Initializable{
     @FXML
     public void archiverEmprunt(ActionEvent event) throws IOException, SQLException {
         if (tabViewEm.getSelectionModel().getSelectedItem() == null) {
-        	resultEm.setText("Veuillez sélectionner un emprunt à archiver !");
+        	resultEm.setText("veuillez sélectionner un emprunt à archiver !");
         	resultEm.setTextFill(Color.RED);
 		} else {
 			Emprunt emprunt = tabViewEm.getSelectionModel().getSelectedItem();	
 			if (!emprunt.getStatut().equals("En cours")) {
 				int empruntID = emprunt.getId();
 				gestionEmprunt.archiverEmprunt(empruntID);
-				resultEm.setText("La réservation avec l'ID " + empruntID + " a été archivé !");
+				resultEm.setText("l'emprunt avec l'ID " + empruntID + " a été archivé !");
 				resultEm.setTextFill(Color.GREEN);
 				
 			}
-			resultEm.setText("Impossible d'archiver un emprunt en cours !");
+			resultEm.setText("impossible d'archiver un emprunt en cours !");
         	resultEm.setTextFill(Color.RED);
 			getListEmprunts();	
 		}

@@ -56,28 +56,26 @@ public class Gestion_Exemplaire {
 	    entityManager.close();
 		return list;
 	}
-
-
-	public ObservableList<String> listerOeuvres() {
-		// TODO Auto-generated method stub
+	
+	public ObservableList<Exemplaire> listerExemplairesParOeuvreID(int oeuvreID) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
-		ObservableList<String> list = FXCollections.observableArrayList();
-		entityTransaction.begin();
-		
-		@SuppressWarnings("unchecked")
-		List<String> oeuvres = entityManager.createNativeQuery("select titre from Oeuvre where date_archivage is null").getResultList();
-		for(String oe : oeuvres)
+	    ObservableList<Exemplaire> list = FXCollections.observableArrayList();
+	    entityTransaction.begin();
+	    
+	    @SuppressWarnings("unchecked")
+		List<Exemplaire> exemplaires = entityManager.createQuery("from Exemplaire where date_archivage is null and statut='Disponible' and  id_oeuvre='"+ oeuvreID +"'").getResultList();
+
+	    for(Exemplaire ex : exemplaires)
 		{
-			list.add(oe);
+			list.add(ex);
+		    LOG.fine(ex.toString());
+			
 		}
-		entityTransaction.commit();
-		entityManager.close();
+	    entityManager.close();
 		return list;
 	}
-
-	
 
 	public void ajouterExemplaire(String etat, Oeuvre oeuvre ) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();

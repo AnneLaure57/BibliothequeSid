@@ -37,40 +37,6 @@ public class Gestion_Reservation {
 		return list;
 	}
 
-	public ObservableList<Usager> listerUsagersDispo() {
-		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	    EntityTransaction entityTransaction = entityManager.getTransaction();
-		
-		ObservableList<Usager> list = FXCollections.observableArrayList();
-		entityTransaction.begin();
-		
-		@SuppressWarnings("unchecked")
-		List<Usager> usagers = entityManager.createQuery("from Usager where date_archivage is null ").getResultList();
-		for(Usager us : usagers)
-		{
-			list.add(us);
-		}
-		entityManager.close();
-		return list;
-	}
-
-	public ObservableList<Oeuvre> listerOeuvresDispo() {
-		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	    EntityTransaction entityTransaction = entityManager.getTransaction();
-		
-		ObservableList<Oeuvre> list = FXCollections.observableArrayList();
-		entityTransaction.begin();
-		
-		@SuppressWarnings("unchecked")
-		List<Oeuvre> oeuvres = entityManager.createQuery("from Oeuvre where date_archivage is null ").getResultList();
-		for(Oeuvre o : oeuvres)
-		{
-			list.add(o);
-		}
-		entityManager.close();
-		return list;
-	}
-
 	public ObservableList<Reservation> trouverReservation(String recherche) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -91,7 +57,7 @@ public class Gestion_Reservation {
 		return list;
 	}
 
-	public void ajouterReservation(Oeuvre oeuvre, Usager usager, Date dateReservation) {
+	public void reserverOeuvre(Oeuvre oeuvre, Usager usager, Date dateReservation) {
 	  EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	  EntityTransaction entityTransaction = entityManager.getTransaction();
 	  entityTransaction.begin();

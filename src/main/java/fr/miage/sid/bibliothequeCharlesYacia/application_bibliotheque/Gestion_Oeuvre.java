@@ -55,6 +55,23 @@ public class Gestion_Oeuvre {
 		return list;
 	}
 	
+	public ObservableList<Oeuvre> listerOeuvresDispo() {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+		ObservableList<Oeuvre> list = FXCollections.observableArrayList();
+		entityTransaction.begin();
+		
+		@SuppressWarnings("unchecked")
+		List<Oeuvre> oeuvres = entityManager.createQuery("from Oeuvre where date_archivage is null ").getResultList();
+		for(Oeuvre o : oeuvres)
+		{
+			list.add(o);
+		}
+		entityManager.close();
+		return list;
+	}
+	
 	public ObservableList<Oeuvre> trouverOeuvre(String recherche) 
 	{
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();

@@ -15,7 +15,7 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button layoutX="37.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormRes" text="Ajouter réservation" />
+                  <Button layoutX="37.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormRes" text="Réserver oeuvre" />
                   <Button layoutX="328.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverReservation" text="Archiver réservation" />
                   <Button layoutX="176.0" layoutY="54.0" mnemonicParsing="false" onAction="#annulerReservation" text="Annuler réservation" />
                   <TextField fx:id="searchReservation" layoutX="623.0" layoutY="54.0" />

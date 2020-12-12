@@ -15,12 +15,12 @@
          <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button layoutX="37.0" layoutY="54.0" mnemonicParsing="false" onAction="#formAddEm" text="Emprunter Exemplaire" />
+                  <Button layoutX="37.0" layoutY="54.0" mnemonicParsing="false" onAction="#ajoutFormEm" text="Emprunter Exemplaire" />
                   <Button layoutX="328.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverEmprunt" text="Archiver Emprunt" />
-                  <Button layoutX="190.0" layoutY="54.0" mnemonicParsing="false" onAction="#formUpdEm" text="Rendre Exemplaire" />
+                  <Button layoutX="190.0" layoutY="54.0" mnemonicParsing="false" onAction="#modFormEm" text="Rendre Exemplaire" />
                   <TextField fx:id="searchEmprunt" layoutX="623.0" layoutY="54.0" />
                   <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverEmprunt" text="Rechercher" />
-                  <Button layoutX="893.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualizeList" text="Actualiser" />
+                  <Button layoutX="893.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualiserListe" text="Actualiser" />
                   <Button layoutX="470.0" layoutY="54.0" mnemonicParsing="false" onAction="#supprimerEmprunt" text="Supprimer Emprunt" />
                   <Label fx:id="resultEm" layoutX="76.0" layoutY="95.0" prefHeight="17.0" prefWidth="400.0" />
                   <Text layoutX="26.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Résultat :" />

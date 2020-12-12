@@ -117,7 +117,7 @@ public class IHM_Exemplaire implements Initializable{
 	}
 	
 	private void getListArtworksSelect() {
-		selectOeuvres.setItems(gestionExemplaire.listerOeuvres());
+		selectOeuvres.setItems(gestionOeuvre.listerOeuvresDispo());
 	}
 
 	private void getListStates() {
@@ -218,7 +218,7 @@ public class IHM_Exemplaire implements Initializable{
 	@FXML
 	private void modifierExemplaire(ActionEvent event) {
 		try {
-		  if (SelectFieldsValid()) {
+		  if (verifierSelects()) {
 			//get values from form
 			Exemplaire exemplaire = (Exemplaire) select.getSelectionModel().getSelectedItem();
 			String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
@@ -273,12 +273,12 @@ public class IHM_Exemplaire implements Initializable{
 	@FXML
     public void archiverExemplaire(ActionEvent event) throws IOException, SQLException {
         if (tabViewEx.getSelectionModel().getSelectedItem() == null) {
-        	resultEx.setText("Veuillez sélectionner un exemplaire à archiver !");
+        	resultEx.setText("veuillez sélectionner un exemplaire à archiver !");
         	resultEx.setTextFill(Color.RED);
 		} else {
 			Exemplaire exemplaire = tabViewEx.getSelectionModel().getSelectedItem();
 			int exemplaireID = exemplaire.getId();
-			resultEx.setText("L'exemplaire avec l'ID " + exemplaireID + " a été archivé !");
+			resultEx.setText("l'exemplaire avec l'ID " + exemplaireID + " a été archivé !");
 			resultEx.setTextFill(Color.GREEN);
 			if (exemplaire.getEtat().equals("Abimé")) {
 				gestionOeuvre.setNbTotalSup(exemplaire.getOeuvre());
@@ -329,7 +329,7 @@ public class IHM_Exemplaire implements Initializable{
         return validTextFields;
     }
 	
-	private boolean SelectFieldsValid() {
+	private boolean verifierSelects() {
 
         boolean validTextFields = true;
 
