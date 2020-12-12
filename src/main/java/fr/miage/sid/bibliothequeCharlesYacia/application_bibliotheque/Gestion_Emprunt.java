@@ -165,7 +165,7 @@ public class Gestion_Emprunt {
 	    entityTransaction.begin();
 		try {
 			
-		  Query query = entityManager.createQuery("Update Emprunt set date_archivage='" + dateD + "', statut='Annulée'  where id='" + empruntID + "'");
+		  Query query = entityManager.createQuery("Update Emprunt set date_archivage='" + dateD + "', statut='Annulé'  where id='" + empruntID + "'");
 		  query.executeUpdate();
 			
 		  entityTransaction.commit();
