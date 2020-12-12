@@ -148,7 +148,7 @@ public class Gestion_Reservation {
 		{
 			list.add(res);
 		    LOG.fine(res.toString());
-		    System.out.println(res.toString());
+		    //System.out.println(res.toString());
 			
 		}
 	    entityTransaction.commit();

@@ -17,7 +17,7 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="45.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Retour" AnchorPane.leftAnchor="50.0">
+      <Text layoutX="45.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date retour" AnchorPane.leftAnchor="50.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -31,7 +31,7 @@
          </font>
       </Text>
       <ComboBox fx:id="selectEm" layoutX="213.0" layoutY="159.0" prefHeight="25.0" prefWidth="205.0" />
-      <Text layoutX="50.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat de l'exemplaire" AnchorPane.leftAnchor="50.0">
+      <Text layoutX="50.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="État de l'exemplaire" AnchorPane.leftAnchor="50.0">
          <font>
             <Font size="14.0" />
          </font>

@@ -98,7 +98,7 @@ public class IHM_Emprunt implements Initializable{
 			resultEm.setText("Aucune action effectuée !");
 			resultEm.setTextFill(Color.BLUE);
 			
-			getListEmprunts();
+			getListLoans();
 		}
 		
 		if (location.equals(getClass().getClassLoader().getResource("view/emprunt/formAddEm.fxml"))) {
@@ -121,7 +121,7 @@ public class IHM_Emprunt implements Initializable{
 	
 	@FXML
 	public void actualiserListe () {
-		getListEmprunts();
+		getListLoans();
 		resultEm.setText("actualisation terminée !");
 		resultEm.setTextFill(Color.BLUE);
 	}
@@ -155,7 +155,7 @@ public class IHM_Emprunt implements Initializable{
 		selectUs.setItems(gestionUsager.listerUsagersDispo());
 	}
 
-	public void getListEmprunts() {
+	public void getListLoans() {
 		tabViewEm.setItems(gestionEmprunt.listerEmprunts());
 		
 	}
@@ -212,38 +212,45 @@ public class IHM_Emprunt implements Initializable{
     
     @FXML
     public void emprunterExemplaire(ActionEvent event) {
-    	try
-		{
-   	    	Usager usager = (Usager) selectUs.getSelectionModel().getSelectedItem();
-   	    	
-   	    	Oeuvre oeuvre = (Oeuvre) selectOe.getSelectionModel().getSelectedItem();
-   	    	
-   	    	Exemplaire exemplaire = (Exemplaire) selectEx.getSelectionModel().getSelectedItem();
-   			
-   			java.sql.Date dateEmprunt = java.sql.Date.valueOf(dateEm.getValue());
-   			
-   			java.sql.Date dateRetour = java.sql.Date.valueOf(dateRe.getValue());
-   	   		
-   	   		//check if there are a list of reservations for the usager and for this oeuvre
-   			if (!(gestionReservation.verifierReservation(oeuvre,usager)).isEmpty()) {
-   				result.setText(" Veuillez annuler les réservations de l'usager pour cette oeuvre !");
+    	try { 
+    		if (verifierChampsAjout()) {
+				//get values from form
+				
+	   	    	Usager usager = (Usager) selectUs.getSelectionModel().getSelectedItem();
+	   	    	
+	   	    	Oeuvre oeuvre = (Oeuvre) selectOe.getSelectionModel().getSelectedItem();
+	   	    	
+	   	    	Exemplaire exemplaire = (Exemplaire) selectEx.getSelectionModel().getSelectedItem();
+	   			
+	   			java.sql.Date dateEmprunt = java.sql.Date.valueOf(dateEm.getValue());
+	   			
+	   			java.sql.Date dateRetour = java.sql.Date.valueOf(dateRe.getValue());
+	   	   		
+	   	   		//check if there are a list of reservations for the usager and for this oeuvre
+	   			if (!(gestionReservation.verifierReservation(oeuvre,usager)).isEmpty()) {
+	   				result.setText(" Veuillez annuler les réservations de l'usager pour cette oeuvre !");
+	   				result.setTextFill(Color.RED);
+	   			} else {
+	   				gestionEmprunt.emprunterExemplaire(oeuvre,usager,exemplaire, dateEmprunt, dateRetour);
+	   	   	   		//Set emprunt 
+	   	   	     	gestionEmprunt.setStatutExemplaire(exemplaire, "Emprunté");
+	   	   	     	//remove -1 nbDispo
+	   	   	     	gestionOeuvre.setNbIndisponibles(exemplaire.getOeuvre());
+	   	   	   		result.setText("L'emprunt a été ajouté !");
+	   	   	   		result.setTextFill(Color.GREEN);
+	   			}
+    		}
+   			else {
+   	        	result.setText("Veuillez remplir tout les champs !");
    				result.setTextFill(Color.RED);
-   			} else {
-   				gestionEmprunt.emprunterExemplaire(oeuvre,usager,exemplaire, dateEmprunt, dateRetour);
-   	   	   		//Set emprunt 
-   	   	     	gestionEmprunt.setStatutExemplaire(exemplaire, "Emprunté");
-   	   	     	//remove -1 nbDispo
-   	   	     	gestionOeuvre.setNbIndisponibles(exemplaire.getOeuvre());
-   	   	   		result.setText("L'emprunt a été ajouté !");
-   	   	   		result.setTextFill(Color.GREEN);
-   			};
+   	        }
 		}
 		catch(Exception e)
 		{
 			result.setText(" L'emprunt entré existe déja dans la BDD !");
 			result.setTextFill(Color.RED);
 		}
-    };
+    }
     
     @FXML
 	public void modFormEm(ActionEvent event) {
@@ -264,45 +271,49 @@ public class IHM_Emprunt implements Initializable{
     @FXML
     public void rendreExemplaire(ActionEvent event) {
     	
-    	try
-		{
-    		Emprunt emprunt = (Emprunt) selectEm.getSelectionModel().getSelectedItem();
-   	    	Exemplaire exemplaire = emprunt.getExemplaire();
-   	    	int empruntID = emprunt.getId();
-   	    	Oeuvre oeuvre = emprunt.getOeuvre();
-   			
-   			java.sql.Date dateRetour = java.sql.Date.valueOf(dateRe.getValue());
-   			
-   			String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
-   	   		
-   	   		//save data in Gestion Exemplaire
-   			if (emprunt.getDateRetour().before(dateRetour)) {
-   	   	   		gestionEmprunt.rendreExemplaire(empruntID,"En retard",dateRetour);
-   			} else {
-   	   			gestionEmprunt.rendreExemplaire(empruntID,"Rendu",dateRetour);
-   			}
-   			//If list of reservations is not empty, take the user with the oldest date
-   			if(!gestionReservation.verifierReservationEmprunt(oeuvre).isEmpty()) {
-   				Reservation reservation = gestionReservation.verifierReservationEmprunt(oeuvre).get(0);
-   				resultNote.setText("Il y a une réservation pour l'oeuvre " + oeuvre.getTitre() + ", le " + reservation.getDateReservation() + ", au nom de " + reservation.getNomPrenom());
-   	   	   		resultNote.setTextFill(Color.BLUE);
-   			}
-   	   		gestionExemplaire.modifierExemplaire(exemplaire, etat);
-   	   		System.out.println();
-   	     	if (etat.equals("Abimé")) {
-   	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
-   	     	} else {
-   	     	  // add +1 NbDispo
- 	   	   	  gestionOeuvre.setNbDisponibles(exemplaire.getOeuvre());
-   	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Disponible");
-   	     	}
-   	   		result.setText("L'emprunt a été modifié !");
-   	   		result.setTextFill(Color.GREEN);
+    	try {
+    		if (verifierChampsMod()) {
+	    		Emprunt emprunt = (Emprunt) selectEm.getSelectionModel().getSelectedItem();
+	   	    	Exemplaire exemplaire = emprunt.getExemplaire();
+	   	    	int empruntID = emprunt.getId();
+	   	    	Oeuvre oeuvre = emprunt.getOeuvre();
+	   			
+	   			java.sql.Date dateRetour = java.sql.Date.valueOf(dateRe.getValue());
+	   			
+	   			String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
+	   	   		
+	   	   		//save data in Gestion Exemplaire
+	   			if (emprunt.getDateRetour().before(dateRetour)) {
+	   	   	   		gestionEmprunt.rendreExemplaire(empruntID,"En retard",dateRetour);
+	   			} else {
+	   	   			gestionEmprunt.rendreExemplaire(empruntID,"Rendu",dateRetour);
+	   			}
+	   			//If list of reservations is not empty, take the user with the oldest date
+	   			if(!gestionReservation.verifierReservationEmprunt(oeuvre).isEmpty()) {
+	   				Reservation reservation = gestionReservation.verifierReservationEmprunt(oeuvre).get(0);
+	   				resultNote.setText("Il y a une réservation pour l'oeuvre " + oeuvre.getTitre() + ", le " + reservation.getDateReservation() + ", au nom de " + reservation.getNomPrenom());
+	   	   	   		resultNote.setTextFill(Color.BLUE);
+	   			}
+	   	   		gestionExemplaire.modifierExemplaire(exemplaire, etat);
+	   	   		System.out.println();
+	   	     	if (etat.equals("Abimé")) {
+	   	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
+	   	     	} else {
+	   	     	  // add +1 NbDispo
+	 	   	   	  gestionOeuvre.setNbDisponibles(exemplaire.getOeuvre());
+	   	     	  gestionEmprunt.setStatutExemplaire(exemplaire,"Disponible");
+	   	     	}
+	   	   		result.setText("L'emprunt a été modifié !");
+	   	   		result.setTextFill(Color.GREEN);
+    		} else {
+	        	result.setText("Veuillez remplir tout les champs !");
+				result.setTextFill(Color.RED);
+	        }
 		}
 		catch(Exception e)
 		{
-			result.setText(" Aucun emprunt ne correspond aux informations saisies");
-			result.setTextFill(Color.GREEN);
+			result.setText(" Aucun emprunt ne correspond aux informations saisies !");
+			result.setTextFill(Color.RED);
 		}
        
     };
@@ -322,7 +333,7 @@ public class IHM_Emprunt implements Initializable{
 			}
 			resultEm.setText("impossible de supprimer un emprunt en cours !");
         	resultEm.setTextFill(Color.RED);
-			getListEmprunts();
+			getListLoans();
 		}
 		
     };
@@ -343,8 +354,68 @@ public class IHM_Emprunt implements Initializable{
 			}
 			resultEm.setText("impossible d'archiver un emprunt en cours !");
         	resultEm.setTextFill(Color.RED);
-			getListEmprunts();	
+			getListLoans();	
 		}
 		
     };
+    
+    private boolean verifierChampsAjout() {
+
+        boolean validTextFields = true;
+        
+        if (selectUs.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectUs.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+
+        if (selectOe.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectOe.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+        
+        if (selectEx.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectOe.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+        
+        if (dateEm.getValue() == null) {
+            validTextFields = false;
+            dateEm.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+        
+        if (dateRe.getValue() == null) {
+            validTextFields = false;
+            dateRe.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+
+        return validTextFields;
+    }
+    
+    private boolean verifierChampsMod() {
+
+        boolean validTextFields = true;
+        
+        if (selectUs.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectUs.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+
+        if (selectEm.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectEm.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+        
+        if (selectEtats.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectEtats.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+        
+        if (dateRe.getValue() == null) {
+            validTextFields = false;
+            dateRe.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+
+        return validTextFields;
+    }
+    
 }

@@ -34,7 +34,7 @@
                       <TableColumn fx:id="tabNameA" minWidth="9.0" prefWidth="202.0" text="Nom" />
                         <TableColumn fx:id="tabFNameA" prefWidth="202.0" text="Prénom" />
                         <TableColumn fx:id="tabO" prefWidth="420.0" text="Oeuvres" />
-                        <TableColumn fx:id="tabDateS" prefWidth="160.0" text="Date Suppression" />
+                        <TableColumn fx:id="tabDateS" prefWidth="160.0" text="Date suppression" />
                     </columns>
                   </TableView>
                </children>

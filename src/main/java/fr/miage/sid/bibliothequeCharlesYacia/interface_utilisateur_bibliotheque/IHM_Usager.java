@@ -162,7 +162,7 @@ public class IHM_Usager implements Initializable{
 	
 	@FXML
 	public void trouverUsager () {
-		ObservableList<Usager> list =gestionUsager.trouverUsager(searchUsager.getText());
+		ObservableList<Usager> list = gestionUsager.trouverUsager(searchUsager.getText());
 		LOG.fine(searchUsager.getText());
 		tabViewU.setItems(list);
 		resultU.setText("nombres d'éléments trouvé(s) : " + list.size());

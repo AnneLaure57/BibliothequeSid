@@ -37,7 +37,7 @@
                         <TableColumn fx:id="tabPrix" prefWidth="75.0" text="Prix" />
                         <TableColumn fx:id="tabAv" prefWidth="75.0" text="Disponibles" />
                         <TableColumn fx:id="tabTotal" prefWidth="75.0" text="Total" />
-                        <TableColumn fx:id="tabNbResa" prefWidth="100.0" text="Nombre Résev" />
+                        <TableColumn fx:id="tabNbResa" prefWidth="100.0" text="Nombre résav" />
                         <TableColumn fx:id="tabEditor" prefWidth="140.0" text="Editeur" />
                         <TableColumn fx:id="tabDateE" prefWidth="115.0" text="Date édition" />
                         <TableColumn fx:id="tabDateS" prefWidth="153.0" text="Date suppression" />
