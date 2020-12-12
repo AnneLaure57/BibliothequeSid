@@ -275,7 +275,17 @@ public class IHM_Reservation implements Initializable{
         
         if (dateRes.getValue() == null) {
             validTextFields = false;
-            dateRes.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+            dateRes.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+        
+        if (selectU.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectU.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+
+        if (selectO.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectO.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
         }
 
         return validTextFields;

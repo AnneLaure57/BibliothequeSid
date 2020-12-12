@@ -318,12 +318,12 @@ public class IHM_Exemplaire implements Initializable{
 
         if (selectOeuvres.getSelectionModel().getSelectedItem() == null) {
             validTextFields = false;
-            selectOeuvres.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+            selectOeuvres.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
         }
 
         if (selectEtats.getSelectionModel().getSelectedItem() == null) {
             validTextFields = false;
-            selectEtats.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+            selectEtats.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
         }
 
         return validTextFields;
@@ -335,12 +335,12 @@ public class IHM_Exemplaire implements Initializable{
 
         if (select.getSelectionModel().getSelectedItem() == null) {
             validTextFields = false;
-            select.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+            select.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
         }
 
         if (selectEtats.getSelectionModel().getSelectedItem() == null) {
             validTextFields = false;
-            selectEtats.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+            selectEtats.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
         }
 
         return validTextFields;

@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Auteur;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Auteur;
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
 import javafx.collections.ObservableList;
@@ -257,18 +258,17 @@ public class IHM_Auteur implements Initializable{
     @FXML
     private void lierAuteurLivre(ActionEvent event) {
     	try {
-    		if (selectL.getSelectionModel().getSelectedItem() == null || select.getSelectionModel().getSelectedItem() == null) {
-                // one or more of the text fields are empty
-        		result.setText("Veuillez remplir les champs manquants !");
-        		result.setTextFill(Color.RED);
-                return;
-            }
-        	Auteur auteur = (Auteur) select.getSelectionModel().getSelectedItem();
-    		Livre livre = (Livre) selectL.getSelectionModel().getSelectedItem();
-    		//save data in Gestion Auteur
-    		gestionAuteur.lierAuteurLivre(auteur,livre);
-    		result.setText("Le livre a été associé à l'auteur !");
-    		result.setTextFill(Color.GREEN);
+    		if (verifierSelect()) {
+    			Auteur auteur = (Auteur) select.getSelectionModel().getSelectedItem();
+        		Livre livre = (Livre) selectL.getSelectionModel().getSelectedItem();
+        		//save data in Gestion Auteur
+        		gestionAuteur.lierAuteurLivre(auteur,livre);
+        		result.setText("Le livre a été associé à l'auteur !");
+        		result.setTextFill(Color.GREEN);
+	        } else {
+	        	result.setText("Veuillez remplir tout les champs !");
+				result.setTextFill(Color.RED);
+	        }
     	} catch(Exception e) {
 			result.setText(" Impossible de lier le livre à l'auteur ! ");
 			result.setTextFill(Color.RED);
@@ -370,6 +370,23 @@ public class IHM_Auteur implements Initializable{
         if (firstname.getText().isEmpty()) {
             validTextFields = false;
             firstname.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222;");
+        }
+
+        return validTextFields;
+    }
+    
+    private boolean verifierSelect() {
+
+        boolean validTextFields = true;
+
+        if (select.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            select.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
+        }
+
+        if (selectL.getSelectionModel().getSelectedItem() == null) {
+            validTextFields = false;
+            selectL.setStyle("-fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-border-color: #B22222;");
         }
 
         return validTextFields;
