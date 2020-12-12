@@ -163,6 +163,7 @@ public class IHM_Oeuvre implements Initializable{
 		LOG.fine(searchOeuvre.getText());
 		tabViewO.setItems(list);
 		resultO.setText("nombres d'éléments trouvé(s) : " + list.size());
+		resultO.setTextFill(Color.BLUE);
 	}
     
     /*

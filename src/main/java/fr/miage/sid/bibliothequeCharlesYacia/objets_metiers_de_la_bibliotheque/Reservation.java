@@ -31,10 +31,6 @@ public class Reservation {
 	@Column(name = "id_reservation")
     private Integer id;
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "date_reservation", nullable=false)
-	private Date dateReservation;
-	
 	@Column(name = "statut", nullable = false)
 	private String statut;
 	
@@ -45,8 +41,16 @@ public class Reservation {
 	private String nomPrenom;
 	
 	@Temporal(TemporalType.DATE)
+	@Column(name = "date_reservation", nullable=false)
+	private Date dateReservation;
+	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_annulation")
 	private Date dateAnnulation;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_archivage")
+	private Date dateArchivage;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usager", nullable = false)
@@ -56,42 +60,6 @@ public class Reservation {
 	@JoinColumn(name = "id_oeuvre", nullable = false)
     private Oeuvre oeuvre = new Oeuvre ();
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "date_archivage")
-	private Date dateArchivage;
-	
-	public Date getDateReservation() {
-		return dateReservation;
-	}
-
-	public void setDateReservation(Date dateReservation) {
-		this.dateReservation = dateReservation;
-	}
-
-	public String getStatut() {
-		return statut;
-	}
-
-	public void setStatut(String statut) {
-		this.statut = statut;
-	}
-
-	public Date getDateAnnulation() {
-		return dateAnnulation;
-	}
-
-	public void setDateAnnulation(Date dateAnnulation) {
-		this.dateAnnulation = dateAnnulation;
-	}
-	
-	public Date getDateArchivage() {
-		return dateArchivage;
-	}
-
-	public void setDateArchivage(Date dateArchivage) {
-		this.dateArchivage = dateArchivage;
-	}
-
 	public Reservation(Usager usager, Oeuvre oeuvre, Date dateReservation) {
 		super();
 		this.dateReservation = dateReservation;

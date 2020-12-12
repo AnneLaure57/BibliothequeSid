@@ -28,6 +28,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -76,7 +77,7 @@ public class IHM_Reservation implements Initializable{
 			tabDateAn.setCellValueFactory(new PropertyValueFactory<Reservation, Date>("dateAnnulation"));
 			tabDateAr.setCellValueFactory(new PropertyValueFactory<Reservation, Date>("dateArchivage"));
 			
-			resultRes.setText("Aucune action effectuée !");
+			resultRes.setText("aucune action effectuée !");
 			resultRes.setTextFill(Color.BLUE);
 			
 			getListReservations();
@@ -86,20 +87,22 @@ public class IHM_Reservation implements Initializable{
 			
             result.setText("Aucune modification enregistrée !");
             result.setTextFill(Color.BLUE);
-            getListUsagersSelect();
-            getListOeuvresSelect();
+            getListUsersSelect();
+            getListArtworksSelect();
             	
 		}
 		
 	};
 	
 	@FXML
-	public void actualizeList () {
+	public void actualiserListe () {
 		getListReservations();
+		resultRes.setText("actualisation terminée !");
+		resultRes.setTextFill(Color.BLUE);
 	}
 	
 	@FXML
-    private void closeView(){
+    private void fermerVue(){
         // get a handle to the stage
         Stage stage = (Stage) cancel.getScene().getWindow();
         // do what you have to do
@@ -112,25 +115,25 @@ public class IHM_Reservation implements Initializable{
 	
 	public void getListReservations()
 	{
-		tabViewRes.setItems(gestionReservation.ListerReservations());
+		tabViewRes.setItems(gestionReservation.listerReservations());
 	}
 	
 	/*
 	 * Get the list of Usagers inside select for addFrom
 	 */
 	
-	public void getListUsagersSelect()
+	public void getListUsersSelect()
 	{
-		selectU.setItems(gestionReservation.ListerUsagersUnDeleted());
+		selectU.setItems(gestionReservation.listerUsagersDispo());
 	}
 	
 	/*
 	 * Get the list of Oeuvres inside select for addFrom
 	 */
 	
-	public void getListOeuvresSelect()
+	public void getListArtworksSelect()
 	{
-		selectO.setItems(gestionReservation.ListerOeuvresUnDeleted());
+		selectO.setItems(gestionReservation.listerOeuvresDispo());
 	}
 	
 	/*
@@ -142,6 +145,8 @@ public class IHM_Reservation implements Initializable{
 		ObservableList<Reservation> list = gestionReservation.trouverReservation(searchReservation.getText());
 		LOG.fine(searchReservation.getText());
 		tabViewRes.setItems(list);
+		resultRes.setText("nombres d'éléments trouvé(s) : " + list.size());
+		resultRes.setTextFill(Color.BLUE);
 	}
     
 	
@@ -150,13 +155,14 @@ public class IHM_Reservation implements Initializable{
 	 */
 	
 	@FXML
-	public void formAddRes(ActionEvent event) {
+	public void ajoutFormRes(ActionEvent event) {
         try {
         	//FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/formAddU.fxml"));
         	//Parent part = fxmlLoader.load();
         	Parent part = FXMLLoader.load(getClass().getClassLoader().getResource("view/reservation/formAddRes.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Ajouter une nouvelle réservation");
+            stage.getIcons().add(new Image("images/open-book.png"));
             Scene scene = new Scene(part);
             stage.setScene(scene);
             stage.show();
@@ -175,7 +181,7 @@ public class IHM_Reservation implements Initializable{
     @FXML
    	private void reserverOeuvre(ActionEvent event) {
    		try {
-			if (textFieldsValid()) {
+			if (verifierChamps()) {
 				//get values from form
 				Oeuvre oeuvre = (Oeuvre) selectO.getSelectionModel().getSelectedItem();
 	   	    	
@@ -189,11 +195,11 @@ public class IHM_Reservation implements Initializable{
 	   	   		result.setText("La réservation a été ajouté !");
 	   	   		result.setTextFill(Color.GREEN);
 	        } else {
-	        	result.setText("  Veuillez remplir tout les champs !");
+	        	result.setText("Veuillez remplir tout les champs !");
 				result.setTextFill(Color.RED);
 	        }
     	} catch(Exception e) {
-    		result.setText(" La réservation entrée existe déja dans la BDD !");
+    		result.setText("La réservation entrée existe déja dans la BDD !");
 			result.setTextFill(Color.GREEN);
 		}
    	}
@@ -204,7 +210,7 @@ public class IHM_Reservation implements Initializable{
 
     public void annulerReservation(ActionEvent event) {
     	 if (tabViewRes.getSelectionModel().getSelectedItem() == null) {
-         	resultRes.setText("Veuillez sélectionner une réservation à annuler !");
+         	resultRes.setText("veuillez sélectionner une réservation à annuler !");
          	resultRes.setTextFill(Color.RED);
  		} else {
  			Reservation reservation = tabViewRes.getSelectionModel().getSelectedItem();
@@ -223,7 +229,7 @@ public class IHM_Reservation implements Initializable{
     @FXML
     public void supprimerReservation(ActionEvent event) throws IOException, SQLException {
         if (tabViewRes.getSelectionModel().getSelectedItem() == null) {
-        	resultRes.setText("Veuillez sélectionner une réservation à supprimer !");
+        	resultRes.setText("veuillez sélectionner une réservation à supprimer !");
         	resultRes.setTextFill(Color.RED);
 		} else {
 			Reservation reservation = tabViewRes.getSelectionModel().getSelectedItem();
@@ -239,10 +245,14 @@ public class IHM_Reservation implements Initializable{
 		
     };
     
+    /*
+     *  check fields
+     */
+    
     @FXML
     public void archiverReservation(ActionEvent event) throws IOException, SQLException {
         if (tabViewRes.getSelectionModel().getSelectedItem() == null) {
-        	resultRes.setText("Veuillez sélectionner une réservation à archiver !");
+        	resultRes.setText("veuillez sélectionner une réservation à archiver !");
         	resultRes.setTextFill(Color.RED);
 		} else {
 			Reservation reservation = tabViewRes.getSelectionModel().getSelectedItem();
@@ -259,7 +269,7 @@ public class IHM_Reservation implements Initializable{
 		
     };
     
-    private boolean textFieldsValid() {
+    private boolean verifierChamps() {
 
         boolean validTextFields = true;
         

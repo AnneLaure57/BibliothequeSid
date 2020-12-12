@@ -143,6 +143,7 @@ public class IHM_Exemplaire implements Initializable{
 		LOG.fine(searchExemplaire.getText());
 		tabViewEx.setItems(list);
 		resultEx.setText("nombres d'éléments trouvé(s) : " + list.size());
+		resultEx.setTextFill(Color.BLUE);
 	}
 	
 

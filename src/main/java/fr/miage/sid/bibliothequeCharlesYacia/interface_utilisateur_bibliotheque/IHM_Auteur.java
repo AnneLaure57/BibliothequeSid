@@ -164,6 +164,7 @@ public class IHM_Auteur implements Initializable{
 		LOG.fine(searchAuteur.getText());
 		tabViewA.setItems(list);
 		resultA.setText("nombres d'éléments trouvé(s) : " + list.size());
+		resultA.setTextFill(Color.BLUE);
 	}
 	
 	@FXML

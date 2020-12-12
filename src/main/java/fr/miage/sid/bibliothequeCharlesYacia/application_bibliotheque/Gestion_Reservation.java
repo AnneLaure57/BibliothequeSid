@@ -20,7 +20,7 @@ public class Gestion_Reservation {
 	
 	private static final Logger LOG = Logger.getLogger(Gestion_Reservation.class.getName());
 
-	public ObservableList<Reservation> ListerReservations() {
+	public ObservableList<Reservation> listerReservations() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -37,7 +37,7 @@ public class Gestion_Reservation {
 		return list;
 	}
 
-	public ObservableList<Usager> ListerUsagersUnDeleted() {
+	public ObservableList<Usager> listerUsagersDispo() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -54,7 +54,7 @@ public class Gestion_Reservation {
 		return list;
 	}
 
-	public ObservableList<Oeuvre> ListerOeuvresUnDeleted() {
+	public ObservableList<Oeuvre> listerOeuvresDispo() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -79,7 +79,7 @@ public class Gestion_Reservation {
 	    entityTransaction.begin();
 	    
 	    @SuppressWarnings("unchecked")
-		List<Reservation> reservations = entityManager.createQuery("from Reservation where lower(statut) like '%" + recherche + "%'or  lower(titre) like '%" + recherche + "%' or lower(nomPrenom) like '%" + recherche + "%'").getResultList();
+		List<Reservation> reservations = entityManager.createQuery("from Reservation where statut like '%" + recherche + "%'or  titre like '%" + recherche + "%' or nomPrenom like '%" + recherche + "%'").getResultList();
 
 	    for(Reservation res : reservations)
 		{
@@ -190,7 +190,7 @@ public class Gestion_Reservation {
 		return list;
 	}
 
-	public ObservableList<Reservation> verifierReservationE(Oeuvre oeuvre) {
+	public ObservableList<Reservation> verifierReservationEmprunt(Oeuvre oeuvre) {
 
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();

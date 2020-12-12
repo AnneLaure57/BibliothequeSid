@@ -166,6 +166,7 @@ public class IHM_Usager implements Initializable{
 		LOG.fine(searchUsager.getText());
 		tabViewU.setItems(list);
 		resultU.setText("nombres d'éléments trouvé(s) : " + list.size());
+		resultU.setTextFill(Color.BLUE);
 	}
 	
 	/*
@@ -335,7 +336,7 @@ public class IHM_Usager implements Initializable{
     };
     
     /*
-     *  Vérifier les champs
+     *  check fields
      */
     
     private boolean verifierChamps() {

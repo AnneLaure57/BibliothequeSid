@@ -271,8 +271,8 @@ public class IHM_Emprunt implements Initializable{
    			} else {
    	   			gestionEmprunt.rendreExemplaire(empruntID,"Rendu",dateRetour);
    			}
-   			if(!gestionReservation.verifierReservationE(oeuvre).isEmpty()) {
-   				Reservation reservation = gestionReservation.verifierReservationE(oeuvre).get(0);
+   			if(!gestionReservation.verifierReservationEmprunt(oeuvre).isEmpty()) {
+   				Reservation reservation = gestionReservation.verifierReservationEmprunt(oeuvre).get(0);
    				resultNote.setText("Il y a une réservation pour l'oeuvre " + oeuvre.getTitre() + ", le " + reservation.getDateReservation() + ", au nom de " + reservation.getNomPrenom());
    	   	   		resultNote.setTextFill(Color.BLUE);
    			}
