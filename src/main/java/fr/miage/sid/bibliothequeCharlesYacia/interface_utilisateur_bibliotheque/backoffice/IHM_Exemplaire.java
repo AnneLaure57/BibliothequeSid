@@ -251,7 +251,6 @@ public class IHM_Exemplaire implements Initializable{
 		resultEx.setTextFill(Color.RED);
 		} else {
 			Exemplaire exemplaire = tabViewEx.getSelectionModel().getSelectedItem();
-			int exemplaireID = exemplaire.getId();
 			if (exemplaire.getEtat().equals("Abimé") && exemplaire.getDateArchivage() == null) {
 				//2
 				gestionOeuvre.setNbTotalSup(exemplaire.getOeuvre());
@@ -263,9 +262,16 @@ public class IHM_Exemplaire implements Initializable{
 				//1 && 3
 				LOG.finer("je ne suis pas abimé et je suis  archivé");
 			}
-			gestionExemplaire.supprimerExemplaire(exemplaireID);
-			resultEx.setText("L'exemplaire avec l'ID " + exemplaireID + " a été supprimé !");
-			resultEx.setTextFill(Color.GREEN);
+			if (!exemplaire.getStatut().equals("Emprunté")) {
+				int exemplaireID = exemplaire.getId();
+				gestionExemplaire.supprimerExemplaire(exemplaireID);
+				resultEx.setText("L'exemplaire avec l'ID " + exemplaireID + " a été supprimé !");
+				resultEx.setTextFill(Color.GREEN);
+				getListExemplars();
+			} else {
+				resultEx.setText("impossible de supprimer un exemplaire emprunté !");
+				resultEx.setTextFill(Color.RED);
+			}
 			getListExemplars();
 		}
 	}
@@ -277,16 +283,21 @@ public class IHM_Exemplaire implements Initializable{
         	resultEx.setTextFill(Color.RED);
 		} else {
 			Exemplaire exemplaire = tabViewEx.getSelectionModel().getSelectedItem();
-			int exemplaireID = exemplaire.getId();
-			resultEx.setText("l'exemplaire avec l'ID " + exemplaireID + " a été archivé !");
-			resultEx.setTextFill(Color.GREEN);
-			if (exemplaire.getEtat().equals("Abimé")) {
-				gestionOeuvre.setNbTotalSup(exemplaire.getOeuvre());
+			if (!exemplaire.getStatut().equals("Emprunté")) {
+				int exemplaireID = exemplaire.getId();
+				resultEx.setText("l'exemplaire avec l'ID " + exemplaireID + " a été archivé !");
+				resultEx.setTextFill(Color.GREEN);
+				if (exemplaire.getEtat().equals("Abimé")) {
+					gestionOeuvre.setNbTotalSup(exemplaire.getOeuvre());
+				} else {
+					gestionOeuvre.setNbTotalDispoSup(exemplaire.getOeuvre());
+					gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
+				}
+				gestionExemplaire.archiverExemplaire(exemplaireID);
 			} else {
-				gestionOeuvre.setNbTotalDispoSup(exemplaire.getOeuvre());
-				gestionEmprunt.setStatutExemplaire(exemplaire,"Indisponible");
+				resultEx.setText("impossible d'archiver un exemplaire emprunté !");
+				resultEx.setTextFill(Color.RED);
 			}
-			gestionExemplaire.archiverExemplaire(exemplaireID);
 			getListExemplars();
 		}
 		

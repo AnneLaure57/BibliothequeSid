@@ -235,16 +235,22 @@ public class IHM_Reservation implements Initializable{
     	 if (tabViewRes.getSelectionModel().getSelectedItem() == null) {
          	resultRes.setText("veuillez sélectionner une réservation à annuler !");
          	resultRes.setTextFill(Color.RED);
- 		} else {
+ 		 } else {
  			Reservation reservation = tabViewRes.getSelectionModel().getSelectedItem();
- 			int reservationID = reservation.getId();
- 			resultRes.setText("la réservation avec l'ID " + reservationID + " a été annulé !");
- 			resultRes.setTextFill(Color.GREEN);
- 			gestionReservation.annulerReservation(reservationID);
- 			if (reservation.getDateArchivage() == null) {
-				gestionOeuvre.setNbResaSup(reservation.getOeuvre());
-			}
- 			getListReservations();
+ 			if (!reservation.getStatut().equals("Annulée")) {
+ 				int reservationID = reservation.getId();
+ 	 			resultRes.setText("la réservation avec l'ID " + reservationID + " a été annulé !");
+ 	 			resultRes.setTextFill(Color.GREEN);
+ 	 			gestionReservation.annulerReservation(reservationID);
+ 	 			if (reservation.getDateArchivage() == null) {
+ 					gestionOeuvre.setNbResaSup(reservation.getOeuvre());
+ 			} else {
+ 				resultRes.setText("la réservation sélectionnée est déjà annulée !");
+ 	 			resultRes.setTextFill(Color.GREEN);
+ 			}
+ 			
+		}
+ 		  getListReservations();
  		}
         
     }

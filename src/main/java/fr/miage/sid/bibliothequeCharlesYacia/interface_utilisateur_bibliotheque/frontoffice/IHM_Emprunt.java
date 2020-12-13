@@ -301,7 +301,7 @@ public class IHM_Emprunt implements Initializable{
 	   			
 	   			String etat = selectEtats.getSelectionModel().getSelectedItem().toString();
 	   	   		
-	   	   		//save data in Gestion Exemplaire
+	   	   		//save data in Gestion Emprunt
 	   			if (emprunt.getDateRetour().before(dateRetour)) {
 	   	   	   		gestionEmprunt.rendreExemplaire(empruntID,"En retard",dateRetour);
 	   			} else {

@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Reservation;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
@@ -34,6 +35,26 @@ public class Gestion_Reservation {
 			list.add(res);
 		}
 		entityManager.close();
+		return list;
+	}
+	
+	public ObservableList<Reservation> listerReservationsUsager(int usagerID) {
+		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	    EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+	    ObservableList<Reservation> list = FXCollections.observableArrayList();
+	    entityTransaction.begin();
+	    
+	    @SuppressWarnings("unchecked")
+		List<Reservation> reservations = entityManager.createQuery("from Reservation where date_archivage is null and statut='Réservée' and  id_usager='"+ usagerID +"'").getResultList();
+
+	    for(Reservation res : reservations)
+		{
+			list.add(res);
+		    LOG.fine(res.toString());
+			
+		}
+	    entityManager.close();
 		return list;
 	}
 

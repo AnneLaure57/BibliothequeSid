@@ -21,7 +21,7 @@
                   <Button layoutX="791.0" layoutY="54.0" mnemonicParsing="false" onAction="#trouverUsager" text="Rechercher" />
                   <Button layoutX="902.0" layoutY="54.0" mnemonicParsing="false" onAction="#actualiserListe" text="Actualiser" />
                   <Label layoutX="14.0" layoutY="102.0" text="Résultat : " />
-                  <Label fx:id="resultU" layoutX="66.0" layoutY="102.0" prefHeight="17.0" prefWidth="340.0" />
+                  <Label fx:id="resultU" layoutX="66.0" layoutY="102.0" prefHeight="17.0" prefWidth="527.0" />
                   <Button layoutX="347.0" layoutY="54.0" mnemonicParsing="false" onAction="#archiverUsager" text="Archiver usager" AnchorPane.leftAnchor="347.0" />
                </children>
             </AnchorPane>

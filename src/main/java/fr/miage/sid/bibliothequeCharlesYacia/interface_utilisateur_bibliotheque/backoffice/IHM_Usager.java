@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.backoffice.Gestion_Usager;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.frontoffice.Gestion_Emprunt;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.frontoffice.Gestion_Reservation;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Usager;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,6 +43,10 @@ public class IHM_Usager implements Initializable{
 	private static final Logger LOG = Logger.getLogger(Gestion_Usager.class.getName());
 	
 	private Gestion_Usager gestionUsager = new Gestion_Usager();
+	
+	private Gestion_Emprunt gestionEmprunt = new Gestion_Emprunt();
+	
+	private Gestion_Reservation gestionReservation = new Gestion_Reservation();
 	
 	@FXML
 	private Parent root;
@@ -241,9 +247,15 @@ public class IHM_Usager implements Initializable{
 				String telephone = 	tel.getText();
 				
 				//save data in Gestion Usager
-				gestionUsager.ajouterUsager(nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
-				result.setText("L'usager a été ajouté !");
-	    		result.setTextFill(Color.GREEN);
+				if (verifierDate(dateNaissance)) {
+					gestionUsager.ajouterUsager(nom,prenom, adresse,codePostal, ville, telephone, email , dateNaissance);
+					result.setText("L'usager a été ajouté !");
+		    		result.setTextFill(Color.GREEN);
+				}
+				else {
+					result.setText("La date est invalide !");
+		    		result.setTextFill(Color.BLUE);
+				}
 	        } else {
 	        	result.setText("Veuillez remplir tout les champs !");
 				result.setTextFill(Color.RED);
@@ -252,6 +264,20 @@ public class IHM_Usager implements Initializable{
 			result.setText(" Impossible d'ajouter l'usager ! ");
 			result.setTextFill(Color.RED);
 		}
+	}
+    
+    private boolean verifierDate(Date dateNaissance) {
+		
+		boolean validDate = true;
+		
+        Calendar calendar = Calendar.getInstance();
+		java.sql.Date dateD = new java.sql.Date(calendar.getTime().getTime());
+		
+		if(dateNaissance.after(dateD)) {
+			validDate = false;
+		}
+		
+		return validDate;
 	}
     
     /*
@@ -311,9 +337,15 @@ public class IHM_Usager implements Initializable{
 		} else {
 			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
 			int usagerID = usager.getId();
-			resultU.setText("l'usager avec l'ID " + usagerID + " a été supprimé !");
-			resultU.setTextFill(Color.GREEN);
-			gestionUsager.supprimerUsager(usagerID);
+			if(gestionEmprunt.listerEmpruntsUsager(usagerID).isEmpty() && gestionReservation.listerReservationsUsager(usagerID).isEmpty()) {
+				resultU.setText("l'usager avec l'ID " + usagerID + " a été supprimé !");
+				resultU.setTextFill(Color.GREEN);
+				gestionUsager.supprimerUsager(usagerID);
+				getListUsers();
+			} else {
+				resultU.setText("impossible de supprimer un usager avec des emprunts/réservations en cours !");
+				resultU.setTextFill(Color.RED);
+			}
 			getListUsers();
 		}
 		
@@ -327,9 +359,15 @@ public class IHM_Usager implements Initializable{
 		} else {
 			Usager usager = tabViewU.getSelectionModel().getSelectedItem();
 			int usagerID = usager.getId();
-			resultU.setText("l'usager avec l'ID " + usagerID + " a été archivé !");
-			resultU.setTextFill(Color.GREEN);
-			gestionUsager.archiverUsager(usagerID);
+			if(gestionEmprunt.listerEmpruntsUsager(usagerID).isEmpty() && gestionReservation.listerReservationsUsager(usagerID).isEmpty()) {
+				resultU.setText("l'usager avec l'ID " + usagerID + " a été archivé !");
+				resultU.setTextFill(Color.GREEN);
+				gestionUsager.archiverUsager(usagerID);
+				getListUsers();
+			} else {
+				resultU.setText("impossible d'archiver un usager avec des emprunts/réservations en cours !");
+				resultU.setTextFill(Color.RED);
+			}
 			getListUsers();
 		}
 		

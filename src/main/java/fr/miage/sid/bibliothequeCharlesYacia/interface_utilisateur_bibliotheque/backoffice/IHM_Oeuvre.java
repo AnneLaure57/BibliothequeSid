@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.backoffice.Gestion_Oeuvre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Auteur;
-import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -277,10 +276,15 @@ public class IHM_Oeuvre implements Initializable{
 			resultO.setTextFill(Color.RED);
 		} else {
 			Oeuvre oeuvre = tabViewO.getSelectionModel().getSelectedItem();
-			int oeuvreID = oeuvre.getId();
-			resultO.setText("l'oeuvre avec l'ID " + oeuvreID + " a été supprimé !");
-			resultO.setTextFill(Color.GREEN);
-			gestionOeuvre.supprimerOeuvre(oeuvreID);
+			if (oeuvre.getNbResa() == 0) {
+				int oeuvreID = oeuvre.getId();
+				resultO.setText("l'oeuvre avec l'ID " + oeuvreID + " a été supprimé !");
+				resultO.setTextFill(Color.GREEN);
+				gestionOeuvre.supprimerOeuvre(oeuvreID);
+				getListArtworks();
+			}
+			resultO.setText("impossible de supprimer une oeuvre avec des réservations !");
+			resultO.setTextFill(Color.RED);
 			getListArtworks();
 		}
     };
@@ -296,10 +300,15 @@ public class IHM_Oeuvre implements Initializable{
 			resultO.setTextFill(Color.RED);
 		} else {
 			Oeuvre oeuvre = tabViewO.getSelectionModel().getSelectedItem();
-			int oeuvreID = oeuvre.getId();
-			resultO.setText("l'oeuvre avec l'ID " + oeuvreID + " a été archivé !");
-			resultO.setTextFill(Color.GREEN);
-			gestionOeuvre.archiverOeuvre(oeuvreID);
+			if (oeuvre.getNbResa() == 0) {
+				int oeuvreID = oeuvre.getId();
+				resultO.setText("l'oeuvre avec l'ID " + oeuvreID + " a été archivé !");
+				resultO.setTextFill(Color.GREEN);
+				gestionOeuvre.archiverOeuvre(oeuvreID);
+				getListArtworks();
+			}
+			resultO.setText("impossible d'archiver une oeuvre avec des réservations !");
+			resultO.setTextFill(Color.RED);
 			getListArtworks();
 		}
 		
