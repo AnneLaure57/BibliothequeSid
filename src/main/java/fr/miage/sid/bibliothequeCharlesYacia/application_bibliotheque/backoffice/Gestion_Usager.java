@@ -1,4 +1,4 @@
-package fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque;
+package fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.backoffice;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -136,7 +136,7 @@ public class Gestion_Usager {
 		  }
 	}
 	
-	public void archiverUsager(int id) {
+	public void archiverUsager(int usagerID) {
 		 Calendar calendar = Calendar.getInstance();
 		 java.sql.Date dateD = new java.sql.Date(calendar.getTime().getTime());
 		    
@@ -145,7 +145,7 @@ public class Gestion_Usager {
 	    entityTransaction.begin();
 		try {
 			
-		  Query query = entityManager.createQuery("Update Usager set date_archivage='" + dateD + "'  where id='" + id + "'");
+		  Query query = entityManager.createQuery("Update Usager set date_archivage='" + dateD + "'  where id='" + usagerID + "'");
 		  query.executeUpdate();
 			
 		  entityTransaction.commit();

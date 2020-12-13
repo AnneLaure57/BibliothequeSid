@@ -1,4 +1,4 @@
-package fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque;
+package fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.backoffice;
 
 import java.io.IOException;
 import java.net.URL;
@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Auteur;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.backoffice.Gestion_Auteur;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Auteur;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Livre;

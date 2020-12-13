@@ -1,4 +1,4 @@
-package fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque;
+package fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.backoffice;
 
 import java.util.Calendar;
 import java.util.List;

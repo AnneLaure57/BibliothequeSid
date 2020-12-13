@@ -1,4 +1,4 @@
-package fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque;
+package fr.miage.sid.bibliothequeCharlesYacia.interface_utilisateur_bibliotheque.frontoffice;
 
 import java.io.IOException;
 import java.net.URL;
@@ -9,11 +9,11 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Emprunt;
-import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Exemplaire;
-import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Oeuvre;
-import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Reservation;
-import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.Gestion_Usager;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.backoffice.Gestion_Exemplaire;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.backoffice.Gestion_Oeuvre;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.backoffice.Gestion_Usager;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.frontoffice.Gestion_Emprunt;
+import fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.frontoffice.Gestion_Reservation;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Emprunt;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Exemplaire;
 import fr.miage.sid.bibliothequeCharlesYacia.objets_metiers_de_la_bibliotheque.Oeuvre;

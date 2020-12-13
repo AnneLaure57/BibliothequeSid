@@ -1,4 +1,4 @@
-package fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque;
+package fr.miage.sid.bibliothequeCharlesYacia.application_bibliotheque.frontoffice;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -20,7 +20,7 @@ public class Gestion_Reservation {
 	
 	private static final Logger LOG = Logger.getLogger(Gestion_Reservation.class.getName());
 
-	public ObservableList<Reservation> listerReservations() {
+	public static ObservableList<Reservation> listerReservations() {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -37,7 +37,7 @@ public class Gestion_Reservation {
 		return list;
 	}
 
-	public ObservableList<Reservation> trouverReservation(String recherche) {
+	public static ObservableList<Reservation> trouverReservation(String recherche) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -134,7 +134,7 @@ public class Gestion_Reservation {
 		
 	}
 
-	public  ObservableList<Reservation> verifierReservation(Oeuvre oeuvre, Usager usager) {
+	public  static ObservableList<Reservation> verifierReservation(Oeuvre oeuvre, Usager usager) {
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
 	    EntityTransaction entityTransaction = entityManager.getTransaction();
 		
@@ -156,7 +156,7 @@ public class Gestion_Reservation {
 		return list;
 	}
 
-	public ObservableList<Reservation> verifierReservationEmprunt(Oeuvre oeuvre) {
+	public static ObservableList<Reservation> verifierReservationEmprunt(Oeuvre oeuvre) {
 
 		EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
